@@ -1,7 +1,7 @@
-product_name,platform,category,price,commission_rate,trend_score,demand_score,competition_score,urgency_score,product_url
-AI Resume Builder,PartnerStack,Career Software,29,0.30,88,84,42,79,https://example.com/ai-resume-builder
-Portable Neck Fan,Amazon Associates,Summer Gadgets,34.99,0.04,82,76,55,91,https://example.com/portable-neck-fan
-Budget Meal Planning App,Impact,Personal Finance,9.99,0.40,68,80,38,65,https://example.com/meal-planning-app
-Online Course Platform,ShareASale,Creator Tools,99,0.20,73,70,72,58,https://example.com/course-platform
-Ergonomic Desk Chair,Amazon Associates,Home Office,229,0.03,51,64,83,36,https://example.com/desk-chair
-Language Learning App,CJ Affiliate,Education,14.99,0.35,77,74,48,62,
+product_name,platform,category,price,commission_rate,product_url,search_volume,search_growth_7d,social_mentions_7d,competitor_count,days_until_peak,seasonal_relevance
+AI Resume Builder,PartnerStack,Career Software,29,0.30,https://example.com/ai-resume-builder,68000,24,7200,42,10,82
+Portable Neck Fan,Amazon Associates,Summer Gadgets,34.99,0.04,https://example.com/portable-neck-fan,82000,38,8600,55,7,95
+Budget Meal Planning App,Impact,Personal Finance,9.99,0.40,https://example.com/meal-planning-app,54000,12,4100,38,21,68
+Online Course Platform,ShareASale,Creator Tools,99,0.20,https://example.com/course-platform,74000,8,6300,72,35,58
+Ergonomic Desk Chair,Amazon Associates,Home Office,229,0.03,https://example.com/desk-chair,46000,-9,2800,83,60,32
+Language Learning App,CJ Affiliate,Education,14.99,0.35,,61000,17,5900,48,18,74

@@ -1,33 +1,41 @@
-REQUIRED_COLUMNS = [
+import math
+
+
+CORE_COLUMNS = [
     "product_name",
     "platform",
     "category",
     "price",
     "commission_rate",
-    "trend_score",
-    "demand_score",
-    "competition_score",
-    "urgency_score",
     "product_url",
 ]
+SIGNAL_COLUMNS = [
+    "search_volume",
+    "search_growth_7d",
+    "social_mentions_7d",
+    "competitor_count",
+    "days_until_peak",
+    "seasonal_relevance",
+]
+REQUIRED_COLUMNS = CORE_COLUMNS + SIGNAL_COLUMNS
 
 TEXT_COLUMNS_REQUIRED = ["product_name", "platform", "category"]
-NUMERIC_COLUMNS = [
-    "price",
-    "commission_rate",
-    "trend_score",
-    "demand_score",
-    "competition_score",
-    "urgency_score",
+CORE_NUMERIC_COLUMNS = ["price", "commission_rate"]
+NUMERIC_COLUMNS = CORE_NUMERIC_COLUMNS + SIGNAL_COLUMNS
+NON_NEGATIVE_COLUMNS = [
+    "search_volume",
+    "social_mentions_7d",
+    "competitor_count",
+    "days_until_peak",
 ]
-SCORE_COLUMNS = ["trend_score", "demand_score", "competition_score", "urgency_score"]
 
 
-def validate_products(products_df):
+def validate_products(products_df, mode="manual"):
     errors = []
+    required_columns = REQUIRED_COLUMNS if mode == "manual" else CORE_COLUMNS
 
     missing_columns = [
-        column for column in REQUIRED_COLUMNS if column not in products_df.columns
+        column for column in required_columns if column not in products_df.columns
     ]
     if missing_columns:
         errors.append(f"Missing required columns: {', '.join(missing_columns)}")
@@ -47,21 +55,17 @@ def validate_products(products_df):
                 f"Problem rows: {format_row_numbers(empty_rows)}"
             )
 
+    numeric_columns = NUMERIC_COLUMNS if mode == "manual" else CORE_NUMERIC_COLUMNS
     converted_numbers = {}
-    has_numeric_parse_errors = False
-    for column in NUMERIC_COLUMNS:
+    for column in numeric_columns:
         converted = products_df[column].apply(parse_number)
         converted_numbers[column] = converted
         invalid_rows = converted[converted.isna()].index
         if len(invalid_rows) > 0:
-            has_numeric_parse_errors = True
             errors.append(
                 f"{column} must contain valid numbers. "
                 f"Problem rows: {format_row_numbers(invalid_rows)}"
             )
-
-    if has_numeric_parse_errors:
-        return errors
 
     invalid_price_rows = converted_numbers["price"][
         converted_numbers["price"] <= 0
@@ -82,17 +86,45 @@ def validate_products(products_df):
             f"Problem rows: {format_row_numbers(invalid_commission_rows)}"
         )
 
-    for column in SCORE_COLUMNS:
-        invalid_score_rows = converted_numbers[column][
-            (converted_numbers[column] < 0) | (converted_numbers[column] > 100)
+    if mode == "manual":
+        for column in NON_NEGATIVE_COLUMNS:
+            invalid_rows = converted_numbers[column][
+                converted_numbers[column] < 0
+            ].index
+            if len(invalid_rows) > 0:
+                errors.append(
+                    f"{column} must be greater than or equal to 0. "
+                    f"Problem rows: {format_row_numbers(invalid_rows)}"
+                )
+
+        invalid_relevance_rows = converted_numbers["seasonal_relevance"][
+            (converted_numbers["seasonal_relevance"] < 0)
+            | (converted_numbers["seasonal_relevance"] > 100)
         ].index
-        if len(invalid_score_rows) > 0:
+        if len(invalid_relevance_rows) > 0:
             errors.append(
-                f"{column} must be between 0 and 100. "
-                f"Problem rows: {format_row_numbers(invalid_score_rows)}"
+                "seasonal_relevance must be between 0 and 100. "
+                f"Problem rows: {format_row_numbers(invalid_relevance_rows)}"
             )
 
     return errors
+
+
+def get_valid_fallback_signals(product):
+    if any(column not in product for column in SIGNAL_COLUMNS):
+        return None
+
+    converted = {
+        column: parse_number(product.get(column)) for column in SIGNAL_COLUMNS
+    }
+    if any(value is None for value in converted.values()):
+        return None
+    if any(converted[column] < 0 for column in NON_NEGATIVE_COLUMNS):
+        return None
+    if not 0 <= converted["seasonal_relevance"] <= 100:
+        return None
+
+    return converted
 
 
 def parse_number(value):
@@ -101,7 +133,8 @@ def parse_number(value):
             value = value.strip()
         if value == "":
             return None
-        return float(value)
+        parsed_value = float(value)
+        return parsed_value if math.isfinite(parsed_value) else None
     except (TypeError, ValueError):
         return None
 
