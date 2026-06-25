@@ -2,21 +2,25 @@
 
 ## Project Overview
 
-Affiliate Product Ranker Version 1.4 supports two independent decisions:
+Affiliate Product Ranker Version 1.5 supports three independent decision layers:
 
 1. Which products have the strongest short-term market opportunity?
 2. For the same product, which platform-specific affiliate offer is most
    attractive?
+3. Which structured promotional-video patterns have the strongest observed
+   attention and engagement evidence?
 
 The Product Opportunity Score from Versions 1.2 and 1.3A remains unchanged.
-Version 1.4 adds a separate Platform Offer Score. The scores are not combined
-into a final profit prediction.
+Version 1.4 added a separate Platform Offer Score. Version 1.5 adds Video
+Insights without creating a video score. These layers are not combined into a
+final profit prediction.
 
 This is a rule-based demonstration and decision-support tool. It does not
 guarantee affiliate revenue or profit.
 
-Version 1.4 does not use real APIs, scraping, databases, machine learning, LLM
-APIs, computer vision, or video analysis.
+Version 1.5 does not fetch or process video files. It uses structured CSV data
+and no real APIs, scraping, databases, machine learning, LLM APIs, computer
+vision, audio analysis, or automated posting.
 
 ## Two-File Model
 
@@ -94,6 +98,60 @@ unknown
 ```
 
 An offers upload is optional. Product ranking continues to work without it.
+
+### Promotional Videos
+
+`videos.csv` is optional:
+
+```text
+video_id
+product_id
+platform
+title
+video_url
+publish_date
+duration_seconds
+views
+likes
+comments
+shares
+creator_followers
+content_format
+hook_type
+demo_present
+comparison_present
+cta_present
+main_feature
+```
+
+Required video fields are `video_id`, `product_id`, `platform`,
+`publish_date`, `duration_seconds`, `views`, `content_format`, and `hook_type`.
+
+Optional interaction metrics remain unknown when blank. They are never replaced
+with zero. `video_url` may be blank and is never fetched automatically.
+
+Controlled platforms:
+
+```text
+YouTube, TikTok, Instagram, Facebook, Other
+```
+
+Controlled content formats:
+
+```text
+demo, review, comparison, unboxing, tutorial,
+testimonial, lifestyle, listicle, other
+```
+
+Controlled hook types:
+
+```text
+result_first, problem_solution, question, surprising_fact,
+discount_offer, general_introduction, other
+```
+
+Boolean fields accept `true/false`, `yes/no`, or `1/0`, case-insensitively.
+Blank optional booleans remain unknown.
 
 ## Application Modes
 
@@ -260,14 +318,88 @@ Checks include:
 Excluded records remain downloadable from the Data Quality tab. One invalid
 offer does not prevent valid offers from being scored.
 
+Video validation additionally checks:
+
+- unique, non-empty `video_id`
+- matching product relationship
+- parseable publication date
+- positive duration
+- non-negative whole-number counts
+- valid platform, format, hook, and boolean values
+
+Invalid video rows are retained in a downloadable exclusion report.
+
+Interaction counts greater than views and malformed nonblank video URLs produce
+warnings rather than exclusions. Warning rows remain eligible for analysis and
+are included in a separate downloadable warning report.
+
+## Video Metrics
+
+```text
+engagement_rate =
+  (likes + comments + shares) / views
+
+like_rate = likes / views
+comment_rate = comments / views
+share_rate = shares / views
+view_to_follower_ratio = views / creator_followers
+```
+
+Rules:
+
+- Engagement requires all three interaction metrics and positive views.
+- Individual rates require their own numerator and positive views.
+- Zero views produce unavailable view-based rates.
+- Zero followers produce an unavailable follower ratio.
+- Missing metrics remain unavailable.
+- Rates are stored as decimals and displayed as percentages.
+- Group comparisons use medians to reduce outlier influence.
+
+No Video Promotion Score, conversion prediction, revenue prediction, or
+profitability score is created.
+
+## Video Recommendations
+
+Product-level evidence requires:
+
+```text
+at least 5 valid product videos
+at least 3 product videos with positive views
+at least 2 valid observations per candidate
+```
+
+Category fallback requires:
+
+```text
+at least 10 valid category videos
+at least 3 distinct products
+at least 3 valid observations per candidate
+```
+
+Every recommendation reports:
+
+- evidence level: product, category fallback, or insufficient
+- supporting video count
+- valid engagement-metric count
+- median engagement used
+- comparison baseline
+- preferred format, hook, and duration band
+- demo, comparison, and CTA guidance
+- feature worth emphasizing
+- a transparent evidence summary
+
+Recommendations are deterministic rules based only on uploaded data.
+
 ## Dashboard Tabs
 
 1. **Overview**: counts, provider status, top product, recommended offer, timing.
 2. **Product Ranking**: existing ranking, filters, Top N, chart, and download.
 3. **Platform Offer Comparison**: offer filters and side-by-side product offers.
-4. **Data Quality**: excluded records, reasons, and error-report downloads.
-5. **Scalability**: row counts and processing-stage timing.
-6. **Methodology**: formulas, assumptions, limitations, and future work.
+4. **Video Insights**: filters, metrics, group summaries, recommendations, and
+   video downloads.
+5. **Data Quality**: exclusions, warnings, reasons, and report downloads.
+6. **Scalability**: row counts and processing-stage timing.
+7. **Methodology**: formulas, evidence rules, limitations, and future work.
 
 ## Synthetic Test Data
 
@@ -291,11 +423,21 @@ Validation-only files:
 ```text
 invalid_sample_products.csv
 invalid_sample_offers.csv
+invalid_sample_videos.csv
 ```
 
 The clean files contain no intentional validation errors. Invalid examples are
 kept separately and include duplicates, orphans, bad rates, missing payout
-values, invalid booleans, payout types, and statuses.
+values, invalid booleans, payout types, statuses, video relationships, and
+controlled video values.
+
+Video files:
+
+```text
+sample_videos.csv: 30 valid sample videos
+large_sample_videos.csv: exactly 5,000 valid videos
+invalid_sample_videos.csv: separate exclusions and warning-only examples
+```
 
 All generated data is synthetic test data and does not represent real affiliate
 markets.
@@ -316,8 +458,8 @@ streamlit run app.py
 python -m unittest discover -s tests
 ```
 
-Tests cover Versions 1.2, 1.3A, and 1.4, including the complete clean
-1,000-product and 2,500-offer run.
+Tests cover Versions 1.2 through 1.5, including the complete clean
+1,000-product, 2,500-offer, and 5,000-video run.
 
 ## Repository Structure
 
@@ -331,6 +473,8 @@ affiliate-product-ranker/
 ├── schemas.py
 ├── scoring.py
 ├── signal_processing.py
+├── video_insights.py
+├── video_validation.py
 ├── validation.py
 ├── market_data/
 ├── sample_products.csv
@@ -339,6 +483,9 @@ affiliate-product-ranker/
 ├── large_sample_offers.csv
 ├── invalid_sample_products.csv
 ├── invalid_sample_offers.csv
+├── sample_videos.csv
+├── large_sample_videos.csv
+├── invalid_sample_videos.csv
 ├── tests/
 ├── requirements.txt
 └── README.md
@@ -354,6 +501,7 @@ Python: 3.12
 Secrets: none
 ```
 
-Future versions may add real affiliate APIs, a database, historical
-machine-learning models, and a separate video-analysis module. None are included
-in Version 1.4.
+Future versions may add real affiliate APIs, a database, or historical
+machine-learning models. Version 1.5 does not upload MP4 files, scrape platforms,
+download videos, inspect frames, process audio, generate scripts, or publish
+social-media content.

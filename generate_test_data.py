@@ -2,7 +2,15 @@ import csv
 import random
 from pathlib import Path
 
-from schemas import OFFER_COLUMNS, PRODUCT_CORE_COLUMNS, SIGNAL_COLUMNS
+from schemas import (
+    OFFER_COLUMNS,
+    PRODUCT_CORE_COLUMNS,
+    SIGNAL_COLUMNS,
+    VIDEO_COLUMNS,
+    VIDEO_CONTENT_FORMATS,
+    VIDEO_HOOK_TYPES,
+    VIDEO_PLATFORMS,
+)
 
 RANDOM_SEED = 140
 PROJECT_DIR = Path(__file__).resolve().parent
@@ -46,6 +54,18 @@ PLATFORMS = [
 COOKIE_DURATIONS = [0, 1, 7, 14, 30, 60, 90]
 PAYOUT_TYPES = ["one_time", "recurring", "fixed_amount", "lead"]
 STATUSES = ["active", "active", "active", "unknown", "inactive"]
+VIDEO_FORMATS = VIDEO_CONTENT_FORMATS[:-1]
+VIDEO_HOOKS = VIDEO_HOOK_TYPES[:-1]
+VIDEO_FEATURES = [
+    "ease of use",
+    "price",
+    "speed",
+    "design",
+    "durability",
+    "automation",
+    "portability",
+    "customer support",
+]
 
 
 def generate_clean_data(seed=RANDOM_SEED):
@@ -183,6 +203,106 @@ def generate_invalid_data():
     return products, offers
 
 
+def generate_clean_video_data(product_ids, seed=RANDOM_SEED):
+    randomizer = random.Random(seed + 15)
+    videos = []
+
+    for product_index, product_id in enumerate(product_ids):
+        for video_number in range(5):
+            video_id = f"V{len(videos) + 1:06d}"
+            views = randomizer.randint(0, 1_000_000)
+            likes = randomizer.randint(0, views) if views else 0
+            comments = randomizer.randint(0, max(views // 20, 0)) if views else 0
+            shares = randomizer.randint(0, max(views // 10, 0)) if views else 0
+            followers = randomizer.randint(0, 500_000)
+            videos.append(
+                {
+                    "video_id": video_id,
+                    "product_id": product_id,
+                    "platform": randomizer.choice(VIDEO_PLATFORMS),
+                    "title": f"Synthetic Product Video {product_index + 1}-{video_number + 1}",
+                    "video_url": f"https://example.com/videos/{video_id.lower()}",
+                    "publish_date": (
+                        pd_timestamp(2025, 1, 1, product_index * 5 + video_number)
+                    ),
+                    "duration_seconds": randomizer.randint(6, 240),
+                    "views": views,
+                    "likes": likes if video_number != 1 else "",
+                    "comments": comments if video_number != 1 else "",
+                    "shares": shares if video_number != 1 else "",
+                    "creator_followers": followers if video_number != 2 else "",
+                    "content_format": randomizer.choice(VIDEO_FORMATS),
+                    "hook_type": randomizer.choice(VIDEO_HOOKS),
+                    "demo_present": randomizer.choice([True, False, ""]),
+                    "comparison_present": randomizer.choice([True, False, ""]),
+                    "cta_present": randomizer.choice([True, False, ""]),
+                    "main_feature": randomizer.choice(VIDEO_FEATURES),
+                }
+            )
+
+    return videos
+
+
+def generate_invalid_video_data():
+    base = {
+        "video_id": "BAD-V1",
+        "product_id": "P0001",
+        "platform": "YouTube",
+        "title": "Invalid synthetic video",
+        "video_url": "",
+        "publish_date": "2026-01-01",
+        "duration_seconds": 30,
+        "views": 100,
+        "likes": 10,
+        "comments": 2,
+        "shares": 1,
+        "creator_followers": 1000,
+        "content_format": "demo",
+        "hook_type": "result_first",
+        "demo_present": True,
+        "comparison_present": False,
+        "cta_present": True,
+        "main_feature": "testing",
+    }
+    rows = [
+        {**base, "video_id": "DUP-V"},
+        {**base, "video_id": "DUP-V", "product_id": "P0002"},
+        {**base, "video_id": "BAD-ORPHAN", "product_id": "MISSING"},
+        {**base, "video_id": "BAD-NEGATIVE", "views": -1},
+        {**base, "video_id": "BAD-DURATION", "duration_seconds": 0},
+        {**base, "video_id": "BAD-DATE", "publish_date": "not-a-date"},
+        {**base, "video_id": "BAD-PLATFORM", "platform": "Unknown Network"},
+        {**base, "video_id": "BAD-FORMAT", "content_format": "dance"},
+        {**base, "video_id": "BAD-HOOK", "hook_type": "mystery"},
+        {**base, "video_id": "BAD-BOOL", "demo_present": "maybe"},
+        {
+            **base,
+            "video_id": "WARN-URL",
+            "video_url": "example.com/video",
+        },
+        {
+            **base,
+            "video_id": "WARN-LIKES",
+            "views": 10,
+            "likes": 11,
+        },
+    ]
+    return rows
+
+
+def generate_sample_video_data():
+    return generate_clean_video_data(
+        ["P001", "P002", "P003", "P004", "P005", "P006"],
+        seed=15,
+    )
+
+
+def pd_timestamp(year, month, day, offset_days):
+    from datetime import date, timedelta
+
+    return (date(year, month, day) + timedelta(days=offset_days)).isoformat()
+
+
 def invalid_offer(
     offer_id,
     product_id,
@@ -219,6 +339,11 @@ def write_csv(path, rows, columns):
 def main():
     clean_products, clean_offers = generate_clean_data()
     invalid_products, invalid_offers = generate_invalid_data()
+    clean_videos = generate_clean_video_data(
+        [product["product_id"] for product in clean_products]
+    )
+    invalid_videos = generate_invalid_video_data()
+    sample_videos = generate_sample_video_data()
     write_csv(PROJECT_DIR / "large_sample_products.csv", clean_products, PRODUCT_COLUMNS)
     write_csv(PROJECT_DIR / "large_sample_offers.csv", clean_offers, OFFER_COLUMNS)
     write_csv(
@@ -230,6 +355,13 @@ def main():
         PROJECT_DIR / "invalid_sample_offers.csv",
         invalid_offers,
         OFFER_COLUMNS,
+    )
+    write_csv(PROJECT_DIR / "sample_videos.csv", sample_videos, VIDEO_COLUMNS)
+    write_csv(PROJECT_DIR / "large_sample_videos.csv", clean_videos, VIDEO_COLUMNS)
+    write_csv(
+        PROJECT_DIR / "invalid_sample_videos.csv",
+        invalid_videos,
+        VIDEO_COLUMNS,
     )
 
 

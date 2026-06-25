@@ -10,7 +10,8 @@ PROJECT_DIR = Path(__file__).resolve().parents[1]
 class CleanImportTests(unittest.TestCase):
     def test_all_deployment_modules_import_in_fresh_process(self):
         command = (
-            "import validation; import data_quality; "
+            "import schemas; import validation; import data_quality; "
+            "import video_validation; import video_insights; "
             "import market_data.service; import offer_scoring; import app"
         )
         result = subprocess.run(

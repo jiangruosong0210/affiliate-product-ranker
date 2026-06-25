@@ -11,11 +11,18 @@ from market_data.mock_provider import MockProvider
 from market_data.service import process_market_data
 from offer_scoring import OFFER_SCORING_CONFIG, score_offers
 from scoring import SCORING_CONFIG, score_products
+from video_insights import (
+    add_video_metrics,
+    build_video_recommendations,
+    summarize_groups,
+)
+from video_validation import validate_video_records
 
 
 PROJECT_DIR = Path(__file__).resolve().parent
 PRODUCT_TEMPLATE_PATH = PROJECT_DIR / "sample_products.csv"
 OFFER_TEMPLATE_PATH = PROJECT_DIR / "sample_offers.csv"
+VIDEO_TEMPLATE_PATH = PROJECT_DIR / "sample_videos.csv"
 
 
 @st.cache_resource
@@ -79,8 +86,8 @@ st.write(
     "for the next 7-30 days."
 )
 st.info(
-    "Version 1.4 keeps Product Opportunity Score and Platform Offer Score "
-    "separate because they answer different decisions."
+    "Version 1.5 keeps Product Opportunity Score and Platform Offer Score "
+    "separate and adds evidence-based structured video insights."
 )
 st.warning(
     "This application provides estimated scores for demonstration and "
@@ -100,7 +107,7 @@ if mode == "Mock automatic data":
         "market data."
     )
 
-upload_columns = st.columns(2)
+upload_columns = st.columns(3)
 with upload_columns[0]:
     products_file = st.file_uploader("Upload products.csv", type=["csv"])
     st.download_button(
@@ -117,11 +124,20 @@ with upload_columns[1]:
         file_name="sample_offers.csv",
         mime="text/csv",
     )
+with upload_columns[2]:
+    videos_file = st.file_uploader("Upload videos.csv (optional)", type=["csv"])
+    st.download_button(
+        "Download video CSV template",
+        VIDEO_TEMPLATE_PATH.read_bytes(),
+        file_name="sample_videos.csv",
+        mime="text/csv",
+    )
 
 products_input, product_read_error = read_uploaded_csv(products_file)
 offers_input, offer_read_error = read_uploaded_csv(offers_file)
+videos_input, video_read_error = read_uploaded_csv(videos_file)
 
-for read_error in [product_read_error, offer_read_error]:
+for read_error in [product_read_error, offer_read_error, video_read_error]:
     if read_error:
         st.error(read_error)
 
@@ -133,12 +149,19 @@ ranked_products = pd.DataFrame()
 valid_offers = pd.DataFrame()
 excluded_offers = pd.DataFrame()
 scored_offers = pd.DataFrame()
+valid_videos = pd.DataFrame()
+excluded_videos = pd.DataFrame()
+video_warnings = pd.DataFrame()
+video_metrics = pd.DataFrame()
+video_recommendations = pd.DataFrame()
 timings = {
     "product_validation": 0.0,
     "provider_processing": 0.0,
     "product_scoring": 0.0,
     "offer_validation": 0.0,
     "offer_scoring": 0.0,
+    "video_validation": 0.0,
+    "video_analysis": 0.0,
     "total": 0.0,
 }
 
@@ -194,6 +217,30 @@ if products_input is not None:
             )
             timings["offer_scoring"] = perf_counter() - started
 
+    if videos_input is not None and not valid_products.empty:
+        started = perf_counter()
+        valid_videos, excluded_videos, video_warnings = validate_video_records(
+            videos_input,
+            set(valid_products["product_id"]),
+        )
+        timings["video_validation"] = perf_counter() - started
+
+        if not valid_videos.empty:
+            started = perf_counter()
+            product_context = valid_products[
+                ["product_id", "product_name", "category"]
+            ]
+            video_metrics = add_video_metrics(valid_videos).merge(
+                product_context,
+                on="product_id",
+                how="left",
+            )
+            video_recommendations = build_video_recommendations(
+                video_metrics,
+                valid_products,
+            )
+            timings["video_analysis"] = perf_counter() - started
+
 timings["total"] = perf_counter() - processing_started
 
 tabs = st.tabs(
@@ -201,6 +248,7 @@ tabs = st.tabs(
         "Overview",
         "Product Ranking",
         "Platform Offer Comparison",
+        "Video Insights",
         "Data Quality",
         "Scalability",
         "Methodology",
@@ -231,7 +279,7 @@ with tabs[0]:
             if not provider_status.empty
             else 0
         )
-        overview_metrics = st.columns(5)
+        overview_metrics = st.columns(6)
         overview_metrics[0].metric("Valid products", len(valid_products))
         overview_metrics[1].metric("Valid offers", len(valid_offers))
         overview_metrics[2].metric(
@@ -246,9 +294,13 @@ with tabs[0]:
                 else "0.00"
             ),
         )
-        overview_metrics[4].metric(
+        overview_metrics[4].metric("Valid videos", len(valid_videos))
+        overview_metrics[5].metric(
             "Excluded records",
-            len(excluded_products) + len(excluded_offers) + len(failed_provider_df),
+            len(excluded_products)
+            + len(excluded_offers)
+            + len(excluded_videos)
+            + len(failed_provider_df),
         )
 
         status_metrics = st.columns(4)
@@ -421,11 +473,210 @@ with tabs[2]:
         st.dataframe(comparison[display_columns], width="stretch")
 
 with tabs[3]:
+    st.subheader("Video Insights")
+    st.caption(
+        "Video insights summarize structured performance evidence. They do not "
+        "estimate revenue, conversion, or profitability."
+    )
+    if videos_input is None:
+        st.write(
+            "Upload an optional videos CSV to analyze promotional video patterns."
+        )
+    elif video_metrics.empty:
+        st.warning("No valid video rows are available for analysis.")
+        if not excluded_videos.empty:
+            st.download_button(
+                "Download video exclusion report",
+                excluded_videos.to_csv(index=False).encode("utf-8"),
+                file_name="excluded_videos.csv",
+                mime="text/csv",
+            )
+    else:
+        first_filters = st.columns(5)
+        product_values = sorted(video_metrics["product_name"].unique())
+        category_values = sorted(video_metrics["category"].unique())
+        platform_values = sorted(video_metrics["platform"].unique())
+        format_values = sorted(video_metrics["content_format"].unique())
+        hook_values = sorted(video_metrics["hook_type"].unique())
+        selected_video_products = first_filters[0].multiselect(
+            "Video product",
+            product_values,
+            default=product_values,
+        )
+        selected_video_categories = first_filters[1].multiselect(
+            "Video category",
+            category_values,
+            default=category_values,
+        )
+        selected_video_platforms = first_filters[2].multiselect(
+            "Video platform",
+            platform_values,
+            default=platform_values,
+        )
+        selected_formats = first_filters[3].multiselect(
+            "Content format",
+            format_values,
+            default=format_values,
+        )
+        selected_hooks = first_filters[4].multiselect(
+            "Hook type",
+            hook_values,
+            default=hook_values,
+        )
+
+        second_filters = st.columns(5)
+        duration_values = [
+            "under 15 seconds",
+            "15-29 seconds",
+            "30-59 seconds",
+            "60-119 seconds",
+            "120+ seconds",
+        ]
+        selected_durations = second_filters[0].multiselect(
+            "Duration range",
+            duration_values,
+            default=duration_values,
+        )
+        selected_demo = second_filters[1].multiselect(
+            "Demo present",
+            [True, False],
+            default=[True, False],
+        )
+        selected_comparison = second_filters[2].multiselect(
+            "Comparison present",
+            [True, False],
+            default=[True, False],
+        )
+        selected_cta = second_filters[3].multiselect(
+            "CTA present",
+            [True, False],
+            default=[True, False],
+        )
+        feature_values = sorted(
+            value for value in video_metrics["main_feature"].unique() if value
+        )
+        selected_features = second_filters[4].multiselect(
+            "Main feature",
+            feature_values,
+            default=feature_values,
+        )
+
+        filtered_videos = video_metrics[
+            video_metrics["product_name"].isin(selected_video_products)
+            & video_metrics["category"].isin(selected_video_categories)
+            & video_metrics["platform"].isin(selected_video_platforms)
+            & video_metrics["content_format"].isin(selected_formats)
+            & video_metrics["hook_type"].isin(selected_hooks)
+            & video_metrics["duration_band"].isin(selected_durations)
+        ]
+        if selected_features:
+            filtered_videos = filtered_videos[
+                filtered_videos["main_feature"].isin(selected_features)
+            ]
+        filtered_videos = filtered_videos[
+            (
+                filtered_videos["demo_present"].isna()
+                | filtered_videos["demo_present"].isin(selected_demo)
+            )
+            & (
+                filtered_videos["comparison_present"].isna()
+                | filtered_videos["comparison_present"].isin(
+                    selected_comparison
+                )
+            )
+            & (
+                filtered_videos["cta_present"].isna()
+                | filtered_videos["cta_present"].isin(selected_cta)
+            )
+        ]
+
+        metric_columns = st.columns(4)
+        metric_columns[0].metric("Videos", len(filtered_videos))
+        metric_columns[1].metric(
+            "Median views",
+            (
+                f"{filtered_videos['views'].median():,.0f}"
+                if not filtered_videos.empty
+                else "0"
+            ),
+        )
+        median_engagement = filtered_videos["engagement_rate"].median(
+            skipna=True
+        )
+        metric_columns[2].metric(
+            "Median engagement",
+            (
+                f"{median_engagement:.2%}"
+                if not pd.isna(median_engagement)
+                else "Unavailable"
+            ),
+        )
+        metric_columns[3].metric(
+            "Valid engagement observations",
+            int(filtered_videos["engagement_rate"].notna().sum()),
+        )
+
+        st.subheader("Cleaned Video Data")
+        st.dataframe(filtered_videos, width="stretch")
+        summary_choice = st.selectbox(
+            "Summarize by",
+            [
+                "platform",
+                "content_format",
+                "hook_type",
+                "duration_band",
+                "demo_present",
+                "comparison_present",
+                "cta_present",
+                "main_feature",
+            ],
+        )
+        summary = summarize_groups(filtered_videos, summary_choice)
+        st.subheader("Performance Summary")
+        st.dataframe(summary, width="stretch")
+        if not summary.empty:
+            chart_data = summary.dropna(
+                subset=["median_engagement_rate"]
+            ).set_index(summary_choice)[["median_engagement_rate"]]
+            st.bar_chart(chart_data)
+
+        st.subheader("Product-Level Promotion Recommendations")
+        st.dataframe(video_recommendations, width="stretch")
+
+        video_downloads = st.columns(4)
+        video_downloads[0].download_button(
+            "Download cleaned videos",
+            video_metrics.to_csv(index=False).encode("utf-8"),
+            file_name="cleaned_videos.csv",
+            mime="text/csv",
+        )
+        video_downloads[1].download_button(
+            "Download video exclusions",
+            excluded_videos.to_csv(index=False).encode("utf-8"),
+            file_name="excluded_videos.csv",
+            mime="text/csv",
+        )
+        video_downloads[2].download_button(
+            "Download video warnings",
+            video_warnings.to_csv(index=False).encode("utf-8"),
+            file_name="video_warnings.csv",
+            mime="text/csv",
+        )
+        video_downloads[3].download_button(
+            "Download video recommendations",
+            video_recommendations.to_csv(index=False).encode("utf-8"),
+            file_name="video_recommendations.csv",
+            mime="text/csv",
+        )
+
+with tabs[4]:
     st.subheader("Data Quality")
-    quality_metrics = st.columns(3)
+    quality_metrics = st.columns(5)
     quality_metrics[0].metric("Excluded products", len(excluded_products))
     quality_metrics[1].metric("Excluded offers", len(excluded_offers))
     quality_metrics[2].metric("Provider failures", len(failed_provider_df))
+    quality_metrics[3].metric("Excluded videos", len(excluded_videos))
+    quality_metrics[4].metric("Video warnings", len(video_warnings))
 
     if not excluded_products.empty:
         st.write("Excluded Product Records")
@@ -448,27 +699,52 @@ with tabs[3]:
     if not failed_provider_df.empty:
         st.write("Failed Provider Records")
         st.dataframe(failed_provider_df, width="stretch")
+    if not excluded_videos.empty:
+        st.write("Excluded Video Records")
+        st.dataframe(excluded_videos, width="stretch")
+        st.download_button(
+            "Download excluded video records",
+            excluded_videos.to_csv(index=False).encode("utf-8"),
+            file_name="excluded_videos.csv",
+            mime="text/csv",
+        )
+    if not video_warnings.empty:
+        st.write("Video Data Warnings")
+        st.dataframe(video_warnings, width="stretch")
+        st.download_button(
+            "Download video warning report",
+            video_warnings.to_csv(index=False).encode("utf-8"),
+            file_name="video_warnings.csv",
+            mime="text/csv",
+        )
     if (
         excluded_products.empty
         and excluded_offers.empty
+        and excluded_videos.empty
+        and video_warnings.empty
         and failed_provider_df.empty
         and products_input is not None
     ):
         st.success("No records were excluded.")
 
-with tabs[4]:
+with tabs[5]:
     st.subheader("Scalability")
     product_rows = len(products_input) if products_input is not None else 0
     offer_rows = len(offers_input) if offers_input is not None else 0
-    total_rows = product_rows + offer_rows
+    video_rows = len(videos_input) if videos_input is not None else 0
+    total_rows = product_rows + offer_rows + video_rows
     average_ms = timings["total"] / total_rows * 1000 if total_rows else 0
-    scalability_metrics = st.columns(4)
+    scalability_metrics = st.columns(5)
     scalability_metrics[0].metric("Rows processed", total_rows)
     scalability_metrics[1].metric("Valid products", len(valid_products))
     scalability_metrics[2].metric("Valid offers", len(valid_offers))
-    scalability_metrics[3].metric(
+    scalability_metrics[3].metric("Valid videos", len(valid_videos))
+    scalability_metrics[4].metric(
         "Excluded",
-        len(excluded_products) + len(excluded_offers) + len(failed_provider_df),
+        len(excluded_products)
+        + len(excluded_offers)
+        + len(excluded_videos)
+        + len(failed_provider_df),
     )
     st.dataframe(
         pd.DataFrame(
@@ -487,16 +763,18 @@ with tabs[4]:
     if products_input is not None:
         st.success("Processing completed successfully.")
 
-with tabs[5]:
+with tabs[6]:
     st.subheader("Methodology")
     st.markdown(
         f"""
-### Two Separate Decision Layers
+### Three Separate Decision Layers
 
 - **Product Opportunity Score** estimates short-term market opportunity.
 - **Platform Offer Score** compares affiliate economics for the same product.
+- **Video Insights** compare observed attention and engagement patterns.
 
-They are not combined into a final profit prediction.
+Video Insights do not create a score, conversion estimate, revenue estimate, or
+profit prediction.
 
 ### Product Scoring
 
@@ -525,13 +803,23 @@ Fixed and lead offers receive no commission-rate or recurring contribution.
 Inactive offers are never recommended. Unknown offers are recommended only when
 no active offer exists.
 
+### Video Metrics And Evidence
+
+Engagement rate is calculated only when likes, comments, shares, and positive
+views are all available. Missing values remain unknown. Product-level
+recommendations require at least five valid videos, three with positive views,
+and two valid observations per candidate. Category fallback requires at least
+ten videos from three products and three observations per candidate.
+
 ### Limitations
 
 All caps and weights are provisional. Mock-provider and generated files are
-synthetic. Version 1.4 uses no real APIs, scraping, database, machine learning,
-LLM, or video analysis.
+synthetic. Version 1.5 uses structured video CSV data only. It performs no URL
+requests, scraping, downloading, transcript analysis, frame extraction,
+computer vision, audio analysis, machine learning, LLM generation, or automated
+posting.
 
 Future versions may integrate real affiliate APIs, persistent storage,
-historical outcome data, machine learning, and a separate video-analysis layer.
+historical outcome data, and separately approved analytical capabilities.
 """
     )

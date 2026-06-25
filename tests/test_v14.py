@@ -301,8 +301,8 @@ class DatasetAndRegressionTests(unittest.TestCase):
     def test_streamlit_app_imports_cleanly(self):
         app = AppTest.from_file(str(PROJECT_DIR / "app.py")).run(timeout=30)
         self.assertEqual(len(app.exception), 0)
-        self.assertEqual(len(app.tabs), 6)
-        self.assertEqual(len(app.get("file_uploader")), 2)
+        self.assertEqual(len(app.tabs), 7)
+        self.assertEqual(len(app.get("file_uploader")), 3)
 
 
 if __name__ == "__main__":

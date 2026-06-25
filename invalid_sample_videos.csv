@@ -1,0 +1,13 @@
+video_id,product_id,platform,title,video_url,publish_date,duration_seconds,views,likes,comments,shares,creator_followers,content_format,hook_type,demo_present,comparison_present,cta_present,main_feature
+DUP-V,P0001,YouTube,Invalid synthetic video,,2026-01-01,30,100,10,2,1,1000,demo,result_first,True,False,True,testing
+DUP-V,P0002,YouTube,Invalid synthetic video,,2026-01-01,30,100,10,2,1,1000,demo,result_first,True,False,True,testing
+BAD-ORPHAN,MISSING,YouTube,Invalid synthetic video,,2026-01-01,30,100,10,2,1,1000,demo,result_first,True,False,True,testing
+BAD-NEGATIVE,P0001,YouTube,Invalid synthetic video,,2026-01-01,30,-1,10,2,1,1000,demo,result_first,True,False,True,testing
+BAD-DURATION,P0001,YouTube,Invalid synthetic video,,2026-01-01,0,100,10,2,1,1000,demo,result_first,True,False,True,testing
+BAD-DATE,P0001,YouTube,Invalid synthetic video,,not-a-date,30,100,10,2,1,1000,demo,result_first,True,False,True,testing
+BAD-PLATFORM,P0001,Unknown Network,Invalid synthetic video,,2026-01-01,30,100,10,2,1,1000,demo,result_first,True,False,True,testing
+BAD-FORMAT,P0001,YouTube,Invalid synthetic video,,2026-01-01,30,100,10,2,1,1000,dance,result_first,True,False,True,testing
+BAD-HOOK,P0001,YouTube,Invalid synthetic video,,2026-01-01,30,100,10,2,1,1000,demo,mystery,True,False,True,testing
+BAD-BOOL,P0001,YouTube,Invalid synthetic video,,2026-01-01,30,100,10,2,1,1000,demo,result_first,maybe,False,True,testing
+WARN-URL,P0001,YouTube,Invalid synthetic video,example.com/video,2026-01-01,30,100,10,2,1,1000,demo,result_first,True,False,True,testing
+WARN-LIKES,P0001,YouTube,Invalid synthetic video,,2026-01-01,30,10,11,2,1,1000,demo,result_first,True,False,True,testing

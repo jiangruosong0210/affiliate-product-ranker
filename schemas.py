@@ -42,3 +42,57 @@ SIGNAL_COLUMNS = [
 ]
 
 LEGACY_REQUIRED_COLUMNS = LEGACY_CORE_COLUMNS + SIGNAL_COLUMNS
+
+VIDEO_COLUMNS = [
+    "video_id",
+    "product_id",
+    "platform",
+    "title",
+    "video_url",
+    "publish_date",
+    "duration_seconds",
+    "views",
+    "likes",
+    "comments",
+    "shares",
+    "creator_followers",
+    "content_format",
+    "hook_type",
+    "demo_present",
+    "comparison_present",
+    "cta_present",
+    "main_feature",
+]
+
+VIDEO_PLATFORMS = ["YouTube", "TikTok", "Instagram", "Facebook", "Other"]
+VIDEO_CONTENT_FORMATS = [
+    "demo",
+    "review",
+    "comparison",
+    "unboxing",
+    "tutorial",
+    "testimonial",
+    "lifestyle",
+    "listicle",
+    "other",
+]
+VIDEO_HOOK_TYPES = [
+    "result_first",
+    "problem_solution",
+    "question",
+    "surprising_fact",
+    "discount_offer",
+    "general_introduction",
+    "other",
+]
+VIDEO_BOOLEAN_COLUMNS = [
+    "demo_present",
+    "comparison_present",
+    "cta_present",
+]
+VIDEO_OPTIONAL_COUNT_COLUMNS = [
+    "likes",
+    "comments",
+    "shares",
+    "creator_followers",
+]

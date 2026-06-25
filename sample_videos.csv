@@ -1,0 +1,31 @@
+video_id,product_id,platform,title,video_url,publish_date,duration_seconds,views,likes,comments,shares,creator_followers,content_format,hook_type,demo_present,comparison_present,cta_present,main_feature
+V000001,P001,TikTok,Synthetic Product Video 1-1,https://example.com/videos/v000001,2025-01-01,71,565267,303244,20021,1968,326042,demo,surprising_fact,False,,True,price
+V000002,P001,YouTube,Synthetic Product Video 1-2,https://example.com/videos/v000002,2025-01-02,46,483952,,,,13553,lifestyle,general_introduction,False,,True,portability
+V000003,P001,Facebook,Synthetic Product Video 1-3,https://example.com/videos/v000003,2025-01-03,150,24652,8146,1152,1146,,review,general_introduction,False,,,price
+V000004,P001,Instagram,Synthetic Product Video 1-4,https://example.com/videos/v000004,2025-01-04,230,643263,518468,30596,20263,67814,tutorial,question,,True,True,design
+V000005,P001,Other,Synthetic Product Video 1-5,https://example.com/videos/v000005,2025-01-05,83,733356,329897,7767,3767,214814,comparison,discount_offer,,True,False,automation
+V000006,P002,Instagram,Synthetic Product Video 2-1,https://example.com/videos/v000006,2025-01-06,23,538029,473185,21528,21774,272639,demo,general_introduction,True,False,False,durability
+V000007,P002,TikTok,Synthetic Product Video 2-2,https://example.com/videos/v000007,2025-01-07,181,977833,,,,134007,comparison,problem_solution,,False,False,design
+V000008,P002,Facebook,Synthetic Product Video 2-3,https://example.com/videos/v000008,2025-01-08,236,980148,223698,31256,48477,,tutorial,discount_offer,False,,,portability
+V000009,P002,TikTok,Synthetic Product Video 2-4,https://example.com/videos/v000009,2025-01-09,190,316053,247128,6114,10169,271527,comparison,question,,False,True,design
+V000010,P002,Other,Synthetic Product Video 2-5,https://example.com/videos/v000010,2025-01-10,147,125345,101233,2741,9212,17144,tutorial,surprising_fact,,,,ease of use
+V000011,P003,Other,Synthetic Product Video 3-1,https://example.com/videos/v000011,2025-01-11,133,737831,464254,439,18897,431590,testimonial,question,False,,True,speed
+V000012,P003,Instagram,Synthetic Product Video 3-2,https://example.com/videos/v000012,2025-01-12,220,909557,,,,392920,demo,problem_solution,False,,False,ease of use
+V000013,P003,Instagram,Synthetic Product Video 3-3,https://example.com/videos/v000013,2025-01-13,200,149686,111492,525,6237,,tutorial,discount_offer,True,False,False,ease of use
+V000014,P003,Instagram,Synthetic Product Video 3-4,https://example.com/videos/v000014,2025-01-14,131,501869,399544,14664,42625,52905,listicle,discount_offer,,True,True,design
+V000015,P003,TikTok,Synthetic Product Video 3-5,https://example.com/videos/v000015,2025-01-15,128,348702,253791,12793,6928,101953,review,result_first,False,True,True,speed
+V000016,P004,Other,Synthetic Product Video 4-1,https://example.com/videos/v000016,2025-01-16,48,736248,542863,22537,2794,467260,testimonial,discount_offer,,False,True,automation
+V000017,P004,Other,Synthetic Product Video 4-2,https://example.com/videos/v000017,2025-01-17,159,156931,,,,366974,comparison,problem_solution,False,True,,design
+V000018,P004,Instagram,Synthetic Product Video 4-3,https://example.com/videos/v000018,2025-01-18,112,337161,263059,4696,12436,,unboxing,question,True,,False,durability
+V000019,P004,YouTube,Synthetic Product Video 4-4,https://example.com/videos/v000019,2025-01-19,128,4369,3273,213,140,405048,tutorial,result_first,False,,False,price
+V000020,P004,Other,Synthetic Product Video 4-5,https://example.com/videos/v000020,2025-01-20,236,491703,490730,2481,15632,23549,listicle,discount_offer,True,,True,speed
+V000021,P005,Other,Synthetic Product Video 5-1,https://example.com/videos/v000021,2025-01-21,204,119323,63055,5107,4200,9183,review,question,True,,False,automation
+V000022,P005,TikTok,Synthetic Product Video 5-2,https://example.com/videos/v000022,2025-01-22,192,755667,,,,32990,review,problem_solution,True,,,ease of use
+V000023,P005,Instagram,Synthetic Product Video 5-3,https://example.com/videos/v000023,2025-01-23,13,75956,14161,1288,5139,,listicle,general_introduction,False,,,portability
+V000024,P005,YouTube,Synthetic Product Video 5-4,https://example.com/videos/v000024,2025-01-24,164,199777,11452,8948,17387,5732,lifestyle,question,False,True,False,speed
+V000025,P005,Facebook,Synthetic Product Video 5-5,https://example.com/videos/v000025,2025-01-25,177,279011,36756,1857,21641,203394,comparison,discount_offer,,False,False,portability
+V000026,P006,TikTok,Synthetic Product Video 6-1,https://example.com/videos/v000026,2025-01-26,128,81697,5829,2543,6904,322144,demo,question,True,False,,automation
+V000027,P006,TikTok,Synthetic Product Video 6-2,https://example.com/videos/v000027,2025-01-27,137,805499,,,,363578,testimonial,general_introduction,True,False,False,ease of use
+V000028,P006,Other,Synthetic Product Video 6-3,https://example.com/videos/v000028,2025-01-28,86,21845,21286,186,591,,listicle,general_introduction,True,,True,speed
+V000029,P006,YouTube,Synthetic Product Video 6-4,https://example.com/videos/v000029,2025-01-29,89,640532,159610,7406,56763,36865,demo,problem_solution,True,,True,automation
+V000030,P006,Instagram,Synthetic Product Video 6-5,https://example.com/videos/v000030,2025-01-30,48,546801,438328,3246,33258,116795,tutorial,result_first,False,True,True,design
