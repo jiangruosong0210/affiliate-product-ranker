@@ -328,6 +328,7 @@ affiliate-product-ranker/
 ├── generate_test_data.py
 ├── keyword_generation.py
 ├── offer_scoring.py
+├── schemas.py
 ├── scoring.py
 ├── signal_processing.py
 ├── validation.py

@@ -11,8 +11,6 @@ from market_data.mock_provider import MockProvider
 from market_data.service import process_market_data
 from offer_scoring import OFFER_SCORING_CONFIG, score_offers
 from scoring import SCORING_CONFIG, score_products
-from signal_processing import SIGNAL_CONFIG
-from validation import OFFER_COLUMNS, PRODUCT_CORE_COLUMNS, SIGNAL_COLUMNS
 
 
 PROJECT_DIR = Path(__file__).resolve().parent

@@ -1,46 +1,16 @@
 import math
 
+from schemas import (
+    LEGACY_CORE_COLUMNS,
+    LEGACY_REQUIRED_COLUMNS,
+    OFFER_COLUMNS,
+    PRODUCT_CORE_COLUMNS,
+    SIGNAL_COLUMNS,
+)
 
-PRODUCT_CORE_COLUMNS = [
-    "product_id",
-    "product_name",
-    "category",
-    "product_type",
-    "product_url",
-    "reference_price",
-    "reference_commission_rate",
-]
-OFFER_COLUMNS = [
-    "offer_id",
-    "product_id",
-    "platform",
-    "payout_type",
-    "offer_price",
-    "commission_rate",
-    "fixed_commission_amount",
-    "commission_per_lead",
-    "cookie_duration_days",
-    "recurring_commission",
-    "affiliate_url",
-    "offer_status",
-]
-CORE_COLUMNS = [
-    "product_name",
-    "platform",
-    "category",
-    "price",
-    "commission_rate",
-    "product_url",
-]
-SIGNAL_COLUMNS = [
-    "search_volume",
-    "search_growth_7d",
-    "social_mentions_7d",
-    "competitor_count",
-    "days_until_peak",
-    "seasonal_relevance",
-]
-REQUIRED_COLUMNS = CORE_COLUMNS + SIGNAL_COLUMNS
+# Backward-compatible names used by the Version 1.2 and 1.3A validation API.
+CORE_COLUMNS = LEGACY_CORE_COLUMNS
+REQUIRED_COLUMNS = LEGACY_REQUIRED_COLUMNS
 
 TEXT_COLUMNS_REQUIRED = ["product_name", "platform", "category"]
 CORE_NUMERIC_COLUMNS = ["price", "commission_rate"]

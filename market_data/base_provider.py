@@ -3,15 +3,9 @@ from abc import ABC, abstractmethod
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 
+from schemas import SIGNAL_COLUMNS
 
-SIGNAL_FIELDS = [
-    "search_volume",
-    "search_growth_7d",
-    "social_mentions_7d",
-    "competitor_count",
-    "days_until_peak",
-    "seasonal_relevance",
-]
+SIGNAL_FIELDS = SIGNAL_COLUMNS
 VALID_STATUSES = {"success", "fallback", "failed"}
 VALID_CONFIDENCE_LEVELS = {"low", "medium", "high", "not assessed"}
 

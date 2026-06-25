@@ -1,10 +1,7 @@
 import pandas as pd
 
+from schemas import OFFER_COLUMNS, PRODUCT_CORE_COLUMNS, SIGNAL_COLUMNS
 from validation import (
-    OFFER_COLUMNS,
-    PRODUCT_CORE_COLUMNS,
-    SIGNAL_COLUMNS,
-    format_row_numbers,
     parse_boolean,
     parse_number,
 )
