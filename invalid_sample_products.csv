@@ -1,0 +1,4 @@
+product_id,product_name,category,product_type,product_url,reference_price,reference_commission_rate,search_volume,search_growth_7d,social_mentions_7d,competitor_count,days_until_peak,seasonal_relevance
+BAD-P1,Duplicate Product A,Testing,software,,20,0.2,1000,5,100,10,20,50
+BAD-P1,Duplicate Product B,Testing,service,,30,0.25,1200,4,120,12,22,55
+,Missing ID Product,Testing,physical,,15,0.1,800,0,50,8,30,40

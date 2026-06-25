@@ -84,11 +84,20 @@ def merge_product_result(product, result, keyword_columns):
 
 def core_product_values(product):
     return {
+        "product_id": product.get("product_id", ""),
         "product_name": product.get("product_name"),
-        "platform": product.get("platform"),
         "category": product.get("category"),
-        "price": product.get("price"),
-        "commission_rate": product.get("commission_rate"),
+        "product_type": product.get("product_type", ""),
+        "price": product.get("reference_price", product.get("price")),
+        "commission_rate": product.get(
+            "reference_commission_rate",
+            product.get("commission_rate"),
+        ),
+        "reference_price": product.get("reference_price", product.get("price")),
+        "reference_commission_rate": product.get(
+            "reference_commission_rate",
+            product.get("commission_rate"),
+        ),
         "product_url": product.get("product_url", ""),
     }
 

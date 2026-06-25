@@ -160,7 +160,25 @@ class ProviderTests(unittest.TestCase):
 
 class ModeAndFallbackTests(unittest.TestCase):
     def setUp(self):
-        self.manual_sample = pd.read_csv(PROJECT_DIR / "sample_products.csv")
+        sample = pd.read_csv(PROJECT_DIR / "sample_products.csv")
+        self.manual_sample = sample.rename(
+            columns={
+                "reference_price": "price",
+                "reference_commission_rate": "commission_rate",
+            }
+        )
+        self.manual_sample["platform"] = "Test Platform"
+        self.manual_sample = self.manual_sample[
+            [
+                "product_name",
+                "platform",
+                "category",
+                "price",
+                "commission_rate",
+                "product_url",
+                *SIGNAL_COLUMNS,
+            ]
+        ]
 
     def test_manual_mode_rejects_missing_signal_columns(self):
         product_only = self.manual_sample.drop(columns=SIGNAL_COLUMNS)

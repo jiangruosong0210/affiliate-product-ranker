@@ -2,185 +2,120 @@
 
 ## Project Overview
 
-Affiliate Product Ranker is a beginner-friendly Streamlit Version 1.3A app. It
-ranks affiliate products by estimated short-term opportunity for the next 7-30
-days.
+Affiliate Product Ranker Version 1.4 supports two independent decisions:
 
-Version 1.3A adds deterministic keyword generation and a provider-based
-market-data architecture. It does not use paid APIs, web scraping, databases,
-authentication, machine learning, LangChain, CrewAI, or an LLM API.
+1. Which products have the strongest short-term market opportunity?
+2. For the same product, which platform-specific affiliate offer is most
+   attractive?
 
-The Version 1.2 scoring formulas, fixed reference caps, weights, contribution
-logic, filters, charts, and downloads remain unchanged.
+The Product Opportunity Score from Versions 1.2 and 1.3A remains unchanged.
+Version 1.4 adds a separate Platform Offer Score. The scores are not combined
+into a final profit prediction.
 
-This is a demonstration and decision-support tool. Its scores do not guarantee
-affiliate revenue or profit.
+This is a rule-based demonstration and decision-support tool. It does not
+guarantee affiliate revenue or profit.
+
+Version 1.4 does not use real APIs, scraping, databases, machine learning, LLM
+APIs, computer vision, or video analysis.
+
+## Two-File Model
+
+### Products
+
+`products.csv` represents products and their market opportunity.
+
+Required core columns:
+
+```text
+product_id
+product_name
+category
+product_type
+product_url
+reference_price
+reference_commission_rate
+```
+
+Manual mode also requires:
+
+```text
+search_volume
+search_growth_7d
+social_mentions_7d
+competitor_count
+days_until_peak
+seasonal_relevance
+```
+
+Automatic mock mode requires only the core columns. The six market signals are
+optional row-level fallback values.
+
+`reference_price` and `reference_commission_rate` are provisional product-level
+inputs used only to preserve the existing Product Opportunity Score. They are
+separate from real platform-offer economics.
+
+`product_id` must be non-empty and unique. Rows participating in a duplicate ID
+are excluded because offer relationships would otherwise be ambiguous.
+
+### Platform Offers
+
+`offers.csv` represents affiliate terms offered by individual platforms:
+
+```text
+offer_id
+product_id
+platform
+payout_type
+offer_price
+commission_rate
+fixed_commission_amount
+commission_per_lead
+cookie_duration_days
+recurring_commission
+affiliate_url
+offer_status
+```
+
+Valid payout types:
+
+```text
+one_time
+recurring
+fixed_amount
+lead
+```
+
+Valid offer statuses:
+
+```text
+active
+inactive
+unknown
+```
+
+An offers upload is optional. Product ranking continues to work without it.
 
 ## Application Modes
 
 ### Manual CSV
 
-Manual mode preserves the complete Version 1.2 workflow. The uploaded CSV must
-contain:
-
-```text
-product_name
-platform
-category
-price
-commission_rate
-product_url
-search_volume
-search_growth_7d
-social_mentions_7d
-competitor_count
-days_until_peak
-seasonal_relevance
-```
-
-The six raw market signals are read by `ManualProvider`, labeled
-`uploaded CSV`, and passed into the unchanged scoring pipeline.
+Manual mode uses the complete product schema and reads the six uploaded market
+signals through `ManualProvider`.
 
 ### Mock Automatic Data
 
-Automatic mode requires only:
+Mock mode generates deterministic synthetic signals from rule-based keywords.
+It is an architecture test, not real market data.
 
-```text
-product_name
-platform
-category
-price
-commission_rate
-product_url
-```
+If mock retrieval fails, valid optional CSV signals can be used as fallback.
+A failed product without fallback is excluded without stopping other products.
 
-The six raw-signal columns are optional. `MockProvider` generates deterministic
-synthetic signals from the generated keywords.
+Keyword generation uses product name and category. Affiliate platform names are
+not included in buyer-demand search queries.
 
-Mock values are not real market data. They exist only to test the automatic
-provider workflow and must not be treated as evidence of actual demand,
-competition, seasonality, or profit potential.
+## Product Opportunity Score
 
-## Keyword Generation
-
-`keyword_generation.py` applies deterministic text rules:
-
-1. Convert text to lowercase.
-2. Replace punctuation with spaces.
-3. Collapse repeated whitespace.
-4. Remove duplicate phrases while preserving order.
-5. Use `product_name` as the primary keyword.
-6. Use `category` to enrich related keywords and search queries.
-
-Example:
-
-```text
-primary_keyword:
-ai resume builder
-
-related_keywords:
-ai resume builder
-career software
-ai resume builder career software
-
-search_queries:
-ai resume builder
-best ai resume builder
-ai resume builder reviews
-ai resume builder career software
-```
-
-`platform` remains metadata for filtering, routing, or future provider
-selection. It is not added to buyer-demand queries by default.
-
-## Provider Architecture
-
-```text
-market_data/
-├── base_provider.py
-├── manual_provider.py
-├── mock_provider.py
-└── service.py
-```
-
-`base_provider.py` defines the shared provider interface, result model,
-validation, and controlled error types for:
-
-- missing credentials
-- timeouts
-- incomplete responses
-- invalid values
-- rate limits
-- general provider failures
-
-Every provider result contains:
-
-```text
-search_volume
-search_growth_7d
-social_mentions_7d
-competitor_count
-days_until_peak
-seasonal_relevance
-data_source
-retrieved_at
-confidence_level
-retrieval_status
-error_message
-```
-
-`service.py` processes products independently. One failed product never stops
-the remaining products.
-
-## Fallback Behavior
-
-In automatic mode:
-
-1. The provider is called for each product.
-2. A complete, valid provider response is used when retrieval succeeds.
-3. If retrieval fails, the app checks that product's optional CSV signals.
-4. All six optional signals must be present and valid to serve as fallback.
-5. Valid fallback values are labeled `fallback data`.
-6. Without valid fallback, only that product is labeled `failed retrieval` and
-   excluded from scoring.
-
-Missing, incomplete, or invalid fallback fields do not reject the automatic
-upload. They matter only if provider retrieval fails for that row.
-
-## Data Sources And Status
-
-The interface and ranked download show:
-
-```text
-data_source
-retrieval_status
-retrieved_at
-confidence_level
-error_message
-```
-
-Possible sources include:
-
-```text
-uploaded CSV
-mock provider
-fallback data
-failed retrieval
-```
-
-## Caching
-
-Provider objects are cached with Streamlit because they contain no uploaded
-product data. Provider results are cached only in the current Streamlit user
-session and keyed by normalized keyword requests.
-
-Uploaded CSV rows and manual-provider results are not stored in a global
-Streamlit data cache. Future API providers can extend the cache key with public
-request parameters such as geography, language, date range, and provider name.
-
-## Version 1.2 Scoring
-
-The fixed reference values remain:
+The Version 1.2 caps and formulas are unchanged:
 
 ```text
 maximum search volume: 100,000
@@ -188,69 +123,184 @@ maximum social mentions: 10,000
 maximum competitor count: 100
 growth range: -50% to +50%
 maximum days until peak: 60
-maximum commission per sale: $50
+maximum reference commission per sale: $50
 ```
 
 ```text
-commission_per_sale = price * commission_rate
-commission_score = clip(commission_per_sale / 50 * 100, 0, 100)
+reference commission per sale =
+  reference_price * reference_commission_rate
 
-trend_score maps:
--50% or lower = 0
-0% = 50
-+50% or higher = 100
-
-demand_score =
-  normalized_search_volume * 0.70
-  + normalized_social_mentions * 0.30
-
-competition_score =
-  clip(competitor_count / 100 * 100, 0, 100)
-
-competition_opportunity = 100 - competition_score
-
-timing_urgency_score =
-  clip(100 - days_until_peak / 60 * 100, 0, 100)
-
-urgency_score =
-  timing_urgency_score * 0.60
-  + seasonal_relevance * 0.40
+Product Opportunity Score =
+  commission_score * 0.30
+  + trend_score * 0.25
+  + demand_score * 0.20
+  + competition_opportunity * 0.15
+  + urgency_score * 0.10
 ```
 
-The final fixed weights remain:
+## Payout-Specific Commission Values
+
+### One-Time And Recurring
 
 ```text
-commission: 0.30
-trend: 0.25
-demand: 0.20
-competition: 0.15
-urgency: 0.10
+commission_value = offer_price * commission_rate
+offer_price > 0
+0 < commission_rate <= 1
 ```
 
-Users cannot change the caps or weights.
+### Fixed Amount
 
-## Adding A Real Provider Later
+```text
+commission_value = fixed_commission_amount
+fixed_commission_amount > 0
+```
 
-A future provider should:
+### Lead
 
-1. Subclass `MarketDataProvider`.
-2. Implement `retrieve(product, keywords)`.
-3. Return a complete `MarketDataResult`.
-4. Convert provider-specific failures into the controlled provider errors.
-5. Register the provider in the application provider registry.
-6. Keep credentials in Streamlit secrets rather than source code.
+```text
+commission_value = commission_per_lead
+commission_per_lead > 0
+```
 
-Possible future integrations include:
+Non-applicable payout fields may be blank.
 
-- Google Ads Keyword Planning for keyword volume and competition signals
-- YouTube Data API for recent video and engagement signals
+Recurring consistency is strict:
 
-Those integrations are not included in Version 1.3A and may require credentials,
-quotas, approval, or paid access.
+```text
+payout_type == recurring → recurring_commission must be true
+all other payout types   → recurring_commission must be false
+```
+
+Contradictory rows are excluded.
+
+## Platform Offer Score
+
+All assumptions are stored in `OFFER_SCORING_CONFIG`.
+
+Reference caps:
+
+```text
+commission value: $100
+commission rate: 50%
+cookie duration: 90 days
+```
+
+Component mappings:
+
+```text
+commission_value_score =
+  clip(commission_value / 100 * 100, 0, 100)
+
+commission_rate_score =
+  clip(commission_rate / 0.50 * 100, 0, 100)
+
+cookie_duration_score =
+  clip(cookie_duration_days / 90 * 100, 0, 100)
+
+recurring_score:
+  true = 100
+  false = 0
+
+status_score:
+  active = 100
+  unknown = 50
+  inactive = 0
+```
+
+Percentage-based offer weights:
+
+```text
+commission value: 0.40
+commission rate: 0.20
+cookie duration: 0.15
+recurring commission: 0.15
+offer status: 0.10
+```
+
+For fixed and lead offers, commission rate and recurring commission are
+inapplicable. Their weights are redistributed proportionally:
+
+```text
+commission value: 0.6153846154
+cookie duration: 0.2307692308
+offer status: 0.1538461538
+total: 1.0
+```
+
+Fixed and lead offers receive zero commission-rate and recurring contributions.
+
+## Offer Recommendations
+
+For each product:
+
+1. Recommend the highest-scoring active offer.
+2. If no active offer exists, recommend the highest-scoring unknown offer and
+   display a warning.
+3. Never recommend an inactive offer.
+4. Resolve ties using commission value, cookie duration, then `offer_id`.
+
+## Validation And Exclusions
+
+Product and offer rows are validated independently. Validation reports all
+detectable reasons for each excluded row.
+
+Checks include:
+
+- missing required fields
+- duplicate product or offer IDs
+- orphan offers
+- invalid payout types
+- invalid offer statuses
+- invalid commission rates
+- missing payout-specific amounts
+- negative cookie duration
+- invalid recurring booleans
+- payout and recurring-flag contradictions
+
+Excluded records remain downloadable from the Data Quality tab. One invalid
+offer does not prevent valid offers from being scored.
+
+## Dashboard Tabs
+
+1. **Overview**: counts, provider status, top product, recommended offer, timing.
+2. **Product Ranking**: existing ranking, filters, Top N, chart, and download.
+3. **Platform Offer Comparison**: offer filters and side-by-side product offers.
+4. **Data Quality**: excluded records, reasons, and error-report downloads.
+5. **Scalability**: row counts and processing-stage timing.
+6. **Methodology**: formulas, assumptions, limitations, and future work.
+
+## Synthetic Test Data
+
+Run:
+
+```bash
+python generate_test_data.py
+```
+
+The generator uses fixed seed `140`.
+
+Clean scalability files:
+
+```text
+large_sample_products.csv: exactly 1,000 valid products
+large_sample_offers.csv: exactly 2,500 valid offers
+```
+
+Validation-only files:
+
+```text
+invalid_sample_products.csv
+invalid_sample_offers.csv
+```
+
+The clean files contain no intentional validation errors. Invalid examples are
+kept separately and include duplicates, orphans, bad rates, missing payout
+values, invalid booleans, payout types, and statuses.
+
+All generated data is synthetic test data and does not represent real affiliate
+markets.
 
 ## Local Setup
-
-Python 3.12 is recommended for Streamlit Community Cloud compatibility.
 
 ```bash
 python3.12 -m venv .venv
@@ -260,34 +310,37 @@ python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Run Tests
+## Tests
 
 ```bash
 python -m unittest discover -s tests
 ```
 
+Tests cover Versions 1.2, 1.3A, and 1.4, including the complete clean
+1,000-product and 2,500-offer run.
+
 ## Repository Structure
 
 ```text
 affiliate-product-ranker/
-├── .gitignore
 ├── app.py
+├── data_quality.py
+├── generate_test_data.py
 ├── keyword_generation.py
+├── offer_scoring.py
 ├── scoring.py
 ├── signal_processing.py
 ├── validation.py
 ├── market_data/
-│   ├── __init__.py
-│   ├── base_provider.py
-│   ├── manual_provider.py
-│   ├── mock_provider.py
-│   └── service.py
 ├── sample_products.csv
+├── sample_offers.csv
+├── large_sample_products.csv
+├── large_sample_offers.csv
+├── invalid_sample_products.csv
+├── invalid_sample_offers.csv
+├── tests/
 ├── requirements.txt
-├── README.md
-└── tests/
-    ├── test_v12.py
-    └── test_v13.py
+└── README.md
 ```
 
 ## Streamlit Community Cloud
@@ -295,10 +348,11 @@ affiliate-product-ranker/
 ```text
 Repository: <your-github-username>/<your-repository-name>
 Branch: main
-Entrypoint file: app.py
-Python version: 3.12
-Secrets: none for Version 1.3A
+Entrypoint: app.py
+Python: 3.12
+Secrets: none
 ```
 
-The template path is relative to `app.py`, so downloads work locally and after
-cloud deployment.
+Future versions may add real affiliate APIs, a database, historical
+machine-learning models, and a separate video-analysis module. None are included
+in Version 1.4.

@@ -181,7 +181,30 @@ class SignalProcessingTests(unittest.TestCase):
 
 class ValidationAndRankingTests(unittest.TestCase):
     def setUp(self):
-        self.sample = pd.read_csv(PROJECT_DIR / "sample_products.csv")
+        sample = pd.read_csv(PROJECT_DIR / "sample_products.csv")
+        self.sample = sample.rename(
+            columns={
+                "reference_price": "price",
+                "reference_commission_rate": "commission_rate",
+            }
+        )
+        self.sample["platform"] = "Test Platform"
+        self.sample = self.sample[
+            [
+                "product_name",
+                "platform",
+                "category",
+                "price",
+                "commission_rate",
+                "product_url",
+                "search_volume",
+                "search_growth_7d",
+                "social_mentions_7d",
+                "competitor_count",
+                "days_until_peak",
+                "seasonal_relevance",
+            ]
+        ]
 
     def test_sample_csv_is_valid(self):
         self.assertEqual(validate_products(self.sample), [])

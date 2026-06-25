@@ -1,0 +1,11 @@
+offer_id,product_id,platform,payout_type,offer_price,commission_rate,fixed_commission_amount,commission_per_lead,cookie_duration_days,recurring_commission,affiliate_url,offer_status
+O001,P001,PartnerStack,recurring,29,0.30,,,30,true,https://example.com/offers/o001,active
+O002,P001,Impact,one_time,35,0.40,,,45,false,https://example.com/offers/o002,active
+O003,P002,Amazon Associates,one_time,34.99,0.04,,,1,false,https://example.com/offers/o003,active
+O004,P002,Direct Program,fixed_amount,,,6.50,,14,false,https://example.com/offers/o004,unknown
+O005,P003,Impact,recurring,9.99,0.40,,,30,true,https://example.com/offers/o005,active
+O006,P004,ShareASale,one_time,99,0.20,,,60,false,https://example.com/offers/o006,active
+O007,P004,Direct Program,lead,,,,18,90,false,https://example.com/offers/o007,active
+O008,P005,Amazon Associates,one_time,229,0.03,,,1,false,https://example.com/offers/o008,inactive
+O009,P005,Awin,fixed_amount,,,15,,30,false,https://example.com/offers/o009,unknown
+O010,P006,CJ Affiliate,recurring,14.99,0.35,,,30,true,https://example.com/offers/o010,active

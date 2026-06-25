@@ -1,0 +1,1001 @@
+product_id,product_name,category,product_type,product_url,reference_price,reference_commission_rate,search_volume,search_growth_7d,social_mentions_7d,competitor_count,days_until_peak,seasonal_relevance
+P0001,Synthetic Summer Gadgets Product 1,Summer Gadgets,software,https://example.com/products/p0001,137.1,0.3237,13928,-13,246,131,24,90
+P0002,Synthetic Creator Tools Product 2,Creator Tools,course,https://example.com/products/p0002,334.39,0.2522,115796,4,918,138,70,54
+P0003,Synthetic Beauty Product 3,Beauty,subscription,https://example.com/products/p0003,332.73,0.5745,124896,-15,5159,62,70,18
+P0004,Synthetic Beauty Product 4,Beauty,mobile_app,https://example.com/products/p0004,463.49,0.2384,79655,31,11049,94,80,44
+P0005,Synthetic Home Office Product 5,Home Office,service,https://example.com/products/p0005,373.86,0.5355,100654,90,11206,60,27,45
+P0006,Synthetic Education Product 6,Education,membership,https://example.com/products/p0006,375.6,0.2639,148558,-66,13291,158,55,16
+P0007,Synthetic Travel Product 7,Travel,subscription,https://example.com/products/p0007,338.83,0.4146,29150,-46,13329,103,45,16
+P0008,Synthetic Productivity Product 8,Productivity,membership,https://example.com/products/p0008,36.74,0.598,45493,25,3190,88,65,73
+P0009,Synthetic Productivity Product 9,Productivity,membership,https://example.com/products/p0009,271.56,0.4041,32312,85,625,20,90,47
+P0010,Synthetic Fitness Product 10,Fitness,digital_download,https://example.com/products/p0010,416.21,0.3522,97538,32,2581,124,9,1
+P0011,Synthetic Personal Finance Product 11,Personal Finance,subscription,https://example.com/products/p0011,134.21,0.1768,78180,-38,7615,30,22,60
+P0012,Synthetic Gaming Product 12,Gaming,subscription,https://example.com/products/p0012,78.17,0.2656,141633,25,11714,105,67,32
+P0013,Synthetic Travel Product 13,Travel,mobile_app,https://example.com/products/p0013,344.23,0.3909,5596,67,14935,120,69,86
+P0014,Synthetic Career Software Product 14,Career Software,software,https://example.com/products/p0014,62.09,0.5587,67096,80,3287,48,86,45
+P0015,Synthetic Personal Finance Product 15,Personal Finance,course,https://example.com/products/p0015,369.89,0.3996,146833,80,6744,54,67,59
+P0016,Synthetic Pet Care Product 16,Pet Care,subscription,https://example.com/products/p0016,320.21,0.2783,1273,-19,7185,136,60,85
+P0017,Synthetic Career Software Product 17,Career Software,mobile_app,https://example.com/products/p0017,74.34,0.0346,42385,40,9037,147,42,43
+P0018,Synthetic Summer Gadgets Product 18,Summer Gadgets,software,https://example.com/products/p0018,194.34,0.5929,122128,-50,4755,116,10,22
+P0019,Synthetic Creator Tools Product 19,Creator Tools,mobile_app,https://example.com/products/p0019,53.35,0.0213,2664,75,8548,158,26,7
+P0020,Synthetic Beauty Product 20,Beauty,service,https://example.com/products/p0020,292.42,0.2525,120577,64,344,135,43,39
+P0021,Synthetic Gaming Product 21,Gaming,software,https://example.com/products/p0021,28.18,0.0895,135999,79,4561,123,88,96
+P0022,Synthetic Gaming Product 22,Gaming,physical,https://example.com/products/p0022,108.22,0.1127,12060,-19,14655,28,48,90
+P0023,Synthetic Education Product 23,Education,course,https://example.com/products/p0023,394.79,0.2755,1445,-55,10987,18,53,90
+P0024,Synthetic Home Office Product 24,Home Office,digital_download,https://example.com/products/p0024,264.59,0.2135,21839,27,6588,95,38,64
+P0025,Synthetic Gaming Product 25,Gaming,course,https://example.com/products/p0025,33.73,0.2165,8691,-40,4654,41,52,37
+P0026,Synthetic Fitness Product 26,Fitness,service,https://example.com/products/p0026,208.45,0.2617,10831,-32,10634,115,22,41
+P0027,Synthetic Creator Tools Product 27,Creator Tools,physical,https://example.com/products/p0027,175.59,0.0944,109658,50,5709,18,46,99
+P0028,Synthetic Creator Tools Product 28,Creator Tools,digital_download,https://example.com/products/p0028,229.26,0.2974,23211,82,5078,131,74,9
+P0029,Synthetic Travel Product 29,Travel,digital_download,https://example.com/products/p0029,295.21,0.3964,148517,20,6516,6,24,5
+P0030,Synthetic Productivity Product 30,Productivity,membership,https://example.com/products/p0030,73.27,0.5561,30342,-38,5202,95,58,91
+P0031,Synthetic Creator Tools Product 31,Creator Tools,physical,https://example.com/products/p0031,145.38,0.3294,134596,-25,12840,14,74,29
+P0032,Synthetic Home Office Product 32,Home Office,service,https://example.com/products/p0032,314.09,0.5667,148310,40,2839,120,15,14
+P0033,Synthetic Gaming Product 33,Gaming,course,https://example.com/products/p0033,496.09,0.1114,135720,8,11245,11,74,48
+P0034,Synthetic Travel Product 34,Travel,course,https://example.com/products/p0034,378.58,0.5484,140886,88,7149,5,13,20
+P0035,Synthetic Gaming Product 35,Gaming,physical,https://example.com/products/p0035,137.92,0.3966,81005,-46,880,42,86,28
+P0036,Synthetic Beauty Product 36,Beauty,service,https://example.com/products/p0036,202.33,0.3785,78150,-42,5279,43,76,73
+P0037,Synthetic Career Software Product 37,Career Software,subscription,https://example.com/products/p0037,490.39,0.0262,51574,-65,1451,84,9,45
+P0038,Synthetic Productivity Product 38,Productivity,course,https://example.com/products/p0038,431.28,0.1132,51460,-26,5621,81,22,2
+P0039,Synthetic Productivity Product 39,Productivity,subscription,https://example.com/products/p0039,24.59,0.3435,147243,-68,7764,85,51,38
+P0040,Synthetic Pet Care Product 40,Pet Care,mobile_app,https://example.com/products/p0040,152.02,0.3578,113293,-53,14479,104,88,100
+P0041,Synthetic Personal Finance Product 41,Personal Finance,physical,https://example.com/products/p0041,127.97,0.1069,108093,-22,316,112,60,10
+P0042,Synthetic Travel Product 42,Travel,software,https://example.com/products/p0042,479.73,0.0485,100461,-46,9491,40,23,67
+P0043,Synthetic Career Software Product 43,Career Software,membership,https://example.com/products/p0043,225.26,0.4933,70238,83,9321,2,89,42
+P0044,Synthetic Personal Finance Product 44,Personal Finance,mobile_app,https://example.com/products/p0044,472.23,0.5925,96195,59,10106,10,58,78
+P0045,Synthetic Education Product 45,Education,physical,https://example.com/products/p0045,243.68,0.5059,50259,18,8194,91,63,26
+P0046,Synthetic Personal Finance Product 46,Personal Finance,software,https://example.com/products/p0046,371.77,0.4245,105427,-68,10425,21,78,46
+P0047,Synthetic Personal Finance Product 47,Personal Finance,membership,https://example.com/products/p0047,416.01,0.0363,24543,69,3043,0,29,35
+P0048,Synthetic Personal Finance Product 48,Personal Finance,mobile_app,https://example.com/products/p0048,222.42,0.0296,42880,-27,11891,102,65,22
+P0049,Synthetic Creator Tools Product 49,Creator Tools,digital_download,https://example.com/products/p0049,476.76,0.0998,96350,66,10081,144,18,60
+P0050,Synthetic Fitness Product 50,Fitness,software,https://example.com/products/p0050,215.72,0.4599,33527,-63,3029,118,33,76
+P0051,Synthetic Beauty Product 51,Beauty,digital_download,https://example.com/products/p0051,54.42,0.5187,23376,-35,8207,59,88,36
+P0052,Synthetic Beauty Product 52,Beauty,digital_download,https://example.com/products/p0052,25.9,0.2595,99970,-52,8942,25,13,83
+P0053,Synthetic Creator Tools Product 53,Creator Tools,mobile_app,https://example.com/products/p0053,148.21,0.4749,17207,42,182,120,44,60
+P0054,Synthetic Summer Gadgets Product 54,Summer Gadgets,subscription,https://example.com/products/p0054,314.05,0.1391,74973,83,9936,52,34,72
+P0055,Synthetic Education Product 55,Education,software,https://example.com/products/p0055,103.78,0.2777,115294,31,3862,37,51,23
+P0056,Synthetic Creator Tools Product 56,Creator Tools,course,https://example.com/products/p0056,163.88,0.3037,28798,-42,7536,86,65,96
+P0057,Synthetic Travel Product 57,Travel,digital_download,https://example.com/products/p0057,273.13,0.3574,27164,24,10840,122,33,97
+P0058,Synthetic Pet Care Product 58,Pet Care,digital_download,https://example.com/products/p0058,394.93,0.3995,48353,-9,3266,134,78,91
+P0059,Synthetic Personal Finance Product 59,Personal Finance,digital_download,https://example.com/products/p0059,246.39,0.0592,119496,67,6261,15,77,96
+P0060,Synthetic Travel Product 60,Travel,digital_download,https://example.com/products/p0060,80.34,0.1113,2606,-24,12147,26,1,81
+P0061,Synthetic Gaming Product 61,Gaming,membership,https://example.com/products/p0061,124.28,0.3919,83202,74,6075,34,81,15
+P0062,Synthetic Productivity Product 62,Productivity,service,https://example.com/products/p0062,280.23,0.4884,63952,65,8464,160,77,2
+P0063,Synthetic Creator Tools Product 63,Creator Tools,membership,https://example.com/products/p0063,72.86,0.2111,130419,39,5845,1,76,31
+P0064,Synthetic Personal Finance Product 64,Personal Finance,mobile_app,https://example.com/products/p0064,232.05,0.2875,21375,60,5249,114,52,83
+P0065,Synthetic Education Product 65,Education,physical,https://example.com/products/p0065,402.53,0.0353,117436,11,11140,9,75,62
+P0066,Synthetic Pet Care Product 66,Pet Care,digital_download,https://example.com/products/p0066,345.23,0.0609,53087,80,696,146,54,80
+P0067,Synthetic Education Product 67,Education,software,https://example.com/products/p0067,116.27,0.5962,103420,-47,9460,90,67,71
+P0068,Synthetic Fitness Product 68,Fitness,software,https://example.com/products/p0068,314.69,0.5474,63200,44,2918,50,56,1
+P0069,Synthetic Fitness Product 69,Fitness,membership,https://example.com/products/p0069,193.32,0.0761,116277,-2,8157,135,69,28
+P0070,Synthetic Pet Care Product 70,Pet Care,physical,https://example.com/products/p0070,253.17,0.5415,70927,-56,9148,9,50,10
+P0071,Synthetic Gaming Product 71,Gaming,subscription,https://example.com/products/p0071,390.97,0.0678,34058,-20,5713,103,10,29
+P0072,Synthetic Personal Finance Product 72,Personal Finance,mobile_app,https://example.com/products/p0072,309.45,0.0839,14720,62,9245,46,20,56
+P0073,Synthetic Creator Tools Product 73,Creator Tools,subscription,https://example.com/products/p0073,155.1,0.576,26353,7,885,95,54,37
+P0074,Synthetic Career Software Product 74,Career Software,software,https://example.com/products/p0074,57.6,0.0219,126784,67,871,104,85,38
+P0075,Synthetic Career Software Product 75,Career Software,mobile_app,https://example.com/products/p0075,229.19,0.3162,41505,10,13972,44,89,98
+P0076,Synthetic Creator Tools Product 76,Creator Tools,membership,https://example.com/products/p0076,52.31,0.5176,61270,-37,9031,31,41,16
+P0077,Synthetic Gaming Product 77,Gaming,digital_download,https://example.com/products/p0077,162.99,0.2258,76021,70,4744,160,90,25
+P0078,Synthetic Productivity Product 78,Productivity,membership,https://example.com/products/p0078,494.75,0.3325,146159,88,2289,33,49,80
+P0079,Synthetic Home Office Product 79,Home Office,mobile_app,https://example.com/products/p0079,450.85,0.3307,97194,50,1633,79,16,77
+P0080,Synthetic Fitness Product 80,Fitness,digital_download,https://example.com/products/p0080,196.88,0.3051,11314,-53,7313,68,50,19
+P0081,Synthetic Gaming Product 81,Gaming,mobile_app,https://example.com/products/p0081,194.48,0.2782,148531,72,10503,72,20,99
+P0082,Synthetic Productivity Product 82,Productivity,mobile_app,https://example.com/products/p0082,199.65,0.1736,73701,48,12681,80,51,22
+P0083,Synthetic Home Office Product 83,Home Office,physical,https://example.com/products/p0083,445.53,0.0476,56254,1,10878,32,66,89
+P0084,Synthetic Summer Gadgets Product 84,Summer Gadgets,membership,https://example.com/products/p0084,163.07,0.3921,135581,43,5425,28,39,82
+P0085,Synthetic Creator Tools Product 85,Creator Tools,membership,https://example.com/products/p0085,421.13,0.5214,41842,89,7642,73,69,80
+P0086,Synthetic Travel Product 86,Travel,mobile_app,https://example.com/products/p0086,471.32,0.2352,37182,-52,1440,25,45,1
+P0087,Synthetic Beauty Product 87,Beauty,mobile_app,https://example.com/products/p0087,390.15,0.018,94471,72,9682,76,84,97
+P0088,Synthetic Gaming Product 88,Gaming,membership,https://example.com/products/p0088,214.91,0.577,30044,32,3683,97,64,30
+P0089,Synthetic Creator Tools Product 89,Creator Tools,service,https://example.com/products/p0089,251.11,0.5291,2707,-19,2675,107,36,95
+P0090,Synthetic Personal Finance Product 90,Personal Finance,course,https://example.com/products/p0090,127.26,0.5895,147444,52,8947,67,13,8
+P0091,Synthetic Home Office Product 91,Home Office,digital_download,https://example.com/products/p0091,23.78,0.3036,121167,-64,12360,148,46,23
+P0092,Synthetic Career Software Product 92,Career Software,digital_download,https://example.com/products/p0092,87.83,0.2537,99445,54,13541,6,46,44
+P0093,Synthetic Personal Finance Product 93,Personal Finance,physical,https://example.com/products/p0093,88.6,0.0491,2135,70,524,64,9,62
+P0094,Synthetic Personal Finance Product 94,Personal Finance,subscription,https://example.com/products/p0094,186.73,0.2255,46812,3,13224,132,59,61
+P0095,Synthetic Creator Tools Product 95,Creator Tools,software,https://example.com/products/p0095,333.34,0.3162,8452,7,992,33,21,12
+P0096,Synthetic Summer Gadgets Product 96,Summer Gadgets,service,https://example.com/products/p0096,112.35,0.4745,68106,-66,899,125,53,94
+P0097,Synthetic Beauty Product 97,Beauty,software,https://example.com/products/p0097,25.48,0.0839,123543,-30,9281,120,2,19
+P0098,Synthetic Personal Finance Product 98,Personal Finance,service,https://example.com/products/p0098,50.51,0.1558,33794,9,13734,15,58,57
+P0099,Synthetic Productivity Product 99,Productivity,physical,https://example.com/products/p0099,91.84,0.3855,104832,69,5762,123,28,85
+P0100,Synthetic Summer Gadgets Product 100,Summer Gadgets,course,https://example.com/products/p0100,455.8,0.3213,128203,-27,6300,53,82,52
+P0101,Synthetic Productivity Product 101,Productivity,physical,https://example.com/products/p0101,343.01,0.2397,89956,-48,6443,112,56,85
+P0102,Synthetic Gaming Product 102,Gaming,membership,https://example.com/products/p0102,445.81,0.3039,82486,-47,13160,50,31,36
+P0103,Synthetic Education Product 103,Education,membership,https://example.com/products/p0103,338.66,0.2148,120318,77,11476,97,59,16
+P0104,Synthetic Home Office Product 104,Home Office,service,https://example.com/products/p0104,416.31,0.5615,11667,-62,2357,156,0,15
+P0105,Synthetic Personal Finance Product 105,Personal Finance,mobile_app,https://example.com/products/p0105,331.1,0.1177,125292,-59,12256,150,72,2
+P0106,Synthetic Summer Gadgets Product 106,Summer Gadgets,digital_download,https://example.com/products/p0106,241.59,0.2034,43337,-37,2436,53,82,35
+P0107,Synthetic Home Office Product 107,Home Office,software,https://example.com/products/p0107,364.89,0.4325,53360,-11,12378,141,74,90
+P0108,Synthetic Gaming Product 108,Gaming,subscription,https://example.com/products/p0108,438.19,0.5032,47908,-52,2374,128,34,14
+P0109,Synthetic Career Software Product 109,Career Software,mobile_app,https://example.com/products/p0109,440.98,0.5061,3395,72,14736,27,13,39
+P0110,Synthetic Career Software Product 110,Career Software,membership,https://example.com/products/p0110,239.75,0.4667,16621,54,3785,32,65,79
+P0111,Synthetic Gaming Product 111,Gaming,membership,https://example.com/products/p0111,175.36,0.2531,149659,-22,3956,109,22,47
+P0112,Synthetic Gaming Product 112,Gaming,subscription,https://example.com/products/p0112,425.18,0.5983,31919,30,8210,133,23,59
+P0113,Synthetic Personal Finance Product 113,Personal Finance,membership,https://example.com/products/p0113,301.65,0.5884,29699,25,1988,109,79,13
+P0114,Synthetic Beauty Product 114,Beauty,membership,https://example.com/products/p0114,461.86,0.4814,92463,-26,2370,26,64,25
+P0115,Synthetic Home Office Product 115,Home Office,software,https://example.com/products/p0115,150.15,0.483,97396,33,3272,20,6,27
+P0116,Synthetic Creator Tools Product 116,Creator Tools,digital_download,https://example.com/products/p0116,303.79,0.1253,58071,-47,13735,160,15,76
+P0117,Synthetic Creator Tools Product 117,Creator Tools,membership,https://example.com/products/p0117,237.88,0.3618,122102,-37,14885,41,1,76
+P0118,Synthetic Pet Care Product 118,Pet Care,mobile_app,https://example.com/products/p0118,319.79,0.0974,81260,-55,14389,151,63,80
+P0119,Synthetic Travel Product 119,Travel,software,https://example.com/products/p0119,243.94,0.1412,105370,-54,6641,49,81,92
+P0120,Synthetic Beauty Product 120,Beauty,mobile_app,https://example.com/products/p0120,364.47,0.2447,80207,9,3417,69,69,69
+P0121,Synthetic Travel Product 121,Travel,membership,https://example.com/products/p0121,278.29,0.4454,124913,23,10128,151,30,64
+P0122,Synthetic Personal Finance Product 122,Personal Finance,software,https://example.com/products/p0122,68.2,0.0711,106045,-3,7135,108,1,64
+P0123,Synthetic Fitness Product 123,Fitness,mobile_app,https://example.com/products/p0123,400.43,0.5906,146812,31,6850,30,6,92
+P0124,Synthetic Gaming Product 124,Gaming,mobile_app,https://example.com/products/p0124,429.83,0.3328,27130,42,4447,17,16,8
+P0125,Synthetic Personal Finance Product 125,Personal Finance,service,https://example.com/products/p0125,208.6,0.5276,81066,26,3344,104,74,56
+P0126,Synthetic Summer Gadgets Product 126,Summer Gadgets,physical,https://example.com/products/p0126,322.08,0.1159,35928,-56,686,4,39,39
+P0127,Synthetic Education Product 127,Education,digital_download,https://example.com/products/p0127,493.12,0.2911,105573,-43,14016,128,77,36
+P0128,Synthetic Fitness Product 128,Fitness,software,https://example.com/products/p0128,343.99,0.4564,6741,71,6014,97,24,37
+P0129,Synthetic Gaming Product 129,Gaming,subscription,https://example.com/products/p0129,453.28,0.2486,74360,-43,11197,85,34,75
+P0130,Synthetic Creator Tools Product 130,Creator Tools,membership,https://example.com/products/p0130,81.14,0.2219,88978,28,9641,46,68,65
+P0131,Synthetic Education Product 131,Education,service,https://example.com/products/p0131,35.12,0.2623,144767,68,12131,146,24,9
+P0132,Synthetic Pet Care Product 132,Pet Care,mobile_app,https://example.com/products/p0132,97.41,0.5338,101247,79,13496,160,70,2
+P0133,Synthetic Education Product 133,Education,physical,https://example.com/products/p0133,437.41,0.167,122854,-33,5745,34,10,44
+P0134,Synthetic Education Product 134,Education,mobile_app,https://example.com/products/p0134,419.75,0.3383,20273,4,3247,146,82,34
+P0135,Synthetic Gaming Product 135,Gaming,mobile_app,https://example.com/products/p0135,280.55,0.5972,141183,-50,9678,58,84,73
+P0136,Synthetic Summer Gadgets Product 136,Summer Gadgets,digital_download,https://example.com/products/p0136,85.07,0.2667,76109,-22,761,100,11,62
+P0137,Synthetic Travel Product 137,Travel,service,https://example.com/products/p0137,478.81,0.2016,131724,7,13608,88,75,30
+P0138,Synthetic Education Product 138,Education,subscription,https://example.com/products/p0138,157.39,0.4907,74007,1,14211,123,4,79
+P0139,Synthetic Travel Product 139,Travel,physical,https://example.com/products/p0139,146.76,0.3392,147159,74,1626,146,77,15
+P0140,Synthetic Personal Finance Product 140,Personal Finance,membership,https://example.com/products/p0140,76.14,0.0367,94984,-24,3124,15,73,23
+P0141,Synthetic Education Product 141,Education,digital_download,https://example.com/products/p0141,374.66,0.2928,140286,-67,8207,41,88,35
+P0142,Synthetic Gaming Product 142,Gaming,software,https://example.com/products/p0142,275.42,0.1463,71718,70,1917,103,42,80
+P0143,Synthetic Personal Finance Product 143,Personal Finance,service,https://example.com/products/p0143,86.3,0.0189,46691,-36,9025,77,30,68
+P0144,Synthetic Summer Gadgets Product 144,Summer Gadgets,service,https://example.com/products/p0144,323.05,0.3027,130046,62,4804,84,15,51
+P0145,Synthetic Summer Gadgets Product 145,Summer Gadgets,subscription,https://example.com/products/p0145,102.31,0.4266,73891,-2,8429,130,50,96
+P0146,Synthetic Creator Tools Product 146,Creator Tools,software,https://example.com/products/p0146,404.7,0.2512,21337,-16,1580,73,38,84
+P0147,Synthetic Summer Gadgets Product 147,Summer Gadgets,membership,https://example.com/products/p0147,203.48,0.4752,16746,45,3613,145,39,26
+P0148,Synthetic Pet Care Product 148,Pet Care,course,https://example.com/products/p0148,358.16,0.2744,55074,6,4289,125,84,96
+P0149,Synthetic Home Office Product 149,Home Office,subscription,https://example.com/products/p0149,334.91,0.1877,51452,34,10680,127,36,45
+P0150,Synthetic Pet Care Product 150,Pet Care,service,https://example.com/products/p0150,88.67,0.372,64347,-50,1944,46,17,57
+P0151,Synthetic Pet Care Product 151,Pet Care,service,https://example.com/products/p0151,66.87,0.1834,55156,-62,12200,40,20,1
+P0152,Synthetic Education Product 152,Education,physical,https://example.com/products/p0152,383.81,0.0976,103227,-20,3664,21,49,55
+P0153,Synthetic Education Product 153,Education,course,https://example.com/products/p0153,499.63,0.2185,140325,16,1768,24,89,86
+P0154,Synthetic Career Software Product 154,Career Software,service,https://example.com/products/p0154,415.39,0.0966,43510,33,11020,34,34,35
+P0155,Synthetic Gaming Product 155,Gaming,physical,https://example.com/products/p0155,340.29,0.5991,133357,26,3122,76,48,11
+P0156,Synthetic Travel Product 156,Travel,physical,https://example.com/products/p0156,424.03,0.595,85021,-40,2227,143,72,78
+P0157,Synthetic Gaming Product 157,Gaming,service,https://example.com/products/p0157,68.23,0.2466,84862,2,4024,110,79,90
+P0158,Synthetic Beauty Product 158,Beauty,course,https://example.com/products/p0158,61.68,0.2148,10439,-56,4402,46,68,44
+P0159,Synthetic Beauty Product 159,Beauty,physical,https://example.com/products/p0159,307.57,0.5372,48315,38,5923,139,4,54
+P0160,Synthetic Education Product 160,Education,subscription,https://example.com/products/p0160,93.04,0.1505,138511,-36,11177,76,52,41
+P0161,Synthetic Fitness Product 161,Fitness,digital_download,https://example.com/products/p0161,75.95,0.5884,126146,42,14051,142,49,93
+P0162,Synthetic Productivity Product 162,Productivity,mobile_app,https://example.com/products/p0162,19.34,0.1569,37146,31,7679,150,71,8
+P0163,Synthetic Education Product 163,Education,subscription,https://example.com/products/p0163,230.25,0.3045,64553,32,6973,138,33,26
+P0164,Synthetic Personal Finance Product 164,Personal Finance,course,https://example.com/products/p0164,263.8,0.1191,112319,-39,305,43,87,100
+P0165,Synthetic Beauty Product 165,Beauty,mobile_app,https://example.com/products/p0165,307.32,0.4588,134378,3,13385,62,57,53
+P0166,Synthetic Gaming Product 166,Gaming,digital_download,https://example.com/products/p0166,26.04,0.0406,24735,55,7091,59,30,24
+P0167,Synthetic Education Product 167,Education,service,https://example.com/products/p0167,315.84,0.2499,29636,5,6843,64,30,24
+P0168,Synthetic Personal Finance Product 168,Personal Finance,service,https://example.com/products/p0168,104.74,0.0385,128230,-30,12827,110,49,48
+P0169,Synthetic Creator Tools Product 169,Creator Tools,membership,https://example.com/products/p0169,71.34,0.0892,104964,23,1323,78,8,17
+P0170,Synthetic Personal Finance Product 170,Personal Finance,service,https://example.com/products/p0170,125.03,0.0922,48730,-60,13816,4,65,62
+P0171,Synthetic Gaming Product 171,Gaming,service,https://example.com/products/p0171,164.58,0.441,374,71,3009,68,20,93
+P0172,Synthetic Beauty Product 172,Beauty,physical,https://example.com/products/p0172,36.27,0.0365,29682,59,11951,120,81,30
+P0173,Synthetic Pet Care Product 173,Pet Care,physical,https://example.com/products/p0173,25.76,0.5368,128511,-1,9023,113,34,56
+P0174,Synthetic Home Office Product 174,Home Office,service,https://example.com/products/p0174,134.55,0.4319,144931,-44,11766,34,84,57
+P0175,Synthetic Productivity Product 175,Productivity,mobile_app,https://example.com/products/p0175,434.62,0.029,57560,-20,14582,1,25,88
+P0176,Synthetic Education Product 176,Education,physical,https://example.com/products/p0176,228.73,0.1238,129737,-34,5854,3,43,94
+P0177,Synthetic Creator Tools Product 177,Creator Tools,software,https://example.com/products/p0177,440.48,0.3365,127979,-65,10885,75,27,82
+P0178,Synthetic Travel Product 178,Travel,physical,https://example.com/products/p0178,326.82,0.1124,29077,46,4877,138,10,10
+P0179,Synthetic Pet Care Product 179,Pet Care,membership,https://example.com/products/p0179,472.92,0.3927,49209,86,8180,67,27,50
+P0180,Synthetic Personal Finance Product 180,Personal Finance,subscription,https://example.com/products/p0180,397.03,0.5557,54201,13,8318,13,4,14
+P0181,Synthetic Beauty Product 181,Beauty,physical,https://example.com/products/p0181,433.52,0.1308,116549,-67,2703,0,22,10
+P0182,Synthetic Home Office Product 182,Home Office,course,https://example.com/products/p0182,139.25,0.3042,132437,-38,257,33,48,76
+P0183,Synthetic Travel Product 183,Travel,course,https://example.com/products/p0183,253.99,0.1464,54155,15,4846,70,37,32
+P0184,Synthetic Creator Tools Product 184,Creator Tools,subscription,https://example.com/products/p0184,404.73,0.04,51953,-62,3905,83,21,75
+P0185,Synthetic Summer Gadgets Product 185,Summer Gadgets,digital_download,https://example.com/products/p0185,263.95,0.2898,141811,59,14250,37,6,44
+P0186,Synthetic Career Software Product 186,Career Software,service,https://example.com/products/p0186,356.96,0.1094,92971,-66,5612,86,74,22
+P0187,Synthetic Creator Tools Product 187,Creator Tools,service,https://example.com/products/p0187,55.19,0.3255,57782,-16,7519,57,14,77
+P0188,Synthetic Career Software Product 188,Career Software,physical,https://example.com/products/p0188,487.09,0.3286,27459,13,2233,33,6,100
+P0189,Synthetic Summer Gadgets Product 189,Summer Gadgets,course,https://example.com/products/p0189,280.42,0.1167,106420,-32,13914,24,2,47
+P0190,Synthetic Education Product 190,Education,subscription,https://example.com/products/p0190,254.71,0.0881,98889,87,8710,44,70,85
+P0191,Synthetic Gaming Product 191,Gaming,software,https://example.com/products/p0191,53.85,0.2678,122897,-15,149,140,50,59
+P0192,Synthetic Gaming Product 192,Gaming,membership,https://example.com/products/p0192,133.76,0.2712,128568,79,14186,29,56,69
+P0193,Synthetic Gaming Product 193,Gaming,service,https://example.com/products/p0193,121.96,0.2974,80537,64,11409,54,2,23
+P0194,Synthetic Beauty Product 194,Beauty,subscription,https://example.com/products/p0194,363.65,0.115,84347,-69,13817,28,2,72
+P0195,Synthetic Beauty Product 195,Beauty,membership,https://example.com/products/p0195,424.85,0.5841,36141,79,14009,101,31,29
+P0196,Synthetic Education Product 196,Education,service,https://example.com/products/p0196,363.81,0.568,133526,73,10306,59,0,64
+P0197,Synthetic Home Office Product 197,Home Office,subscription,https://example.com/products/p0197,192.69,0.2401,95127,-57,7568,134,6,2
+P0198,Synthetic Travel Product 198,Travel,subscription,https://example.com/products/p0198,95.97,0.44,19089,-51,5329,16,13,71
+P0199,Synthetic Beauty Product 199,Beauty,software,https://example.com/products/p0199,109.34,0.4688,21639,51,11381,38,28,72
+P0200,Synthetic Personal Finance Product 200,Personal Finance,digital_download,https://example.com/products/p0200,454.9,0.3138,29720,-58,8667,41,44,78
+P0201,Synthetic Fitness Product 201,Fitness,digital_download,https://example.com/products/p0201,401.14,0.1447,71391,-52,945,19,33,99
+P0202,Synthetic Productivity Product 202,Productivity,software,https://example.com/products/p0202,321.6,0.1676,22885,80,8633,25,32,97
+P0203,Synthetic Travel Product 203,Travel,membership,https://example.com/products/p0203,91.25,0.1516,74073,-33,12150,146,40,3
+P0204,Synthetic Travel Product 204,Travel,physical,https://example.com/products/p0204,29.79,0.2453,120103,37,11528,77,12,21
+P0205,Synthetic Fitness Product 205,Fitness,service,https://example.com/products/p0205,66.37,0.5457,122849,63,1819,32,39,25
+P0206,Synthetic Career Software Product 206,Career Software,physical,https://example.com/products/p0206,55.12,0.2587,139360,20,9149,152,27,89
+P0207,Synthetic Fitness Product 207,Fitness,course,https://example.com/products/p0207,222.94,0.2083,105041,25,12817,151,41,62
+P0208,Synthetic Gaming Product 208,Gaming,membership,https://example.com/products/p0208,234.1,0.2582,37749,-34,5270,65,90,89
+P0209,Synthetic Home Office Product 209,Home Office,mobile_app,https://example.com/products/p0209,137.92,0.5825,142464,38,8486,30,76,77
+P0210,Synthetic Education Product 210,Education,membership,https://example.com/products/p0210,410.42,0.3122,10978,58,12453,110,53,62
+P0211,Synthetic Creator Tools Product 211,Creator Tools,course,https://example.com/products/p0211,384.6,0.3262,11369,88,14672,51,21,88
+P0212,Synthetic Travel Product 212,Travel,course,https://example.com/products/p0212,200.4,0.0324,105012,-6,5130,95,15,99
+P0213,Synthetic Gaming Product 213,Gaming,software,https://example.com/products/p0213,167.58,0.3943,50763,12,9497,48,67,53
+P0214,Synthetic Creator Tools Product 214,Creator Tools,physical,https://example.com/products/p0214,262.81,0.4303,85656,-33,10588,42,34,65
+P0215,Synthetic Home Office Product 215,Home Office,software,https://example.com/products/p0215,108.16,0.345,133860,58,5748,30,46,49
+P0216,Synthetic Career Software Product 216,Career Software,software,https://example.com/products/p0216,39.7,0.3323,80181,51,14339,104,85,21
+P0217,Synthetic Creator Tools Product 217,Creator Tools,membership,https://example.com/products/p0217,60.71,0.4515,97205,15,1224,49,37,20
+P0218,Synthetic Home Office Product 218,Home Office,subscription,https://example.com/products/p0218,417.49,0.3294,114441,44,5688,95,89,33
+P0219,Synthetic Career Software Product 219,Career Software,service,https://example.com/products/p0219,311.17,0.4762,73885,-23,11159,59,13,34
+P0220,Synthetic Personal Finance Product 220,Personal Finance,physical,https://example.com/products/p0220,397.16,0.304,92063,23,7862,159,15,0
+P0221,Synthetic Personal Finance Product 221,Personal Finance,membership,https://example.com/products/p0221,461.74,0.0479,27319,-12,10187,97,80,27
+P0222,Synthetic Personal Finance Product 222,Personal Finance,service,https://example.com/products/p0222,35.04,0.5118,57952,-31,8466,4,21,17
+P0223,Synthetic Personal Finance Product 223,Personal Finance,service,https://example.com/products/p0223,152.36,0.1349,71351,62,7921,129,25,31
+P0224,Synthetic Fitness Product 224,Fitness,course,https://example.com/products/p0224,204.73,0.5309,61617,-8,12537,75,64,26
+P0225,Synthetic Pet Care Product 225,Pet Care,digital_download,https://example.com/products/p0225,454.81,0.5253,144591,0,14115,83,73,47
+P0226,Synthetic Education Product 226,Education,digital_download,https://example.com/products/p0226,161.28,0.5834,17825,-22,571,127,42,63
+P0227,Synthetic Home Office Product 227,Home Office,service,https://example.com/products/p0227,326.84,0.3494,16690,-51,5773,79,7,74
+P0228,Synthetic Gaming Product 228,Gaming,service,https://example.com/products/p0228,412.99,0.4538,139587,-43,14370,54,52,7
+P0229,Synthetic Summer Gadgets Product 229,Summer Gadgets,physical,https://example.com/products/p0229,209.69,0.4856,75371,-38,5672,95,68,91
+P0230,Synthetic Career Software Product 230,Career Software,membership,https://example.com/products/p0230,300.89,0.4703,114962,-34,3241,85,11,1
+P0231,Synthetic Travel Product 231,Travel,software,https://example.com/products/p0231,7.7,0.4756,29962,-35,11740,143,32,13
+P0232,Synthetic Education Product 232,Education,membership,https://example.com/products/p0232,471.47,0.4475,109786,13,11443,0,17,93
+P0233,Synthetic Productivity Product 233,Productivity,physical,https://example.com/products/p0233,182.58,0.1132,24875,32,3150,83,49,90
+P0234,Synthetic Summer Gadgets Product 234,Summer Gadgets,membership,https://example.com/products/p0234,8.02,0.3416,104797,70,14377,73,65,46
+P0235,Synthetic Pet Care Product 235,Pet Care,subscription,https://example.com/products/p0235,341.44,0.2046,17784,62,656,5,29,21
+P0236,Synthetic Travel Product 236,Travel,mobile_app,https://example.com/products/p0236,277.78,0.5592,123976,-7,10058,119,3,52
+P0237,Synthetic Pet Care Product 237,Pet Care,digital_download,https://example.com/products/p0237,453.39,0.2472,84594,-39,4589,89,30,73
+P0238,Synthetic Career Software Product 238,Career Software,course,https://example.com/products/p0238,450.89,0.417,128995,-34,10513,40,18,55
+P0239,Synthetic Fitness Product 239,Fitness,service,https://example.com/products/p0239,357.99,0.0227,13024,-65,13926,130,0,74
+P0240,Synthetic Home Office Product 240,Home Office,course,https://example.com/products/p0240,41.45,0.2586,2324,-17,9485,41,32,3
+P0241,Synthetic Gaming Product 241,Gaming,digital_download,https://example.com/products/p0241,308.71,0.0361,12083,-66,9887,83,81,0
+P0242,Synthetic Travel Product 242,Travel,physical,https://example.com/products/p0242,291.94,0.1399,126179,-14,10782,17,14,100
+P0243,Synthetic Home Office Product 243,Home Office,software,https://example.com/products/p0243,389.75,0.4635,66947,35,4995,121,0,13
+P0244,Synthetic Pet Care Product 244,Pet Care,mobile_app,https://example.com/products/p0244,216.35,0.3829,38142,87,7048,118,64,88
+P0245,Synthetic Personal Finance Product 245,Personal Finance,mobile_app,https://example.com/products/p0245,184.34,0.3806,12348,-14,1981,51,12,0
+P0246,Synthetic Beauty Product 246,Beauty,course,https://example.com/products/p0246,159.32,0.4571,111982,71,10164,135,50,26
+P0247,Synthetic Education Product 247,Education,membership,https://example.com/products/p0247,316.89,0.5963,148012,38,4686,88,59,95
+P0248,Synthetic Career Software Product 248,Career Software,software,https://example.com/products/p0248,410.93,0.2941,99566,-1,10842,123,83,56
+P0249,Synthetic Travel Product 249,Travel,subscription,https://example.com/products/p0249,308.33,0.4596,1750,-58,12280,136,73,94
+P0250,Synthetic Gaming Product 250,Gaming,digital_download,https://example.com/products/p0250,174.54,0.1227,116924,-19,13328,50,60,76
+P0251,Synthetic Home Office Product 251,Home Office,physical,https://example.com/products/p0251,263.24,0.132,25148,80,2056,1,63,55
+P0252,Synthetic Travel Product 252,Travel,digital_download,https://example.com/products/p0252,276.0,0.3212,62196,-53,3694,115,52,87
+P0253,Synthetic Fitness Product 253,Fitness,software,https://example.com/products/p0253,100.58,0.1627,88964,-56,10662,132,5,6
+P0254,Synthetic Creator Tools Product 254,Creator Tools,physical,https://example.com/products/p0254,306.93,0.1206,100634,62,8585,59,34,93
+P0255,Synthetic Travel Product 255,Travel,digital_download,https://example.com/products/p0255,12.12,0.2213,143517,53,219,128,16,82
+P0256,Synthetic Fitness Product 256,Fitness,membership,https://example.com/products/p0256,318.45,0.4841,570,50,10324,126,51,1
+P0257,Synthetic Creator Tools Product 257,Creator Tools,subscription,https://example.com/products/p0257,177.81,0.1392,88223,-26,4427,85,50,53
+P0258,Synthetic Travel Product 258,Travel,digital_download,https://example.com/products/p0258,261.35,0.2304,93051,79,1164,141,44,44
+P0259,Synthetic Education Product 259,Education,mobile_app,https://example.com/products/p0259,305.37,0.3928,103930,-51,7183,25,50,70
+P0260,Synthetic Summer Gadgets Product 260,Summer Gadgets,service,https://example.com/products/p0260,447.51,0.5573,103411,1,1442,70,59,96
+P0261,Synthetic Gaming Product 261,Gaming,digital_download,https://example.com/products/p0261,470.79,0.3512,53661,-54,6498,32,7,1
+P0262,Synthetic Travel Product 262,Travel,subscription,https://example.com/products/p0262,489.53,0.0143,53721,-44,10149,19,50,18
+P0263,Synthetic Summer Gadgets Product 263,Summer Gadgets,mobile_app,https://example.com/products/p0263,371.68,0.0117,146267,57,6551,99,55,75
+P0264,Synthetic Personal Finance Product 264,Personal Finance,course,https://example.com/products/p0264,244.17,0.1792,133620,-52,13769,28,48,96
+P0265,Synthetic Personal Finance Product 265,Personal Finance,course,https://example.com/products/p0265,277.36,0.1569,75883,87,312,43,82,35
+P0266,Synthetic Gaming Product 266,Gaming,service,https://example.com/products/p0266,302.43,0.1403,134900,-6,4389,50,14,82
+P0267,Synthetic Creator Tools Product 267,Creator Tools,membership,https://example.com/products/p0267,329.14,0.1162,60239,-32,14531,125,83,52
+P0268,Synthetic Education Product 268,Education,course,https://example.com/products/p0268,261.36,0.4967,47609,-20,6119,152,90,64
+P0269,Synthetic Career Software Product 269,Career Software,course,https://example.com/products/p0269,175.02,0.5735,15633,-49,163,99,60,97
+P0270,Synthetic Travel Product 270,Travel,mobile_app,https://example.com/products/p0270,310.59,0.5956,51209,42,2272,56,19,1
+P0271,Synthetic Productivity Product 271,Productivity,service,https://example.com/products/p0271,490.86,0.3946,38684,46,4263,118,48,27
+P0272,Synthetic Gaming Product 272,Gaming,course,https://example.com/products/p0272,162.61,0.3021,77149,-20,7834,70,16,66
+P0273,Synthetic Home Office Product 273,Home Office,digital_download,https://example.com/products/p0273,413.52,0.176,118054,-54,13175,148,30,66
+P0274,Synthetic Fitness Product 274,Fitness,digital_download,https://example.com/products/p0274,158.71,0.0236,102313,-14,4665,146,26,96
+P0275,Synthetic Beauty Product 275,Beauty,physical,https://example.com/products/p0275,346.1,0.0142,11434,-46,11933,156,60,86
+P0276,Synthetic Productivity Product 276,Productivity,physical,https://example.com/products/p0276,308.24,0.3597,70448,-61,5575,8,60,63
+P0277,Synthetic Fitness Product 277,Fitness,service,https://example.com/products/p0277,435.07,0.1644,1300,-48,9101,76,61,95
+P0278,Synthetic Beauty Product 278,Beauty,membership,https://example.com/products/p0278,291.33,0.0208,149443,19,1818,23,78,24
+P0279,Synthetic Creator Tools Product 279,Creator Tools,service,https://example.com/products/p0279,321.03,0.4166,63689,16,12648,150,32,70
+P0280,Synthetic Fitness Product 280,Fitness,service,https://example.com/products/p0280,328.23,0.5443,49336,87,14628,138,82,92
+P0281,Synthetic Home Office Product 281,Home Office,membership,https://example.com/products/p0281,97.02,0.0985,2907,-49,10621,126,69,84
+P0282,Synthetic Education Product 282,Education,physical,https://example.com/products/p0282,462.01,0.5229,110582,-58,10446,106,33,18
+P0283,Synthetic Education Product 283,Education,service,https://example.com/products/p0283,73.46,0.0141,78712,77,8564,134,37,36
+P0284,Synthetic Creator Tools Product 284,Creator Tools,subscription,https://example.com/products/p0284,276.68,0.1955,595,8,5332,159,39,49
+P0285,Synthetic Gaming Product 285,Gaming,subscription,https://example.com/products/p0285,341.05,0.0533,36238,-5,12087,20,24,99
+P0286,Synthetic Productivity Product 286,Productivity,digital_download,https://example.com/products/p0286,461.18,0.5168,80419,59,11457,30,69,94
+P0287,Synthetic Travel Product 287,Travel,mobile_app,https://example.com/products/p0287,449.41,0.1827,56720,62,1659,82,65,23
+P0288,Synthetic Pet Care Product 288,Pet Care,subscription,https://example.com/products/p0288,15.63,0.1508,103717,-4,2652,46,23,2
+P0289,Synthetic Fitness Product 289,Fitness,membership,https://example.com/products/p0289,225.25,0.2093,134843,31,1828,65,1,50
+P0290,Synthetic Pet Care Product 290,Pet Care,digital_download,https://example.com/products/p0290,289.56,0.2064,71172,-18,1005,61,6,16
+P0291,Synthetic Beauty Product 291,Beauty,software,https://example.com/products/p0291,136.04,0.488,35925,61,9044,32,13,47
+P0292,Synthetic Education Product 292,Education,subscription,https://example.com/products/p0292,142.19,0.3424,1704,-10,1707,141,29,8
+P0293,Synthetic Education Product 293,Education,service,https://example.com/products/p0293,417.66,0.5097,31994,9,9925,1,45,13
+P0294,Synthetic Home Office Product 294,Home Office,membership,https://example.com/products/p0294,208.12,0.0783,114648,63,2138,19,76,42
+P0295,Synthetic Productivity Product 295,Productivity,software,https://example.com/products/p0295,383.58,0.1739,35266,13,12620,19,9,38
+P0296,Synthetic Home Office Product 296,Home Office,membership,https://example.com/products/p0296,368.09,0.4259,97103,-38,10147,98,16,49
+P0297,Synthetic Education Product 297,Education,subscription,https://example.com/products/p0297,263.89,0.2758,60398,82,4585,93,42,4
+P0298,Synthetic Gaming Product 298,Gaming,subscription,https://example.com/products/p0298,392.83,0.0239,58864,-5,7908,102,43,77
+P0299,Synthetic Creator Tools Product 299,Creator Tools,digital_download,https://example.com/products/p0299,417.94,0.0517,78360,87,10807,56,18,38
+P0300,Synthetic Gaming Product 300,Gaming,course,https://example.com/products/p0300,375.79,0.183,123288,32,4801,31,89,97
+P0301,Synthetic Travel Product 301,Travel,membership,https://example.com/products/p0301,76.02,0.3571,12808,34,5648,57,38,19
+P0302,Synthetic Personal Finance Product 302,Personal Finance,subscription,https://example.com/products/p0302,372.98,0.1482,147025,31,1227,32,7,89
+P0303,Synthetic Career Software Product 303,Career Software,physical,https://example.com/products/p0303,370.02,0.0544,28017,54,482,74,43,29
+P0304,Synthetic Creator Tools Product 304,Creator Tools,service,https://example.com/products/p0304,226.93,0.0505,27706,50,12393,113,41,15
+P0305,Synthetic Pet Care Product 305,Pet Care,service,https://example.com/products/p0305,403.43,0.4163,121304,49,1051,117,7,64
+P0306,Synthetic Education Product 306,Education,course,https://example.com/products/p0306,183.77,0.0175,8321,-6,5534,32,46,90
+P0307,Synthetic Beauty Product 307,Beauty,physical,https://example.com/products/p0307,188.37,0.0324,42155,28,5149,155,54,88
+P0308,Synthetic Career Software Product 308,Career Software,digital_download,https://example.com/products/p0308,238.01,0.5739,29269,33,1957,131,38,31
+P0309,Synthetic Education Product 309,Education,physical,https://example.com/products/p0309,126.86,0.5966,88302,42,7766,81,41,46
+P0310,Synthetic Personal Finance Product 310,Personal Finance,course,https://example.com/products/p0310,337.2,0.5698,26652,65,2216,26,28,7
+P0311,Synthetic Personal Finance Product 311,Personal Finance,mobile_app,https://example.com/products/p0311,61.34,0.2902,133493,27,9881,160,33,86
+P0312,Synthetic Home Office Product 312,Home Office,software,https://example.com/products/p0312,195.91,0.5834,148145,-25,7970,92,10,66
+P0313,Synthetic Education Product 313,Education,service,https://example.com/products/p0313,290.66,0.4258,109170,-59,102,64,68,43
+P0314,Synthetic Education Product 314,Education,service,https://example.com/products/p0314,201.77,0.3321,35954,-49,580,139,80,3
+P0315,Synthetic Pet Care Product 315,Pet Care,service,https://example.com/products/p0315,433.23,0.377,57486,42,2124,11,34,87
+P0316,Synthetic Travel Product 316,Travel,mobile_app,https://example.com/products/p0316,362.67,0.559,68950,-20,7719,88,42,92
+P0317,Synthetic Summer Gadgets Product 317,Summer Gadgets,digital_download,https://example.com/products/p0317,209.81,0.3079,69840,-23,6418,149,9,40
+P0318,Synthetic Fitness Product 318,Fitness,software,https://example.com/products/p0318,160.15,0.5842,91821,10,8289,10,58,74
+P0319,Synthetic Travel Product 319,Travel,subscription,https://example.com/products/p0319,244.51,0.0932,94858,90,11267,151,10,90
+P0320,Synthetic Pet Care Product 320,Pet Care,subscription,https://example.com/products/p0320,427.19,0.1373,110199,-54,4502,76,42,28
+P0321,Synthetic Fitness Product 321,Fitness,course,https://example.com/products/p0321,391.09,0.4564,145934,-11,8098,39,4,61
+P0322,Synthetic Gaming Product 322,Gaming,membership,https://example.com/products/p0322,309.71,0.3835,117378,25,8269,79,25,35
+P0323,Synthetic Summer Gadgets Product 323,Summer Gadgets,service,https://example.com/products/p0323,157.97,0.4444,146657,-33,10212,40,32,67
+P0324,Synthetic Pet Care Product 324,Pet Care,software,https://example.com/products/p0324,110.96,0.3872,128824,37,5633,114,0,2
+P0325,Synthetic Fitness Product 325,Fitness,physical,https://example.com/products/p0325,462.31,0.5569,51956,28,2878,125,5,7
+P0326,Synthetic Personal Finance Product 326,Personal Finance,service,https://example.com/products/p0326,58.64,0.3766,56447,-27,13602,11,66,65
+P0327,Synthetic Productivity Product 327,Productivity,membership,https://example.com/products/p0327,263.99,0.3121,106284,-16,2074,10,46,8
+P0328,Synthetic Personal Finance Product 328,Personal Finance,membership,https://example.com/products/p0328,419.8,0.4349,130004,33,7851,105,57,87
+P0329,Synthetic Career Software Product 329,Career Software,physical,https://example.com/products/p0329,59.37,0.0626,61908,67,5855,3,22,73
+P0330,Synthetic Personal Finance Product 330,Personal Finance,software,https://example.com/products/p0330,118.67,0.5285,35281,-9,12161,108,0,42
+P0331,Synthetic Productivity Product 331,Productivity,service,https://example.com/products/p0331,240.26,0.4955,104168,56,11419,67,61,92
+P0332,Synthetic Creator Tools Product 332,Creator Tools,subscription,https://example.com/products/p0332,456.26,0.3964,16583,-32,13809,144,82,42
+P0333,Synthetic Creator Tools Product 333,Creator Tools,service,https://example.com/products/p0333,272.85,0.3786,2299,37,12129,146,24,58
+P0334,Synthetic Career Software Product 334,Career Software,software,https://example.com/products/p0334,229.09,0.2526,86345,-32,10712,105,24,7
+P0335,Synthetic Beauty Product 335,Beauty,digital_download,https://example.com/products/p0335,250.75,0.118,108759,-43,5388,105,19,87
+P0336,Synthetic Summer Gadgets Product 336,Summer Gadgets,mobile_app,https://example.com/products/p0336,432.9,0.0601,97573,50,13928,115,63,14
+P0337,Synthetic Summer Gadgets Product 337,Summer Gadgets,subscription,https://example.com/products/p0337,396.39,0.3047,125062,-20,5481,16,12,36
+P0338,Synthetic Fitness Product 338,Fitness,mobile_app,https://example.com/products/p0338,379.91,0.1016,55146,66,2550,71,57,12
+P0339,Synthetic Fitness Product 339,Fitness,course,https://example.com/products/p0339,44.59,0.35,8114,46,11726,14,58,6
+P0340,Synthetic Fitness Product 340,Fitness,mobile_app,https://example.com/products/p0340,27.04,0.1241,117600,12,4428,99,81,46
+P0341,Synthetic Education Product 341,Education,service,https://example.com/products/p0341,426.66,0.0807,109551,31,10890,105,85,19
+P0342,Synthetic Fitness Product 342,Fitness,digital_download,https://example.com/products/p0342,120.66,0.137,32615,74,1350,127,67,82
+P0343,Synthetic Summer Gadgets Product 343,Summer Gadgets,mobile_app,https://example.com/products/p0343,452.53,0.3269,134667,52,7085,93,14,50
+P0344,Synthetic Education Product 344,Education,subscription,https://example.com/products/p0344,8.96,0.1122,69869,-13,10264,116,39,72
+P0345,Synthetic Beauty Product 345,Beauty,subscription,https://example.com/products/p0345,288.48,0.4156,86928,-28,9976,100,17,15
+P0346,Synthetic Home Office Product 346,Home Office,subscription,https://example.com/products/p0346,78.52,0.4435,68993,-17,9097,68,88,54
+P0347,Synthetic Beauty Product 347,Beauty,service,https://example.com/products/p0347,267.01,0.1074,64894,-39,8546,11,47,100
+P0348,Synthetic Home Office Product 348,Home Office,service,https://example.com/products/p0348,430.13,0.5325,111160,-64,10493,84,79,2
+P0349,Synthetic Pet Care Product 349,Pet Care,mobile_app,https://example.com/products/p0349,44.54,0.1791,63580,24,3474,20,50,99
+P0350,Synthetic Summer Gadgets Product 350,Summer Gadgets,service,https://example.com/products/p0350,309.64,0.4654,68364,-63,14523,140,58,32
+P0351,Synthetic Education Product 351,Education,mobile_app,https://example.com/products/p0351,463.86,0.5829,90433,-69,3158,147,43,1
+P0352,Synthetic Education Product 352,Education,mobile_app,https://example.com/products/p0352,26.75,0.0924,40585,23,2928,59,67,93
+P0353,Synthetic Summer Gadgets Product 353,Summer Gadgets,mobile_app,https://example.com/products/p0353,164.35,0.4505,4415,67,102,150,80,50
+P0354,Synthetic Summer Gadgets Product 354,Summer Gadgets,mobile_app,https://example.com/products/p0354,469.6,0.255,43121,18,10095,83,87,38
+P0355,Synthetic Fitness Product 355,Fitness,subscription,https://example.com/products/p0355,43.61,0.4013,59102,21,3139,135,79,29
+P0356,Synthetic Personal Finance Product 356,Personal Finance,subscription,https://example.com/products/p0356,497.06,0.526,27226,28,11862,43,64,1
+P0357,Synthetic Education Product 357,Education,subscription,https://example.com/products/p0357,223.67,0.3362,134563,12,4032,7,52,31
+P0358,Synthetic Home Office Product 358,Home Office,subscription,https://example.com/products/p0358,460.73,0.2153,72508,-62,9312,117,44,39
+P0359,Synthetic Beauty Product 359,Beauty,physical,https://example.com/products/p0359,252.11,0.3963,97052,23,9643,104,41,70
+P0360,Synthetic Summer Gadgets Product 360,Summer Gadgets,digital_download,https://example.com/products/p0360,82.57,0.061,145218,-6,5171,113,59,31
+P0361,Synthetic Career Software Product 361,Career Software,mobile_app,https://example.com/products/p0361,416.27,0.5803,108710,26,12223,2,80,59
+P0362,Synthetic Personal Finance Product 362,Personal Finance,digital_download,https://example.com/products/p0362,285.49,0.4032,47187,-57,8507,88,33,57
+P0363,Synthetic Education Product 363,Education,digital_download,https://example.com/products/p0363,251.15,0.1713,97884,18,1173,81,23,59
+P0364,Synthetic Gaming Product 364,Gaming,digital_download,https://example.com/products/p0364,465.37,0.0609,62987,51,2339,36,27,93
+P0365,Synthetic Beauty Product 365,Beauty,software,https://example.com/products/p0365,364.12,0.268,27570,-52,7491,43,83,60
+P0366,Synthetic Pet Care Product 366,Pet Care,service,https://example.com/products/p0366,140.69,0.5691,127194,58,9518,23,75,71
+P0367,Synthetic Personal Finance Product 367,Personal Finance,course,https://example.com/products/p0367,159.88,0.0457,42035,-13,9907,68,52,96
+P0368,Synthetic Home Office Product 368,Home Office,subscription,https://example.com/products/p0368,154.85,0.5387,147940,65,9757,73,38,0
+P0369,Synthetic Summer Gadgets Product 369,Summer Gadgets,membership,https://example.com/products/p0369,145.71,0.2095,102877,-18,9967,152,81,37
+P0370,Synthetic Gaming Product 370,Gaming,software,https://example.com/products/p0370,292.88,0.4834,61242,47,6673,129,88,83
+P0371,Synthetic Career Software Product 371,Career Software,digital_download,https://example.com/products/p0371,288.03,0.3484,88980,42,10628,31,7,81
+P0372,Synthetic Pet Care Product 372,Pet Care,subscription,https://example.com/products/p0372,77.47,0.376,119923,-30,10600,54,79,36
+P0373,Synthetic Summer Gadgets Product 373,Summer Gadgets,subscription,https://example.com/products/p0373,138.33,0.1064,46275,1,11852,51,72,33
+P0374,Synthetic Education Product 374,Education,membership,https://example.com/products/p0374,307.52,0.4987,73608,12,11859,128,53,3
+P0375,Synthetic Travel Product 375,Travel,course,https://example.com/products/p0375,47.89,0.2729,83802,-31,6403,56,36,37
+P0376,Synthetic Home Office Product 376,Home Office,course,https://example.com/products/p0376,206.43,0.1692,22631,-60,8492,43,10,16
+P0377,Synthetic Productivity Product 377,Productivity,mobile_app,https://example.com/products/p0377,63.62,0.5482,84168,-36,9009,101,32,32
+P0378,Synthetic Home Office Product 378,Home Office,course,https://example.com/products/p0378,175.23,0.1712,60270,-11,12357,128,46,82
+P0379,Synthetic Productivity Product 379,Productivity,course,https://example.com/products/p0379,178.95,0.5994,118739,-16,1478,129,25,56
+P0380,Synthetic Career Software Product 380,Career Software,physical,https://example.com/products/p0380,260.66,0.4069,124193,-61,7151,69,40,62
+P0381,Synthetic Home Office Product 381,Home Office,digital_download,https://example.com/products/p0381,310.52,0.4015,46066,36,6670,30,85,74
+P0382,Synthetic Home Office Product 382,Home Office,mobile_app,https://example.com/products/p0382,83.31,0.0406,14580,-59,13985,82,56,65
+P0383,Synthetic Home Office Product 383,Home Office,membership,https://example.com/products/p0383,186.56,0.4517,43087,-62,13037,146,32,67
+P0384,Synthetic Travel Product 384,Travel,physical,https://example.com/products/p0384,367.33,0.1575,110808,69,5140,140,34,18
+P0385,Synthetic Gaming Product 385,Gaming,course,https://example.com/products/p0385,106.82,0.2303,115792,-51,2979,70,41,76
+P0386,Synthetic Personal Finance Product 386,Personal Finance,membership,https://example.com/products/p0386,296.94,0.4115,17672,12,5822,70,87,54
+P0387,Synthetic Pet Care Product 387,Pet Care,software,https://example.com/products/p0387,255.66,0.2817,53229,76,6310,117,80,78
+P0388,Synthetic Fitness Product 388,Fitness,mobile_app,https://example.com/products/p0388,105.93,0.0997,107623,-45,3549,122,20,17
+P0389,Synthetic Summer Gadgets Product 389,Summer Gadgets,physical,https://example.com/products/p0389,108.12,0.5762,13500,19,14464,116,52,46
+P0390,Synthetic Gaming Product 390,Gaming,subscription,https://example.com/products/p0390,140.6,0.3449,135558,26,8471,45,83,59
+P0391,Synthetic Pet Care Product 391,Pet Care,physical,https://example.com/products/p0391,283.8,0.23,34069,79,1745,4,66,2
+P0392,Synthetic Education Product 392,Education,mobile_app,https://example.com/products/p0392,431.56,0.1484,56208,-12,14553,138,77,42
+P0393,Synthetic Career Software Product 393,Career Software,service,https://example.com/products/p0393,274.45,0.5775,65203,-29,14732,67,9,95
+P0394,Synthetic Education Product 394,Education,subscription,https://example.com/products/p0394,380.62,0.3188,64593,-55,796,145,65,70
+P0395,Synthetic Travel Product 395,Travel,membership,https://example.com/products/p0395,465.32,0.2174,123549,-8,12107,70,42,98
+P0396,Synthetic Productivity Product 396,Productivity,membership,https://example.com/products/p0396,8.12,0.4426,74235,83,2031,59,78,34
+P0397,Synthetic Education Product 397,Education,software,https://example.com/products/p0397,189.89,0.5275,83054,89,11256,51,19,85
+P0398,Synthetic Education Product 398,Education,mobile_app,https://example.com/products/p0398,396.5,0.1432,131120,-47,11733,82,49,2
+P0399,Synthetic Productivity Product 399,Productivity,membership,https://example.com/products/p0399,314.84,0.54,38379,-38,6701,29,36,15
+P0400,Synthetic Gaming Product 400,Gaming,membership,https://example.com/products/p0400,206.16,0.5489,89890,65,7673,146,40,71
+P0401,Synthetic Pet Care Product 401,Pet Care,mobile_app,https://example.com/products/p0401,162.06,0.3966,128762,68,5973,145,53,54
+P0402,Synthetic Fitness Product 402,Fitness,software,https://example.com/products/p0402,327.63,0.4501,113498,78,9413,80,51,10
+P0403,Synthetic Gaming Product 403,Gaming,course,https://example.com/products/p0403,383.82,0.579,18794,54,13632,39,66,27
+P0404,Synthetic Career Software Product 404,Career Software,mobile_app,https://example.com/products/p0404,266.27,0.1354,25762,75,6996,113,45,80
+P0405,Synthetic Education Product 405,Education,service,https://example.com/products/p0405,189.8,0.4568,99789,-67,1212,139,27,94
+P0406,Synthetic Beauty Product 406,Beauty,membership,https://example.com/products/p0406,433.4,0.2473,98297,44,3016,100,29,41
+P0407,Synthetic Creator Tools Product 407,Creator Tools,mobile_app,https://example.com/products/p0407,12.51,0.158,95088,81,1925,64,74,67
+P0408,Synthetic Summer Gadgets Product 408,Summer Gadgets,course,https://example.com/products/p0408,30.05,0.3517,54382,-33,4614,152,26,54
+P0409,Synthetic Personal Finance Product 409,Personal Finance,subscription,https://example.com/products/p0409,267.76,0.036,99649,-24,11433,128,50,67
+P0410,Synthetic Education Product 410,Education,service,https://example.com/products/p0410,252.75,0.5654,140882,57,14314,6,20,62
+P0411,Synthetic Productivity Product 411,Productivity,membership,https://example.com/products/p0411,177.6,0.4684,78257,48,4803,86,55,73
+P0412,Synthetic Education Product 412,Education,physical,https://example.com/products/p0412,337.26,0.3959,114187,-34,11455,18,55,48
+P0413,Synthetic Creator Tools Product 413,Creator Tools,course,https://example.com/products/p0413,54.0,0.2013,137276,44,10633,140,56,43
+P0414,Synthetic Summer Gadgets Product 414,Summer Gadgets,membership,https://example.com/products/p0414,407.53,0.021,34377,58,13456,42,60,16
+P0415,Synthetic Pet Care Product 415,Pet Care,subscription,https://example.com/products/p0415,444.57,0.5501,67638,-58,2172,134,37,10
+P0416,Synthetic Beauty Product 416,Beauty,service,https://example.com/products/p0416,290.71,0.2001,20022,3,11176,59,79,100
+P0417,Synthetic Fitness Product 417,Fitness,mobile_app,https://example.com/products/p0417,485.43,0.2464,138836,27,4124,153,66,38
+P0418,Synthetic Personal Finance Product 418,Personal Finance,course,https://example.com/products/p0418,280.01,0.297,113980,60,13858,8,85,85
+P0419,Synthetic Gaming Product 419,Gaming,digital_download,https://example.com/products/p0419,155.81,0.5247,48089,37,2494,58,56,23
+P0420,Synthetic Career Software Product 420,Career Software,membership,https://example.com/products/p0420,15.69,0.1052,30677,22,1068,90,16,88
+P0421,Synthetic Personal Finance Product 421,Personal Finance,membership,https://example.com/products/p0421,104.84,0.4777,139352,58,2420,59,55,57
+P0422,Synthetic Creator Tools Product 422,Creator Tools,digital_download,https://example.com/products/p0422,275.04,0.5803,69540,87,8772,66,81,13
+P0423,Synthetic Productivity Product 423,Productivity,digital_download,https://example.com/products/p0423,135.39,0.5613,82261,86,2249,98,70,31
+P0424,Synthetic Productivity Product 424,Productivity,course,https://example.com/products/p0424,485.87,0.2365,46827,-65,14864,142,40,28
+P0425,Synthetic Pet Care Product 425,Pet Care,service,https://example.com/products/p0425,149.8,0.4872,20530,0,10180,29,21,96
+P0426,Synthetic Gaming Product 426,Gaming,membership,https://example.com/products/p0426,156.36,0.1934,125553,-3,4302,73,13,76
+P0427,Synthetic Personal Finance Product 427,Personal Finance,mobile_app,https://example.com/products/p0427,195.73,0.1036,92463,10,11246,18,31,84
+P0428,Synthetic Productivity Product 428,Productivity,membership,https://example.com/products/p0428,406.08,0.0982,97846,-14,12523,75,49,37
+P0429,Synthetic Gaming Product 429,Gaming,service,https://example.com/products/p0429,143.27,0.1998,198,-62,2366,151,63,34
+P0430,Synthetic Education Product 430,Education,physical,https://example.com/products/p0430,117.58,0.5246,137109,27,4175,59,78,19
+P0431,Synthetic Beauty Product 431,Beauty,digital_download,https://example.com/products/p0431,176.5,0.4896,124545,29,1530,92,86,38
+P0432,Synthetic Education Product 432,Education,software,https://example.com/products/p0432,15.41,0.1546,73828,36,11061,140,15,52
+P0433,Synthetic Education Product 433,Education,physical,https://example.com/products/p0433,52.7,0.1068,53766,6,8382,16,20,77
+P0434,Synthetic Pet Care Product 434,Pet Care,course,https://example.com/products/p0434,326.75,0.1498,82902,-40,12574,10,68,56
+P0435,Synthetic Productivity Product 435,Productivity,course,https://example.com/products/p0435,61.64,0.2156,146956,-63,2437,19,83,68
+P0436,Synthetic Beauty Product 436,Beauty,physical,https://example.com/products/p0436,224.59,0.2871,58904,72,13254,54,71,87
+P0437,Synthetic Fitness Product 437,Fitness,service,https://example.com/products/p0437,57.9,0.2233,69985,-19,14301,154,34,3
+P0438,Synthetic Pet Care Product 438,Pet Care,digital_download,https://example.com/products/p0438,490.07,0.379,50479,21,2055,76,75,98
+P0439,Synthetic Gaming Product 439,Gaming,software,https://example.com/products/p0439,113.3,0.3549,23420,32,13362,33,79,29
+P0440,Synthetic Fitness Product 440,Fitness,subscription,https://example.com/products/p0440,393.5,0.4728,92618,25,622,56,39,87
+P0441,Synthetic Beauty Product 441,Beauty,subscription,https://example.com/products/p0441,6.31,0.3365,105856,2,11827,146,10,73
+P0442,Synthetic Fitness Product 442,Fitness,physical,https://example.com/products/p0442,405.5,0.2321,79894,62,4627,96,86,6
+P0443,Synthetic Gaming Product 443,Gaming,software,https://example.com/products/p0443,242.88,0.4602,124378,20,10750,14,22,72
+P0444,Synthetic Fitness Product 444,Fitness,digital_download,https://example.com/products/p0444,366.4,0.5101,3424,-57,10015,12,48,21
+P0445,Synthetic Home Office Product 445,Home Office,software,https://example.com/products/p0445,74.91,0.2859,13924,53,1845,65,89,7
+P0446,Synthetic Beauty Product 446,Beauty,course,https://example.com/products/p0446,211.61,0.0492,100114,-58,5503,72,78,65
+P0447,Synthetic Productivity Product 447,Productivity,service,https://example.com/products/p0447,101.08,0.3585,63009,84,7723,54,32,78
+P0448,Synthetic Personal Finance Product 448,Personal Finance,mobile_app,https://example.com/products/p0448,372.82,0.0388,17192,31,8165,143,16,42
+P0449,Synthetic Gaming Product 449,Gaming,mobile_app,https://example.com/products/p0449,385.86,0.2595,2320,-68,6764,30,55,66
+P0450,Synthetic Summer Gadgets Product 450,Summer Gadgets,physical,https://example.com/products/p0450,395.15,0.5521,111471,-27,9266,77,36,33
+P0451,Synthetic Fitness Product 451,Fitness,membership,https://example.com/products/p0451,238.41,0.2245,95356,-45,12226,1,59,18
+P0452,Synthetic Education Product 452,Education,mobile_app,https://example.com/products/p0452,363.02,0.4532,130691,-37,3144,105,36,64
+P0453,Synthetic Pet Care Product 453,Pet Care,digital_download,https://example.com/products/p0453,165.29,0.1913,63764,51,2747,32,5,58
+P0454,Synthetic Productivity Product 454,Productivity,physical,https://example.com/products/p0454,164.29,0.3501,89286,29,12583,56,43,18
+P0455,Synthetic Fitness Product 455,Fitness,service,https://example.com/products/p0455,224.91,0.0899,4857,78,5585,115,74,47
+P0456,Synthetic Travel Product 456,Travel,physical,https://example.com/products/p0456,435.65,0.1757,39087,72,2352,94,46,21
+P0457,Synthetic Education Product 457,Education,digital_download,https://example.com/products/p0457,420.41,0.0967,34371,-53,4959,120,5,8
+P0458,Synthetic Gaming Product 458,Gaming,mobile_app,https://example.com/products/p0458,162.23,0.0403,25159,-6,8685,40,36,79
+P0459,Synthetic Education Product 459,Education,software,https://example.com/products/p0459,293.81,0.5079,138417,-33,6183,72,61,40
+P0460,Synthetic Personal Finance Product 460,Personal Finance,subscription,https://example.com/products/p0460,431.36,0.4904,117534,21,11312,154,16,82
+P0461,Synthetic Fitness Product 461,Fitness,service,https://example.com/products/p0461,440.13,0.5763,92145,26,9539,21,84,8
+P0462,Synthetic Education Product 462,Education,mobile_app,https://example.com/products/p0462,55.1,0.4907,129981,3,6049,91,60,73
+P0463,Synthetic Beauty Product 463,Beauty,mobile_app,https://example.com/products/p0463,15.2,0.1579,84438,11,8210,126,20,85
+P0464,Synthetic Travel Product 464,Travel,course,https://example.com/products/p0464,449.84,0.2227,121231,-42,8096,135,14,1
+P0465,Synthetic Education Product 465,Education,mobile_app,https://example.com/products/p0465,345.35,0.4548,140244,-37,6143,20,73,6
+P0466,Synthetic Career Software Product 466,Career Software,digital_download,https://example.com/products/p0466,317.97,0.5113,34755,38,10908,57,1,0
+P0467,Synthetic Personal Finance Product 467,Personal Finance,course,https://example.com/products/p0467,382.36,0.4988,11579,-70,6762,67,56,30
+P0468,Synthetic Education Product 468,Education,membership,https://example.com/products/p0468,384.72,0.3792,45200,-45,5747,155,1,53
+P0469,Synthetic Creator Tools Product 469,Creator Tools,digital_download,https://example.com/products/p0469,436.18,0.1893,15468,-20,8001,9,4,89
+P0470,Synthetic Fitness Product 470,Fitness,mobile_app,https://example.com/products/p0470,431.59,0.36,124946,89,3506,59,75,21
+P0471,Synthetic Productivity Product 471,Productivity,service,https://example.com/products/p0471,202.57,0.1102,28749,0,851,153,40,57
+P0472,Synthetic Personal Finance Product 472,Personal Finance,software,https://example.com/products/p0472,292.86,0.5514,45798,-11,14141,150,84,49
+P0473,Synthetic Personal Finance Product 473,Personal Finance,physical,https://example.com/products/p0473,231.2,0.0137,59123,47,3369,113,34,92
+P0474,Synthetic Travel Product 474,Travel,physical,https://example.com/products/p0474,344.08,0.4565,28474,-36,6760,144,43,66
+P0475,Synthetic Travel Product 475,Travel,mobile_app,https://example.com/products/p0475,291.03,0.3269,149004,29,11458,19,72,81
+P0476,Synthetic Fitness Product 476,Fitness,course,https://example.com/products/p0476,73.84,0.3943,112486,42,10924,47,20,63
+P0477,Synthetic Travel Product 477,Travel,software,https://example.com/products/p0477,71.34,0.3603,99073,-59,12600,94,87,49
+P0478,Synthetic Productivity Product 478,Productivity,mobile_app,https://example.com/products/p0478,268.76,0.3419,123539,26,14347,67,1,76
+P0479,Synthetic Education Product 479,Education,membership,https://example.com/products/p0479,258.22,0.426,99910,-19,7290,1,34,8
+P0480,Synthetic Home Office Product 480,Home Office,service,https://example.com/products/p0480,92.78,0.2187,129881,90,11779,148,34,59
+P0481,Synthetic Creator Tools Product 481,Creator Tools,course,https://example.com/products/p0481,398.14,0.414,116715,73,13077,19,29,5
+P0482,Synthetic Beauty Product 482,Beauty,mobile_app,https://example.com/products/p0482,499.5,0.1746,135316,71,9856,79,46,31
+P0483,Synthetic Fitness Product 483,Fitness,subscription,https://example.com/products/p0483,175.01,0.0287,20747,-40,2347,71,90,47
+P0484,Synthetic Summer Gadgets Product 484,Summer Gadgets,digital_download,https://example.com/products/p0484,193.36,0.3501,67866,87,8734,4,59,51
+P0485,Synthetic Productivity Product 485,Productivity,mobile_app,https://example.com/products/p0485,63.81,0.3304,52289,74,172,38,29,11
+P0486,Synthetic Summer Gadgets Product 486,Summer Gadgets,physical,https://example.com/products/p0486,143.73,0.0688,106828,-34,10550,128,18,49
+P0487,Synthetic Fitness Product 487,Fitness,physical,https://example.com/products/p0487,334.25,0.2087,47569,10,3495,156,73,28
+P0488,Synthetic Beauty Product 488,Beauty,digital_download,https://example.com/products/p0488,339.64,0.1829,17943,-50,635,44,54,97
+P0489,Synthetic Education Product 489,Education,mobile_app,https://example.com/products/p0489,16.75,0.3915,42059,37,13611,124,56,61
+P0490,Synthetic Gaming Product 490,Gaming,mobile_app,https://example.com/products/p0490,233.67,0.5096,109128,20,1040,47,75,17
+P0491,Synthetic Personal Finance Product 491,Personal Finance,service,https://example.com/products/p0491,454.46,0.2182,90765,33,9596,117,84,64
+P0492,Synthetic Career Software Product 492,Career Software,service,https://example.com/products/p0492,264.24,0.068,127726,-2,11217,70,67,27
+P0493,Synthetic Education Product 493,Education,service,https://example.com/products/p0493,170.14,0.4412,14215,41,6717,80,2,89
+P0494,Synthetic Gaming Product 494,Gaming,physical,https://example.com/products/p0494,356.32,0.3938,73096,60,3457,67,52,59
+P0495,Synthetic Beauty Product 495,Beauty,mobile_app,https://example.com/products/p0495,311.53,0.2709,1992,44,56,90,62,72
+P0496,Synthetic Creator Tools Product 496,Creator Tools,software,https://example.com/products/p0496,148.68,0.5096,105556,53,10286,137,25,39
+P0497,Synthetic Creator Tools Product 497,Creator Tools,mobile_app,https://example.com/products/p0497,476.19,0.2794,69497,2,10684,123,26,16
+P0498,Synthetic Pet Care Product 498,Pet Care,mobile_app,https://example.com/products/p0498,59.54,0.5336,20046,-10,14133,21,44,15
+P0499,Synthetic Travel Product 499,Travel,membership,https://example.com/products/p0499,247.03,0.3766,63871,-30,13164,13,30,1
+P0500,Synthetic Gaming Product 500,Gaming,digital_download,https://example.com/products/p0500,106.12,0.2525,6124,-49,2250,111,10,51
+P0501,Synthetic Travel Product 501,Travel,service,https://example.com/products/p0501,12.78,0.1762,106506,6,1215,14,55,50
+P0502,Synthetic Education Product 502,Education,digital_download,https://example.com/products/p0502,222.22,0.1289,35469,-61,10576,74,28,13
+P0503,Synthetic Summer Gadgets Product 503,Summer Gadgets,software,https://example.com/products/p0503,62.96,0.3955,13129,81,486,11,83,25
+P0504,Synthetic Summer Gadgets Product 504,Summer Gadgets,subscription,https://example.com/products/p0504,193.18,0.1571,25599,-62,12790,11,70,56
+P0505,Synthetic Travel Product 505,Travel,membership,https://example.com/products/p0505,273.13,0.2169,90520,-36,10679,104,3,72
+P0506,Synthetic Education Product 506,Education,membership,https://example.com/products/p0506,174.53,0.1195,141933,-64,1127,19,71,66
+P0507,Synthetic Pet Care Product 507,Pet Care,mobile_app,https://example.com/products/p0507,104.68,0.0331,144430,74,10003,24,82,43
+P0508,Synthetic Career Software Product 508,Career Software,membership,https://example.com/products/p0508,192.41,0.1188,32587,57,4045,35,46,12
+P0509,Synthetic Pet Care Product 509,Pet Care,course,https://example.com/products/p0509,492.04,0.306,54846,-58,13489,153,56,31
+P0510,Synthetic Personal Finance Product 510,Personal Finance,physical,https://example.com/products/p0510,47.87,0.05,19209,83,1234,9,88,57
+P0511,Synthetic Creator Tools Product 511,Creator Tools,physical,https://example.com/products/p0511,298.98,0.1303,85333,80,4486,51,79,7
+P0512,Synthetic Beauty Product 512,Beauty,membership,https://example.com/products/p0512,59.88,0.1404,129521,-60,8838,64,55,52
+P0513,Synthetic Productivity Product 513,Productivity,subscription,https://example.com/products/p0513,200.57,0.4319,45503,-25,9801,14,90,0
+P0514,Synthetic Pet Care Product 514,Pet Care,service,https://example.com/products/p0514,35.27,0.4665,92387,75,6940,35,14,53
+P0515,Synthetic Pet Care Product 515,Pet Care,subscription,https://example.com/products/p0515,368.36,0.3117,71372,48,4790,101,0,90
+P0516,Synthetic Education Product 516,Education,course,https://example.com/products/p0516,145.58,0.4709,102146,-31,3833,123,23,24
+P0517,Synthetic Career Software Product 517,Career Software,service,https://example.com/products/p0517,197.02,0.4105,29074,25,12071,87,5,52
+P0518,Synthetic Productivity Product 518,Productivity,course,https://example.com/products/p0518,376.6,0.3958,145170,22,3557,154,85,80
+P0519,Synthetic Beauty Product 519,Beauty,physical,https://example.com/products/p0519,63.66,0.2375,4155,-56,5890,102,78,59
+P0520,Synthetic Summer Gadgets Product 520,Summer Gadgets,course,https://example.com/products/p0520,152.65,0.0764,142126,55,7713,5,84,91
+P0521,Synthetic Education Product 521,Education,subscription,https://example.com/products/p0521,495.19,0.2509,86290,-35,957,138,84,5
+P0522,Synthetic Career Software Product 522,Career Software,digital_download,https://example.com/products/p0522,172.81,0.1215,92112,1,11451,54,7,90
+P0523,Synthetic Career Software Product 523,Career Software,physical,https://example.com/products/p0523,199.38,0.1488,98281,-35,3102,18,45,72
+P0524,Synthetic Career Software Product 524,Career Software,mobile_app,https://example.com/products/p0524,324.18,0.0936,145145,-6,12432,92,77,56
+P0525,Synthetic Education Product 525,Education,membership,https://example.com/products/p0525,174.8,0.2679,139560,-65,13969,46,59,21
+P0526,Synthetic Education Product 526,Education,service,https://example.com/products/p0526,320.78,0.3019,11782,-18,5026,94,62,81
+P0527,Synthetic Beauty Product 527,Beauty,mobile_app,https://example.com/products/p0527,297.28,0.2756,79412,-70,8700,122,73,93
+P0528,Synthetic Personal Finance Product 528,Personal Finance,mobile_app,https://example.com/products/p0528,102.42,0.5773,93274,24,7220,54,68,6
+P0529,Synthetic Travel Product 529,Travel,digital_download,https://example.com/products/p0529,227.9,0.0615,85540,-4,13288,95,71,70
+P0530,Synthetic Pet Care Product 530,Pet Care,software,https://example.com/products/p0530,237.55,0.0747,21718,-19,11230,75,74,31
+P0531,Synthetic Travel Product 531,Travel,physical,https://example.com/products/p0531,338.83,0.3385,144730,69,4674,153,7,80
+P0532,Synthetic Pet Care Product 532,Pet Care,digital_download,https://example.com/products/p0532,14.66,0.3228,26394,85,10681,56,71,44
+P0533,Synthetic Fitness Product 533,Fitness,mobile_app,https://example.com/products/p0533,341.31,0.072,22507,-18,10739,32,60,61
+P0534,Synthetic Home Office Product 534,Home Office,membership,https://example.com/products/p0534,332.2,0.1479,36290,89,3286,61,80,3
+P0535,Synthetic Gaming Product 535,Gaming,mobile_app,https://example.com/products/p0535,175.11,0.3814,57125,85,13414,93,75,65
+P0536,Synthetic Career Software Product 536,Career Software,physical,https://example.com/products/p0536,232.78,0.412,42112,-29,11021,43,90,48
+P0537,Synthetic Creator Tools Product 537,Creator Tools,mobile_app,https://example.com/products/p0537,411.33,0.3194,28004,7,5822,122,74,97
+P0538,Synthetic Productivity Product 538,Productivity,course,https://example.com/products/p0538,223.24,0.488,3577,-27,13489,73,88,95
+P0539,Synthetic Beauty Product 539,Beauty,physical,https://example.com/products/p0539,465.74,0.3509,23571,67,11316,73,64,16
+P0540,Synthetic Productivity Product 540,Productivity,software,https://example.com/products/p0540,194.47,0.5217,118097,-5,5440,71,28,43
+P0541,Synthetic Gaming Product 541,Gaming,subscription,https://example.com/products/p0541,158.85,0.0957,40664,-19,14869,112,44,38
+P0542,Synthetic Pet Care Product 542,Pet Care,digital_download,https://example.com/products/p0542,95.27,0.3587,100873,-62,13672,120,70,34
+P0543,Synthetic Beauty Product 543,Beauty,software,https://example.com/products/p0543,238.21,0.2298,133756,77,11727,123,47,95
+P0544,Synthetic Creator Tools Product 544,Creator Tools,service,https://example.com/products/p0544,441.92,0.3098,134821,-29,4242,4,25,13
+P0545,Synthetic Gaming Product 545,Gaming,subscription,https://example.com/products/p0545,352.88,0.0397,77795,0,5752,92,47,53
+P0546,Synthetic Creator Tools Product 546,Creator Tools,physical,https://example.com/products/p0546,413.45,0.3965,16839,-48,3223,14,55,58
+P0547,Synthetic Productivity Product 547,Productivity,course,https://example.com/products/p0547,447.63,0.0734,111125,28,9484,93,80,36
+P0548,Synthetic Home Office Product 548,Home Office,digital_download,https://example.com/products/p0548,45.52,0.0601,116835,79,6251,52,65,65
+P0549,Synthetic Summer Gadgets Product 549,Summer Gadgets,digital_download,https://example.com/products/p0549,301.51,0.3279,8527,40,10794,42,25,71
+P0550,Synthetic Career Software Product 550,Career Software,software,https://example.com/products/p0550,28.62,0.3135,147880,-14,5346,3,9,5
+P0551,Synthetic Career Software Product 551,Career Software,service,https://example.com/products/p0551,250.58,0.2517,21626,20,7094,44,72,77
+P0552,Synthetic Beauty Product 552,Beauty,mobile_app,https://example.com/products/p0552,405.88,0.2365,7754,19,11701,41,89,64
+P0553,Synthetic Beauty Product 553,Beauty,mobile_app,https://example.com/products/p0553,398.24,0.4208,135544,-8,4247,36,45,6
+P0554,Synthetic Fitness Product 554,Fitness,physical,https://example.com/products/p0554,47.48,0.2367,7886,75,10143,30,8,94
+P0555,Synthetic Travel Product 555,Travel,subscription,https://example.com/products/p0555,98.87,0.5289,110436,-21,4040,150,16,94
+P0556,Synthetic Pet Care Product 556,Pet Care,physical,https://example.com/products/p0556,196.56,0.2283,146972,-48,4060,43,21,40
+P0557,Synthetic Pet Care Product 557,Pet Care,membership,https://example.com/products/p0557,379.03,0.0952,102663,89,10895,72,43,60
+P0558,Synthetic Personal Finance Product 558,Personal Finance,course,https://example.com/products/p0558,259.31,0.5253,144641,44,11189,139,44,18
+P0559,Synthetic Education Product 559,Education,membership,https://example.com/products/p0559,40.88,0.5506,31675,80,13069,72,57,45
+P0560,Synthetic Creator Tools Product 560,Creator Tools,software,https://example.com/products/p0560,235.07,0.2543,139229,-48,11787,43,70,21
+P0561,Synthetic Career Software Product 561,Career Software,course,https://example.com/products/p0561,59.92,0.4591,148807,5,11323,127,59,32
+P0562,Synthetic Home Office Product 562,Home Office,mobile_app,https://example.com/products/p0562,77.98,0.4282,125937,-13,14804,49,48,44
+P0563,Synthetic Career Software Product 563,Career Software,subscription,https://example.com/products/p0563,185.67,0.1831,125243,-11,6335,39,44,54
+P0564,Synthetic Creator Tools Product 564,Creator Tools,software,https://example.com/products/p0564,183.19,0.3897,148363,-31,50,42,56,52
+P0565,Synthetic Personal Finance Product 565,Personal Finance,mobile_app,https://example.com/products/p0565,171.88,0.5455,123884,-41,11753,130,41,60
+P0566,Synthetic Beauty Product 566,Beauty,course,https://example.com/products/p0566,418.72,0.0184,26458,16,14678,67,36,42
+P0567,Synthetic Gaming Product 567,Gaming,software,https://example.com/products/p0567,221.86,0.2693,88937,14,7397,96,68,54
+P0568,Synthetic Gaming Product 568,Gaming,course,https://example.com/products/p0568,161.62,0.4048,40027,-70,8905,104,78,79
+P0569,Synthetic Home Office Product 569,Home Office,physical,https://example.com/products/p0569,192.15,0.2971,128837,34,72,28,41,76
+P0570,Synthetic Personal Finance Product 570,Personal Finance,subscription,https://example.com/products/p0570,430.05,0.1639,129833,-18,11393,54,43,56
+P0571,Synthetic Fitness Product 571,Fitness,course,https://example.com/products/p0571,265.03,0.3642,24233,53,2437,117,72,90
+P0572,Synthetic Productivity Product 572,Productivity,membership,https://example.com/products/p0572,172.78,0.2419,120237,44,422,133,2,4
+P0573,Synthetic Career Software Product 573,Career Software,digital_download,https://example.com/products/p0573,102.24,0.4493,46703,49,10796,61,1,26
+P0574,Synthetic Home Office Product 574,Home Office,membership,https://example.com/products/p0574,397.32,0.0699,18510,41,9004,102,5,15
+P0575,Synthetic Summer Gadgets Product 575,Summer Gadgets,subscription,https://example.com/products/p0575,388.37,0.3816,121110,-50,8185,17,13,28
+P0576,Synthetic Pet Care Product 576,Pet Care,service,https://example.com/products/p0576,89.18,0.5753,131469,78,10525,35,48,97
+P0577,Synthetic Creator Tools Product 577,Creator Tools,mobile_app,https://example.com/products/p0577,126.15,0.2048,87700,-60,14062,98,49,3
+P0578,Synthetic Fitness Product 578,Fitness,service,https://example.com/products/p0578,339.23,0.3981,23115,-60,2387,61,71,18
+P0579,Synthetic Career Software Product 579,Career Software,service,https://example.com/products/p0579,80.52,0.0811,112607,-14,14298,129,42,88
+P0580,Synthetic Productivity Product 580,Productivity,mobile_app,https://example.com/products/p0580,179.6,0.4181,62313,6,6121,120,5,31
+P0581,Synthetic Beauty Product 581,Beauty,course,https://example.com/products/p0581,444.75,0.544,4748,-55,7372,76,21,29
+P0582,Synthetic Personal Finance Product 582,Personal Finance,mobile_app,https://example.com/products/p0582,365.05,0.1858,100471,79,13366,158,2,87
+P0583,Synthetic Gaming Product 583,Gaming,service,https://example.com/products/p0583,217.15,0.2803,60836,52,9095,81,3,28
+P0584,Synthetic Home Office Product 584,Home Office,digital_download,https://example.com/products/p0584,236.29,0.3721,10039,-16,1706,130,16,80
+P0585,Synthetic Creator Tools Product 585,Creator Tools,service,https://example.com/products/p0585,256.39,0.5736,109465,31,5162,8,9,33
+P0586,Synthetic Career Software Product 586,Career Software,mobile_app,https://example.com/products/p0586,39.3,0.5019,80666,-36,6668,63,55,30
+P0587,Synthetic Beauty Product 587,Beauty,software,https://example.com/products/p0587,122.0,0.0728,20022,-65,8899,47,88,85
+P0588,Synthetic Pet Care Product 588,Pet Care,physical,https://example.com/products/p0588,435.18,0.3945,108491,-19,14337,74,44,66
+P0589,Synthetic Creator Tools Product 589,Creator Tools,mobile_app,https://example.com/products/p0589,127.31,0.5139,98904,-68,9643,131,85,32
+P0590,Synthetic Creator Tools Product 590,Creator Tools,software,https://example.com/products/p0590,402.18,0.2646,19865,7,11941,89,37,18
+P0591,Synthetic Beauty Product 591,Beauty,mobile_app,https://example.com/products/p0591,72.12,0.1357,73352,60,13171,120,47,6
+P0592,Synthetic Beauty Product 592,Beauty,service,https://example.com/products/p0592,252.26,0.0766,109706,64,1247,70,26,18
+P0593,Synthetic Gaming Product 593,Gaming,digital_download,https://example.com/products/p0593,141.67,0.3085,42959,34,8737,152,58,52
+P0594,Synthetic Career Software Product 594,Career Software,physical,https://example.com/products/p0594,123.42,0.5787,109009,68,1918,75,65,81
+P0595,Synthetic Beauty Product 595,Beauty,digital_download,https://example.com/products/p0595,204.49,0.0132,54816,-39,3030,11,37,42
+P0596,Synthetic Travel Product 596,Travel,mobile_app,https://example.com/products/p0596,448.29,0.3347,45120,29,14199,91,26,81
+P0597,Synthetic Productivity Product 597,Productivity,physical,https://example.com/products/p0597,446.07,0.4383,144220,-29,13767,116,82,99
+P0598,Synthetic Beauty Product 598,Beauty,digital_download,https://example.com/products/p0598,271.3,0.2484,47808,81,7075,47,83,26
+P0599,Synthetic Productivity Product 599,Productivity,mobile_app,https://example.com/products/p0599,376.45,0.1435,86253,31,8188,34,15,73
+P0600,Synthetic Gaming Product 600,Gaming,mobile_app,https://example.com/products/p0600,282.87,0.5241,52786,72,1261,110,0,69
+P0601,Synthetic Gaming Product 601,Gaming,course,https://example.com/products/p0601,40.49,0.1863,84023,56,9681,111,1,20
+P0602,Synthetic Travel Product 602,Travel,course,https://example.com/products/p0602,159.96,0.4672,114613,76,10188,118,80,65
+P0603,Synthetic Personal Finance Product 603,Personal Finance,digital_download,https://example.com/products/p0603,151.29,0.1665,16507,-34,12392,121,59,96
+P0604,Synthetic Travel Product 604,Travel,service,https://example.com/products/p0604,352.68,0.1638,122076,-57,9531,143,85,54
+P0605,Synthetic Beauty Product 605,Beauty,physical,https://example.com/products/p0605,6.31,0.5913,38157,-41,11762,82,28,79
+P0606,Synthetic Fitness Product 606,Fitness,subscription,https://example.com/products/p0606,321.39,0.3128,131918,-36,10582,16,55,8
+P0607,Synthetic Career Software Product 607,Career Software,course,https://example.com/products/p0607,280.69,0.0857,31074,-33,7201,128,27,77
+P0608,Synthetic Gaming Product 608,Gaming,subscription,https://example.com/products/p0608,366.04,0.3004,69670,42,11235,153,28,64
+P0609,Synthetic Career Software Product 609,Career Software,service,https://example.com/products/p0609,452.88,0.2035,70251,-45,5636,15,50,81
+P0610,Synthetic Career Software Product 610,Career Software,software,https://example.com/products/p0610,346.89,0.3925,44650,-4,8876,104,18,89
+P0611,Synthetic Pet Care Product 611,Pet Care,software,https://example.com/products/p0611,223.78,0.5723,35058,6,11178,140,32,2
+P0612,Synthetic Gaming Product 612,Gaming,digital_download,https://example.com/products/p0612,322.89,0.3349,139974,-30,2497,2,78,78
+P0613,Synthetic Personal Finance Product 613,Personal Finance,mobile_app,https://example.com/products/p0613,88.06,0.058,98177,90,1026,125,74,89
+P0614,Synthetic Productivity Product 614,Productivity,service,https://example.com/products/p0614,360.04,0.2163,41982,34,13697,42,72,93
+P0615,Synthetic Gaming Product 615,Gaming,membership,https://example.com/products/p0615,225.22,0.4429,130182,-2,5224,20,0,85
+P0616,Synthetic Personal Finance Product 616,Personal Finance,digital_download,https://example.com/products/p0616,396.37,0.0671,31849,56,7838,116,83,56
+P0617,Synthetic Beauty Product 617,Beauty,service,https://example.com/products/p0617,126.94,0.5435,50555,30,1003,102,2,32
+P0618,Synthetic Summer Gadgets Product 618,Summer Gadgets,course,https://example.com/products/p0618,66.59,0.4466,10791,76,5414,18,33,16
+P0619,Synthetic Productivity Product 619,Productivity,subscription,https://example.com/products/p0619,228.23,0.2098,11887,74,2463,32,76,2
+P0620,Synthetic Fitness Product 620,Fitness,membership,https://example.com/products/p0620,154.86,0.1209,133067,-37,6468,71,20,17
+P0621,Synthetic Personal Finance Product 621,Personal Finance,membership,https://example.com/products/p0621,129.1,0.4587,50311,-41,7173,74,52,23
+P0622,Synthetic Pet Care Product 622,Pet Care,digital_download,https://example.com/products/p0622,205.18,0.0738,50762,12,3877,122,21,59
+P0623,Synthetic Travel Product 623,Travel,subscription,https://example.com/products/p0623,281.22,0.2015,17987,64,14937,120,15,42
+P0624,Synthetic Career Software Product 624,Career Software,physical,https://example.com/products/p0624,327.32,0.5378,52239,-69,404,60,17,94
+P0625,Synthetic Fitness Product 625,Fitness,membership,https://example.com/products/p0625,115.29,0.5614,79,82,9121,29,22,27
+P0626,Synthetic Education Product 626,Education,software,https://example.com/products/p0626,159.68,0.0684,27935,1,6875,51,33,10
+P0627,Synthetic Beauty Product 627,Beauty,digital_download,https://example.com/products/p0627,487.8,0.4841,42018,40,4472,11,49,78
+P0628,Synthetic Fitness Product 628,Fitness,course,https://example.com/products/p0628,161.96,0.4344,146010,52,8522,101,40,99
+P0629,Synthetic Summer Gadgets Product 629,Summer Gadgets,membership,https://example.com/products/p0629,289.55,0.3602,38363,-32,7109,39,5,96
+P0630,Synthetic Home Office Product 630,Home Office,physical,https://example.com/products/p0630,37.23,0.176,145717,70,9014,96,64,45
+P0631,Synthetic Summer Gadgets Product 631,Summer Gadgets,service,https://example.com/products/p0631,476.28,0.5202,28596,78,591,33,58,2
+P0632,Synthetic Productivity Product 632,Productivity,digital_download,https://example.com/products/p0632,411.47,0.2499,50481,-49,6831,53,36,20
+P0633,Synthetic Pet Care Product 633,Pet Care,digital_download,https://example.com/products/p0633,129.11,0.5461,36706,-43,2258,21,10,23
+P0634,Synthetic Personal Finance Product 634,Personal Finance,mobile_app,https://example.com/products/p0634,497.75,0.4691,1928,-9,14729,132,52,8
+P0635,Synthetic Pet Care Product 635,Pet Care,mobile_app,https://example.com/products/p0635,161.67,0.1773,39694,84,1533,9,44,86
+P0636,Synthetic Summer Gadgets Product 636,Summer Gadgets,subscription,https://example.com/products/p0636,330.83,0.2978,86685,23,10318,131,13,34
+P0637,Synthetic Travel Product 637,Travel,physical,https://example.com/products/p0637,396.97,0.401,42475,59,4911,93,40,80
+P0638,Synthetic Personal Finance Product 638,Personal Finance,mobile_app,https://example.com/products/p0638,236.3,0.2995,128586,0,6782,101,39,3
+P0639,Synthetic Summer Gadgets Product 639,Summer Gadgets,software,https://example.com/products/p0639,352.6,0.0511,19454,51,11253,71,56,14
+P0640,Synthetic Fitness Product 640,Fitness,digital_download,https://example.com/products/p0640,156.85,0.0752,142044,84,4648,148,28,25
+P0641,Synthetic Career Software Product 641,Career Software,service,https://example.com/products/p0641,312.02,0.5999,32116,-67,11518,86,26,99
+P0642,Synthetic Fitness Product 642,Fitness,software,https://example.com/products/p0642,40.9,0.2081,62933,4,6053,34,0,24
+P0643,Synthetic Personal Finance Product 643,Personal Finance,course,https://example.com/products/p0643,388.85,0.0477,52420,-67,11447,114,76,43
+P0644,Synthetic Travel Product 644,Travel,digital_download,https://example.com/products/p0644,455.73,0.3299,63065,4,8887,53,16,0
+P0645,Synthetic Career Software Product 645,Career Software,subscription,https://example.com/products/p0645,447.2,0.1186,127532,36,3116,60,31,95
+P0646,Synthetic Education Product 646,Education,mobile_app,https://example.com/products/p0646,427.51,0.5867,48684,50,2442,132,90,88
+P0647,Synthetic Creator Tools Product 647,Creator Tools,service,https://example.com/products/p0647,426.94,0.2528,98140,44,2137,109,54,93
+P0648,Synthetic Personal Finance Product 648,Personal Finance,digital_download,https://example.com/products/p0648,102.21,0.3411,73160,-35,3650,43,12,92
+P0649,Synthetic Beauty Product 649,Beauty,physical,https://example.com/products/p0649,461.47,0.3285,88463,45,3872,51,28,39
+P0650,Synthetic Pet Care Product 650,Pet Care,software,https://example.com/products/p0650,263.36,0.4522,105344,-69,11701,97,18,29
+P0651,Synthetic Summer Gadgets Product 651,Summer Gadgets,membership,https://example.com/products/p0651,92.07,0.3679,65765,9,7122,105,62,13
+P0652,Synthetic Personal Finance Product 652,Personal Finance,service,https://example.com/products/p0652,458.53,0.5613,138940,-7,3964,98,31,20
+P0653,Synthetic Career Software Product 653,Career Software,physical,https://example.com/products/p0653,179.76,0.3503,119349,48,6931,69,76,8
+P0654,Synthetic Productivity Product 654,Productivity,service,https://example.com/products/p0654,224.74,0.3447,140592,73,9873,51,79,46
+P0655,Synthetic Pet Care Product 655,Pet Care,digital_download,https://example.com/products/p0655,496.1,0.3782,66792,-28,1844,95,78,71
+P0656,Synthetic Beauty Product 656,Beauty,subscription,https://example.com/products/p0656,454.22,0.2996,107877,47,4831,92,64,23
+P0657,Synthetic Creator Tools Product 657,Creator Tools,software,https://example.com/products/p0657,142.23,0.3732,34745,2,11050,19,16,71
+P0658,Synthetic Travel Product 658,Travel,course,https://example.com/products/p0658,106.7,0.1007,76869,-55,3415,56,33,33
+P0659,Synthetic Pet Care Product 659,Pet Care,service,https://example.com/products/p0659,375.92,0.0548,143227,71,7016,106,68,49
+P0660,Synthetic Creator Tools Product 660,Creator Tools,software,https://example.com/products/p0660,307.54,0.104,72109,27,4794,103,17,74
+P0661,Synthetic Creator Tools Product 661,Creator Tools,membership,https://example.com/products/p0661,166.81,0.2643,1906,-53,11129,121,2,89
+P0662,Synthetic Home Office Product 662,Home Office,membership,https://example.com/products/p0662,329.14,0.0503,119459,-25,10294,105,80,43
+P0663,Synthetic Pet Care Product 663,Pet Care,subscription,https://example.com/products/p0663,121.29,0.4964,34557,86,10295,59,54,8
+P0664,Synthetic Travel Product 664,Travel,subscription,https://example.com/products/p0664,174.39,0.2872,145215,65,2827,141,73,77
+P0665,Synthetic Pet Care Product 665,Pet Care,membership,https://example.com/products/p0665,320.64,0.26,100289,51,4168,31,25,23
+P0666,Synthetic Personal Finance Product 666,Personal Finance,course,https://example.com/products/p0666,78.43,0.2787,148814,-26,13214,9,58,28
+P0667,Synthetic Education Product 667,Education,subscription,https://example.com/products/p0667,350.61,0.3529,146105,-30,956,147,90,76
+P0668,Synthetic Creator Tools Product 668,Creator Tools,digital_download,https://example.com/products/p0668,195.18,0.2165,60932,39,11209,16,18,38
+P0669,Synthetic Gaming Product 669,Gaming,membership,https://example.com/products/p0669,141.68,0.4337,3425,-13,14842,94,79,43
+P0670,Synthetic Fitness Product 670,Fitness,digital_download,https://example.com/products/p0670,190.61,0.3927,5985,34,15,78,17,94
+P0671,Synthetic Travel Product 671,Travel,subscription,https://example.com/products/p0671,362.12,0.4044,73959,-34,6776,48,26,3
+P0672,Synthetic Productivity Product 672,Productivity,subscription,https://example.com/products/p0672,387.88,0.2371,82563,-36,1237,3,31,75
+P0673,Synthetic Beauty Product 673,Beauty,course,https://example.com/products/p0673,191.85,0.4711,109948,39,5342,39,72,14
+P0674,Synthetic Personal Finance Product 674,Personal Finance,software,https://example.com/products/p0674,15.98,0.1338,19606,90,711,12,11,92
+P0675,Synthetic Creator Tools Product 675,Creator Tools,digital_download,https://example.com/products/p0675,364.38,0.4377,116307,-33,11184,126,70,69
+P0676,Synthetic Fitness Product 676,Fitness,digital_download,https://example.com/products/p0676,46.55,0.2144,59861,-43,11035,122,17,5
+P0677,Synthetic Summer Gadgets Product 677,Summer Gadgets,mobile_app,https://example.com/products/p0677,219.06,0.4769,98807,60,4835,62,78,80
+P0678,Synthetic Education Product 678,Education,physical,https://example.com/products/p0678,101.71,0.0705,10300,3,12199,121,6,85
+P0679,Synthetic Education Product 679,Education,membership,https://example.com/products/p0679,303.44,0.1983,90001,70,973,158,61,21
+P0680,Synthetic Home Office Product 680,Home Office,software,https://example.com/products/p0680,281.66,0.0906,45045,-62,144,51,11,86
+P0681,Synthetic Gaming Product 681,Gaming,digital_download,https://example.com/products/p0681,218.56,0.3782,85377,-63,7645,31,3,81
+P0682,Synthetic Travel Product 682,Travel,digital_download,https://example.com/products/p0682,373.55,0.2311,2838,46,13470,101,3,19
+P0683,Synthetic Beauty Product 683,Beauty,mobile_app,https://example.com/products/p0683,103.69,0.2456,34748,-50,11382,113,0,69
+P0684,Synthetic Gaming Product 684,Gaming,course,https://example.com/products/p0684,259.39,0.1921,17472,32,693,91,33,95
+P0685,Synthetic Career Software Product 685,Career Software,course,https://example.com/products/p0685,97.53,0.5894,48643,82,6990,147,42,25
+P0686,Synthetic Home Office Product 686,Home Office,mobile_app,https://example.com/products/p0686,64.01,0.3901,58625,-62,13445,48,44,31
+P0687,Synthetic Education Product 687,Education,digital_download,https://example.com/products/p0687,472.14,0.1107,24289,7,10633,132,32,7
+P0688,Synthetic Gaming Product 688,Gaming,course,https://example.com/products/p0688,71.98,0.326,50058,24,3579,120,37,97
+P0689,Synthetic Travel Product 689,Travel,membership,https://example.com/products/p0689,272.13,0.4454,126434,48,5015,142,12,100
+P0690,Synthetic Pet Care Product 690,Pet Care,physical,https://example.com/products/p0690,332.91,0.4257,128211,65,5617,75,35,81
+P0691,Synthetic Creator Tools Product 691,Creator Tools,service,https://example.com/products/p0691,283.27,0.275,21625,9,11613,34,69,83
+P0692,Synthetic Home Office Product 692,Home Office,service,https://example.com/products/p0692,71.7,0.5191,40343,38,8088,99,38,5
+P0693,Synthetic Travel Product 693,Travel,mobile_app,https://example.com/products/p0693,35.76,0.242,43940,-50,9812,157,57,59
+P0694,Synthetic Pet Care Product 694,Pet Care,service,https://example.com/products/p0694,400.94,0.2551,121531,74,13182,22,5,36
+P0695,Synthetic Travel Product 695,Travel,service,https://example.com/products/p0695,210.38,0.3137,146951,33,7595,50,65,41
+P0696,Synthetic Travel Product 696,Travel,service,https://example.com/products/p0696,321.56,0.4271,115333,-57,5945,28,33,53
+P0697,Synthetic Fitness Product 697,Fitness,physical,https://example.com/products/p0697,60.13,0.3219,104865,-12,568,153,3,99
+P0698,Synthetic Creator Tools Product 698,Creator Tools,mobile_app,https://example.com/products/p0698,282.57,0.4588,115407,51,3698,22,9,53
+P0699,Synthetic Home Office Product 699,Home Office,physical,https://example.com/products/p0699,305.73,0.1889,52149,63,12934,140,48,4
+P0700,Synthetic Creator Tools Product 700,Creator Tools,mobile_app,https://example.com/products/p0700,26.8,0.5344,67553,39,6031,7,59,24
+P0701,Synthetic Personal Finance Product 701,Personal Finance,software,https://example.com/products/p0701,85.94,0.3253,125867,-35,746,35,49,6
+P0702,Synthetic Career Software Product 702,Career Software,membership,https://example.com/products/p0702,426.32,0.5992,13225,15,4863,101,82,30
+P0703,Synthetic Beauty Product 703,Beauty,course,https://example.com/products/p0703,64.21,0.5495,98547,-4,7423,85,88,94
+P0704,Synthetic Productivity Product 704,Productivity,digital_download,https://example.com/products/p0704,482.59,0.043,2104,35,5226,148,0,77
+P0705,Synthetic Fitness Product 705,Fitness,digital_download,https://example.com/products/p0705,320.48,0.2211,25389,14,14870,24,15,97
+P0706,Synthetic Home Office Product 706,Home Office,physical,https://example.com/products/p0706,199.03,0.1236,50082,44,13135,53,51,94
+P0707,Synthetic Home Office Product 707,Home Office,course,https://example.com/products/p0707,224.07,0.5448,87572,55,6399,40,62,62
+P0708,Synthetic Summer Gadgets Product 708,Summer Gadgets,subscription,https://example.com/products/p0708,466.24,0.1995,125382,86,1468,86,80,62
+P0709,Synthetic Fitness Product 709,Fitness,membership,https://example.com/products/p0709,464.21,0.5607,68362,11,9991,39,41,26
+P0710,Synthetic Summer Gadgets Product 710,Summer Gadgets,mobile_app,https://example.com/products/p0710,339.34,0.288,96355,36,10601,68,40,26
+P0711,Synthetic Summer Gadgets Product 711,Summer Gadgets,subscription,https://example.com/products/p0711,486.77,0.2697,30833,-20,4201,0,90,83
+P0712,Synthetic Personal Finance Product 712,Personal Finance,software,https://example.com/products/p0712,292.84,0.0355,149780,-44,12090,30,57,62
+P0713,Synthetic Travel Product 713,Travel,subscription,https://example.com/products/p0713,102.61,0.1616,60092,53,8260,86,28,93
+P0714,Synthetic Pet Care Product 714,Pet Care,membership,https://example.com/products/p0714,68.83,0.3813,66858,44,12629,148,87,99
+P0715,Synthetic Gaming Product 715,Gaming,service,https://example.com/products/p0715,373.69,0.3753,88976,67,12145,119,57,80
+P0716,Synthetic Pet Care Product 716,Pet Care,membership,https://example.com/products/p0716,91.38,0.1966,69009,48,12996,107,79,89
+P0717,Synthetic Fitness Product 717,Fitness,physical,https://example.com/products/p0717,208.64,0.2954,143869,-20,13523,139,78,30
+P0718,Synthetic Personal Finance Product 718,Personal Finance,service,https://example.com/products/p0718,196.36,0.1944,2066,-4,10360,56,70,63
+P0719,Synthetic Personal Finance Product 719,Personal Finance,mobile_app,https://example.com/products/p0719,499.51,0.3684,113395,29,9251,131,1,60
+P0720,Synthetic Beauty Product 720,Beauty,software,https://example.com/products/p0720,383.99,0.0762,149569,69,11279,17,28,3
+P0721,Synthetic Beauty Product 721,Beauty,software,https://example.com/products/p0721,476.22,0.5082,83855,-55,7708,45,65,61
+P0722,Synthetic Creator Tools Product 722,Creator Tools,physical,https://example.com/products/p0722,135.79,0.385,118339,-21,12072,69,32,26
+P0723,Synthetic Beauty Product 723,Beauty,software,https://example.com/products/p0723,171.5,0.2787,131008,73,1756,30,38,79
+P0724,Synthetic Pet Care Product 724,Pet Care,software,https://example.com/products/p0724,86.72,0.2382,85404,-57,7960,131,20,54
+P0725,Synthetic Home Office Product 725,Home Office,membership,https://example.com/products/p0725,249.17,0.1893,26032,-19,14676,122,50,15
+P0726,Synthetic Beauty Product 726,Beauty,physical,https://example.com/products/p0726,478.88,0.1765,95684,36,5096,8,27,27
+P0727,Synthetic Creator Tools Product 727,Creator Tools,course,https://example.com/products/p0727,116.16,0.5071,22026,28,7862,69,36,98
+P0728,Synthetic Fitness Product 728,Fitness,subscription,https://example.com/products/p0728,495.79,0.1135,100209,-62,9933,41,61,40
+P0729,Synthetic Travel Product 729,Travel,digital_download,https://example.com/products/p0729,251.56,0.3478,18955,-16,892,94,1,30
+P0730,Synthetic Pet Care Product 730,Pet Care,physical,https://example.com/products/p0730,14.4,0.1856,3719,-6,6953,59,57,96
+P0731,Synthetic Beauty Product 731,Beauty,software,https://example.com/products/p0731,473.15,0.079,17539,-26,327,148,62,5
+P0732,Synthetic Creator Tools Product 732,Creator Tools,subscription,https://example.com/products/p0732,200.79,0.3455,29223,4,4850,3,44,74
+P0733,Synthetic Career Software Product 733,Career Software,course,https://example.com/products/p0733,327.78,0.5144,59848,54,8927,6,68,0
+P0734,Synthetic Travel Product 734,Travel,service,https://example.com/products/p0734,193.63,0.5491,38828,81,11731,60,25,28
+P0735,Synthetic Gaming Product 735,Gaming,membership,https://example.com/products/p0735,56.22,0.4986,85698,55,13978,64,61,88
+P0736,Synthetic Gaming Product 736,Gaming,service,https://example.com/products/p0736,216.28,0.5579,34442,-20,3654,106,2,8
+P0737,Synthetic Career Software Product 737,Career Software,course,https://example.com/products/p0737,144.61,0.4912,38595,78,8197,39,4,46
+P0738,Synthetic Career Software Product 738,Career Software,physical,https://example.com/products/p0738,35.72,0.5765,32126,-5,8280,120,3,34
+P0739,Synthetic Productivity Product 739,Productivity,membership,https://example.com/products/p0739,407.83,0.1301,33184,-56,4215,44,12,70
+P0740,Synthetic Beauty Product 740,Beauty,physical,https://example.com/products/p0740,336.5,0.2278,34027,15,5216,26,87,34
+P0741,Synthetic Personal Finance Product 741,Personal Finance,digital_download,https://example.com/products/p0741,481.97,0.2819,125456,87,14047,89,80,25
+P0742,Synthetic Creator Tools Product 742,Creator Tools,software,https://example.com/products/p0742,241.49,0.4177,66485,-14,14228,23,47,79
+P0743,Synthetic Education Product 743,Education,subscription,https://example.com/products/p0743,432.21,0.0583,68481,-33,13736,134,31,35
+P0744,Synthetic Summer Gadgets Product 744,Summer Gadgets,physical,https://example.com/products/p0744,180.02,0.5005,50645,63,12048,144,15,38
+P0745,Synthetic Career Software Product 745,Career Software,digital_download,https://example.com/products/p0745,224.49,0.2027,84228,-5,6168,52,66,54
+P0746,Synthetic Home Office Product 746,Home Office,course,https://example.com/products/p0746,294.79,0.3571,92405,-18,1813,122,9,65
+P0747,Synthetic Personal Finance Product 747,Personal Finance,digital_download,https://example.com/products/p0747,85.68,0.0634,31205,-39,1507,2,7,88
+P0748,Synthetic Fitness Product 748,Fitness,service,https://example.com/products/p0748,60.11,0.1931,113712,21,14603,110,7,70
+P0749,Synthetic Travel Product 749,Travel,physical,https://example.com/products/p0749,255.91,0.0408,5703,-35,2076,100,39,84
+P0750,Synthetic Productivity Product 750,Productivity,course,https://example.com/products/p0750,91.53,0.482,7422,24,10096,128,35,1
+P0751,Synthetic Personal Finance Product 751,Personal Finance,software,https://example.com/products/p0751,152.06,0.1359,112626,-35,14718,87,35,38
+P0752,Synthetic Beauty Product 752,Beauty,software,https://example.com/products/p0752,459.1,0.257,69986,58,11992,41,67,20
+P0753,Synthetic Fitness Product 753,Fitness,digital_download,https://example.com/products/p0753,92.56,0.567,69239,-52,1222,138,1,31
+P0754,Synthetic Creator Tools Product 754,Creator Tools,service,https://example.com/products/p0754,364.58,0.2421,27858,-62,7109,3,84,57
+P0755,Synthetic Summer Gadgets Product 755,Summer Gadgets,course,https://example.com/products/p0755,333.26,0.1587,92733,-52,1230,139,89,68
+P0756,Synthetic Home Office Product 756,Home Office,subscription,https://example.com/products/p0756,455.5,0.1029,146237,-50,418,21,71,77
+P0757,Synthetic Creator Tools Product 757,Creator Tools,course,https://example.com/products/p0757,333.41,0.0566,81186,-10,11441,121,69,32
+P0758,Synthetic Pet Care Product 758,Pet Care,service,https://example.com/products/p0758,262.51,0.1808,16720,36,10798,144,67,92
+P0759,Synthetic Creator Tools Product 759,Creator Tools,course,https://example.com/products/p0759,431.43,0.3867,9805,-65,11064,27,11,21
+P0760,Synthetic Education Product 760,Education,digital_download,https://example.com/products/p0760,27.24,0.0281,3037,39,7773,76,38,40
+P0761,Synthetic Summer Gadgets Product 761,Summer Gadgets,membership,https://example.com/products/p0761,179.59,0.4203,116116,12,1520,80,59,4
+P0762,Synthetic Productivity Product 762,Productivity,membership,https://example.com/products/p0762,30.76,0.3069,124060,55,8186,47,69,51
+P0763,Synthetic Career Software Product 763,Career Software,service,https://example.com/products/p0763,142.34,0.2076,68196,57,11515,75,16,97
+P0764,Synthetic Beauty Product 764,Beauty,mobile_app,https://example.com/products/p0764,443.8,0.0961,55582,27,7228,57,8,91
+P0765,Synthetic Creator Tools Product 765,Creator Tools,membership,https://example.com/products/p0765,248.76,0.5994,55629,-45,6725,32,50,8
+P0766,Synthetic Personal Finance Product 766,Personal Finance,mobile_app,https://example.com/products/p0766,421.27,0.1219,117851,-53,11425,61,22,41
+P0767,Synthetic Education Product 767,Education,course,https://example.com/products/p0767,340.98,0.541,136421,-18,4511,98,29,53
+P0768,Synthetic Fitness Product 768,Fitness,course,https://example.com/products/p0768,75.53,0.3902,127446,-53,12927,97,33,58
+P0769,Synthetic Summer Gadgets Product 769,Summer Gadgets,digital_download,https://example.com/products/p0769,456.29,0.1915,68151,5,11268,128,6,75
+P0770,Synthetic Productivity Product 770,Productivity,subscription,https://example.com/products/p0770,20.48,0.1925,130693,85,10987,140,84,36
+P0771,Synthetic Personal Finance Product 771,Personal Finance,course,https://example.com/products/p0771,406.55,0.2818,103029,58,14989,154,73,15
+P0772,Synthetic Travel Product 772,Travel,subscription,https://example.com/products/p0772,441.7,0.5856,90916,82,13734,159,90,96
+P0773,Synthetic Career Software Product 773,Career Software,physical,https://example.com/products/p0773,433.05,0.3794,126519,22,965,85,16,67
+P0774,Synthetic Creator Tools Product 774,Creator Tools,subscription,https://example.com/products/p0774,195.2,0.4022,102074,12,9061,19,75,82
+P0775,Synthetic Career Software Product 775,Career Software,subscription,https://example.com/products/p0775,65.5,0.191,132639,32,10524,122,21,17
+P0776,Synthetic Home Office Product 776,Home Office,software,https://example.com/products/p0776,227.75,0.0672,61525,75,2556,131,41,92
+P0777,Synthetic Personal Finance Product 777,Personal Finance,subscription,https://example.com/products/p0777,30.82,0.2906,34727,90,12896,27,28,19
+P0778,Synthetic Pet Care Product 778,Pet Care,course,https://example.com/products/p0778,75.79,0.4336,116208,-21,11878,153,69,9
+P0779,Synthetic Pet Care Product 779,Pet Care,membership,https://example.com/products/p0779,115.05,0.1812,33788,32,660,69,6,13
+P0780,Synthetic Beauty Product 780,Beauty,subscription,https://example.com/products/p0780,235.5,0.4479,13976,55,7289,67,1,35
+P0781,Synthetic Pet Care Product 781,Pet Care,service,https://example.com/products/p0781,215.85,0.5403,960,88,5322,149,65,8
+P0782,Synthetic Summer Gadgets Product 782,Summer Gadgets,subscription,https://example.com/products/p0782,343.08,0.5082,115664,-15,5493,109,28,79
+P0783,Synthetic Fitness Product 783,Fitness,software,https://example.com/products/p0783,203.28,0.2248,141610,-7,144,45,2,22
+P0784,Synthetic Education Product 784,Education,service,https://example.com/products/p0784,313.85,0.2036,74492,57,9500,26,4,89
+P0785,Synthetic Productivity Product 785,Productivity,software,https://example.com/products/p0785,410.29,0.5386,28237,88,8770,115,52,23
+P0786,Synthetic Education Product 786,Education,software,https://example.com/products/p0786,444.54,0.0782,100100,-70,7490,134,27,86
+P0787,Synthetic Beauty Product 787,Beauty,physical,https://example.com/products/p0787,214.06,0.1425,145253,-62,2562,71,58,14
+P0788,Synthetic Productivity Product 788,Productivity,membership,https://example.com/products/p0788,481.3,0.1336,49814,-63,9198,34,51,28
+P0789,Synthetic Beauty Product 789,Beauty,digital_download,https://example.com/products/p0789,164.46,0.2625,64868,-37,3341,83,27,24
+P0790,Synthetic Career Software Product 790,Career Software,digital_download,https://example.com/products/p0790,490.26,0.1056,23239,36,2853,131,27,7
+P0791,Synthetic Travel Product 791,Travel,physical,https://example.com/products/p0791,167.39,0.1051,4976,0,4440,80,17,78
+P0792,Synthetic Gaming Product 792,Gaming,digital_download,https://example.com/products/p0792,461.06,0.3847,57286,-60,3973,43,54,71
+P0793,Synthetic Pet Care Product 793,Pet Care,membership,https://example.com/products/p0793,50.74,0.3876,129163,2,13254,103,89,79
+P0794,Synthetic Home Office Product 794,Home Office,subscription,https://example.com/products/p0794,408.49,0.4759,7701,29,8708,100,52,23
+P0795,Synthetic Summer Gadgets Product 795,Summer Gadgets,mobile_app,https://example.com/products/p0795,411.1,0.14,65913,-62,2282,3,72,88
+P0796,Synthetic Fitness Product 796,Fitness,physical,https://example.com/products/p0796,375.13,0.5275,74912,19,14892,134,2,79
+P0797,Synthetic Beauty Product 797,Beauty,course,https://example.com/products/p0797,289.01,0.3394,87595,-56,1518,104,36,78
+P0798,Synthetic Pet Care Product 798,Pet Care,service,https://example.com/products/p0798,98.31,0.1939,112310,-28,10611,13,73,22
+P0799,Synthetic Pet Care Product 799,Pet Care,service,https://example.com/products/p0799,191.07,0.3222,110133,-63,6239,142,70,34
+P0800,Synthetic Home Office Product 800,Home Office,course,https://example.com/products/p0800,484.63,0.5095,76605,-3,7987,139,53,14
+P0801,Synthetic Pet Care Product 801,Pet Care,software,https://example.com/products/p0801,262.61,0.0871,33656,-5,8692,43,29,3
+P0802,Synthetic Career Software Product 802,Career Software,course,https://example.com/products/p0802,385.98,0.2632,66405,36,4233,115,82,100
+P0803,Synthetic Productivity Product 803,Productivity,subscription,https://example.com/products/p0803,156.97,0.2353,61516,-21,11191,43,6,38
+P0804,Synthetic Home Office Product 804,Home Office,subscription,https://example.com/products/p0804,348.32,0.4779,10609,67,3336,78,89,71
+P0805,Synthetic Gaming Product 805,Gaming,subscription,https://example.com/products/p0805,367.4,0.4524,149003,61,4770,137,16,31
+P0806,Synthetic Home Office Product 806,Home Office,subscription,https://example.com/products/p0806,214.71,0.4117,78791,61,9176,21,28,58
+P0807,Synthetic Beauty Product 807,Beauty,mobile_app,https://example.com/products/p0807,315.44,0.079,97694,64,2826,101,53,2
+P0808,Synthetic Fitness Product 808,Fitness,digital_download,https://example.com/products/p0808,479.91,0.386,121784,45,8797,10,14,57
+P0809,Synthetic Creator Tools Product 809,Creator Tools,membership,https://example.com/products/p0809,437.79,0.0673,109823,51,7270,67,59,59
+P0810,Synthetic Creator Tools Product 810,Creator Tools,course,https://example.com/products/p0810,238.07,0.2963,259,22,199,34,68,7
+P0811,Synthetic Fitness Product 811,Fitness,service,https://example.com/products/p0811,298.2,0.5468,19785,-30,13156,130,42,53
+P0812,Synthetic Career Software Product 812,Career Software,software,https://example.com/products/p0812,165.88,0.3477,101260,58,8659,126,83,24
+P0813,Synthetic Education Product 813,Education,course,https://example.com/products/p0813,416.39,0.3315,76095,-42,6164,96,49,7
+P0814,Synthetic Beauty Product 814,Beauty,membership,https://example.com/products/p0814,400.38,0.5031,48282,-67,8470,26,33,95
+P0815,Synthetic Gaming Product 815,Gaming,membership,https://example.com/products/p0815,172.01,0.1395,5791,85,4293,140,3,36
+P0816,Synthetic Pet Care Product 816,Pet Care,digital_download,https://example.com/products/p0816,242.21,0.5316,109707,78,12525,148,12,5
+P0817,Synthetic Beauty Product 817,Beauty,mobile_app,https://example.com/products/p0817,38.91,0.2491,33857,45,9103,89,25,12
+P0818,Synthetic Fitness Product 818,Fitness,digital_download,https://example.com/products/p0818,313.74,0.244,92891,74,6992,156,26,29
+P0819,Synthetic Career Software Product 819,Career Software,mobile_app,https://example.com/products/p0819,300.03,0.3393,23133,-7,14281,74,79,19
+P0820,Synthetic Personal Finance Product 820,Personal Finance,physical,https://example.com/products/p0820,471.57,0.2303,107305,86,1474,96,52,73
+P0821,Synthetic Beauty Product 821,Beauty,course,https://example.com/products/p0821,346.92,0.0131,145894,9,9182,152,9,11
+P0822,Synthetic Fitness Product 822,Fitness,mobile_app,https://example.com/products/p0822,459.72,0.0492,8589,76,12775,56,90,59
+P0823,Synthetic Beauty Product 823,Beauty,membership,https://example.com/products/p0823,37.44,0.1289,96069,89,104,111,47,0
+P0824,Synthetic Beauty Product 824,Beauty,physical,https://example.com/products/p0824,103.58,0.2667,10547,-18,10995,115,60,52
+P0825,Synthetic Career Software Product 825,Career Software,service,https://example.com/products/p0825,194.57,0.3314,67601,56,12551,118,84,93
+P0826,Synthetic Personal Finance Product 826,Personal Finance,membership,https://example.com/products/p0826,421.88,0.3409,74562,81,3983,144,51,48
+P0827,Synthetic Creator Tools Product 827,Creator Tools,software,https://example.com/products/p0827,207.67,0.5967,89494,0,13589,19,14,7
+P0828,Synthetic Productivity Product 828,Productivity,mobile_app,https://example.com/products/p0828,278.48,0.3208,148288,-19,13482,77,28,63
+P0829,Synthetic Creator Tools Product 829,Creator Tools,service,https://example.com/products/p0829,134.24,0.1696,131596,61,8057,116,36,85
+P0830,Synthetic Beauty Product 830,Beauty,software,https://example.com/products/p0830,309.48,0.5047,56212,63,5823,10,58,7
+P0831,Synthetic Travel Product 831,Travel,mobile_app,https://example.com/products/p0831,445.21,0.573,97738,33,7595,96,25,63
+P0832,Synthetic Productivity Product 832,Productivity,physical,https://example.com/products/p0832,237.21,0.4619,38972,81,9254,143,41,75
+P0833,Synthetic Gaming Product 833,Gaming,course,https://example.com/products/p0833,248.99,0.1359,127293,66,10918,21,13,31
+P0834,Synthetic Personal Finance Product 834,Personal Finance,mobile_app,https://example.com/products/p0834,252.88,0.579,127898,56,12806,27,8,52
+P0835,Synthetic Education Product 835,Education,course,https://example.com/products/p0835,22.7,0.5921,31230,56,12544,89,37,66
+P0836,Synthetic Travel Product 836,Travel,course,https://example.com/products/p0836,116.03,0.3949,144733,9,11178,66,67,39
+P0837,Synthetic Career Software Product 837,Career Software,service,https://example.com/products/p0837,91.05,0.429,9708,65,362,15,66,0
+P0838,Synthetic Beauty Product 838,Beauty,digital_download,https://example.com/products/p0838,379.01,0.2151,47541,-36,13390,82,81,46
+P0839,Synthetic Productivity Product 839,Productivity,physical,https://example.com/products/p0839,432.5,0.5092,62545,-49,14926,136,70,37
+P0840,Synthetic Summer Gadgets Product 840,Summer Gadgets,digital_download,https://example.com/products/p0840,68.07,0.2648,145678,-58,4983,90,65,64
+P0841,Synthetic Personal Finance Product 841,Personal Finance,software,https://example.com/products/p0841,205.27,0.3458,79705,-2,7227,116,19,28
+P0842,Synthetic Career Software Product 842,Career Software,course,https://example.com/products/p0842,130.87,0.4247,89482,-37,11958,135,45,44
+P0843,Synthetic Personal Finance Product 843,Personal Finance,physical,https://example.com/products/p0843,210.48,0.4152,42330,-56,5207,105,39,99
+P0844,Synthetic Home Office Product 844,Home Office,software,https://example.com/products/p0844,117.4,0.4938,118543,74,10797,59,89,38
+P0845,Synthetic Pet Care Product 845,Pet Care,subscription,https://example.com/products/p0845,42.1,0.0654,35096,77,5234,73,44,96
+P0846,Synthetic Creator Tools Product 846,Creator Tools,membership,https://example.com/products/p0846,153.9,0.3231,101934,75,10993,146,14,31
+P0847,Synthetic Fitness Product 847,Fitness,membership,https://example.com/products/p0847,177.11,0.0402,132252,80,3622,32,1,49
+P0848,Synthetic Beauty Product 848,Beauty,course,https://example.com/products/p0848,321.81,0.2178,57351,-63,12030,136,39,19
+P0849,Synthetic Travel Product 849,Travel,mobile_app,https://example.com/products/p0849,80.38,0.5812,54089,-11,2410,96,78,2
+P0850,Synthetic Personal Finance Product 850,Personal Finance,mobile_app,https://example.com/products/p0850,216.01,0.2591,142775,39,9084,155,36,47
+P0851,Synthetic Personal Finance Product 851,Personal Finance,software,https://example.com/products/p0851,22.45,0.3598,76710,40,3003,133,32,14
+P0852,Synthetic Creator Tools Product 852,Creator Tools,mobile_app,https://example.com/products/p0852,138.18,0.0525,75591,68,7707,20,86,61
+P0853,Synthetic Home Office Product 853,Home Office,service,https://example.com/products/p0853,280.98,0.3188,60634,-36,6447,123,65,26
+P0854,Synthetic Gaming Product 854,Gaming,digital_download,https://example.com/products/p0854,71.87,0.3505,105375,56,495,8,38,26
+P0855,Synthetic Creator Tools Product 855,Creator Tools,subscription,https://example.com/products/p0855,291.82,0.1314,110463,82,7339,135,71,81
+P0856,Synthetic Summer Gadgets Product 856,Summer Gadgets,service,https://example.com/products/p0856,137.42,0.5865,100679,-27,1343,105,27,3
+P0857,Synthetic Creator Tools Product 857,Creator Tools,mobile_app,https://example.com/products/p0857,499.46,0.4181,96555,10,3139,6,26,60
+P0858,Synthetic Beauty Product 858,Beauty,mobile_app,https://example.com/products/p0858,107.59,0.257,120254,-54,8345,43,24,70
+P0859,Synthetic Beauty Product 859,Beauty,physical,https://example.com/products/p0859,23.17,0.0927,89198,-45,2087,4,34,57
+P0860,Synthetic Beauty Product 860,Beauty,mobile_app,https://example.com/products/p0860,256.98,0.5828,16374,-23,1630,65,89,49
+P0861,Synthetic Home Office Product 861,Home Office,digital_download,https://example.com/products/p0861,419.61,0.473,75795,0,2977,4,47,73
+P0862,Synthetic Pet Care Product 862,Pet Care,subscription,https://example.com/products/p0862,254.73,0.5523,103357,9,5275,113,72,32
+P0863,Synthetic Travel Product 863,Travel,membership,https://example.com/products/p0863,398.36,0.4904,68178,65,1031,145,33,72
+P0864,Synthetic Fitness Product 864,Fitness,mobile_app,https://example.com/products/p0864,403.44,0.0898,14814,33,12003,112,7,35
+P0865,Synthetic Productivity Product 865,Productivity,membership,https://example.com/products/p0865,172.1,0.2786,102829,16,13111,128,65,46
+P0866,Synthetic Career Software Product 866,Career Software,service,https://example.com/products/p0866,36.01,0.3022,145876,63,517,32,33,100
+P0867,Synthetic Beauty Product 867,Beauty,membership,https://example.com/products/p0867,85.32,0.5532,86040,88,100,100,42,99
+P0868,Synthetic Home Office Product 868,Home Office,service,https://example.com/products/p0868,306.04,0.1421,84889,47,9479,26,52,16
+P0869,Synthetic Fitness Product 869,Fitness,software,https://example.com/products/p0869,74.97,0.2179,74431,-33,4676,76,46,60
+P0870,Synthetic Fitness Product 870,Fitness,course,https://example.com/products/p0870,381.89,0.2115,87805,43,7537,127,90,97
+P0871,Synthetic Pet Care Product 871,Pet Care,service,https://example.com/products/p0871,284.31,0.4065,39384,24,13133,79,59,97
+P0872,Synthetic Career Software Product 872,Career Software,physical,https://example.com/products/p0872,445.01,0.2161,19951,76,13138,101,81,86
+P0873,Synthetic Travel Product 873,Travel,subscription,https://example.com/products/p0873,11.16,0.5199,125282,21,409,44,68,100
+P0874,Synthetic Travel Product 874,Travel,physical,https://example.com/products/p0874,105.38,0.0645,106741,-33,8507,134,28,42
+P0875,Synthetic Pet Care Product 875,Pet Care,software,https://example.com/products/p0875,208.22,0.5184,79970,-45,4207,40,90,10
+P0876,Synthetic Education Product 876,Education,subscription,https://example.com/products/p0876,476.57,0.1386,1993,-68,7513,139,67,0
+P0877,Synthetic Education Product 877,Education,physical,https://example.com/products/p0877,391.1,0.1867,66532,-41,12124,67,80,6
+P0878,Synthetic Productivity Product 878,Productivity,subscription,https://example.com/products/p0878,152.37,0.5827,24899,24,1089,140,50,9
+P0879,Synthetic Home Office Product 879,Home Office,physical,https://example.com/products/p0879,180.64,0.2497,15204,55,4532,69,72,31
+P0880,Synthetic Personal Finance Product 880,Personal Finance,membership,https://example.com/products/p0880,146.71,0.3833,137155,6,13053,62,25,73
+P0881,Synthetic Productivity Product 881,Productivity,mobile_app,https://example.com/products/p0881,148.98,0.4302,148046,-9,13983,82,51,8
+P0882,Synthetic Summer Gadgets Product 882,Summer Gadgets,physical,https://example.com/products/p0882,166.66,0.3341,54050,7,14305,133,52,21
+P0883,Synthetic Gaming Product 883,Gaming,mobile_app,https://example.com/products/p0883,378.67,0.2559,22593,41,11682,106,60,29
+P0884,Synthetic Education Product 884,Education,software,https://example.com/products/p0884,202.47,0.4093,1469,10,7219,96,83,78
+P0885,Synthetic Productivity Product 885,Productivity,course,https://example.com/products/p0885,67.84,0.1427,74194,68,11528,124,27,94
+P0886,Synthetic Home Office Product 886,Home Office,physical,https://example.com/products/p0886,11.2,0.0792,14697,-42,1952,142,31,99
+P0887,Synthetic Summer Gadgets Product 887,Summer Gadgets,subscription,https://example.com/products/p0887,7.91,0.3156,64374,-21,4863,8,90,94
+P0888,Synthetic Beauty Product 888,Beauty,software,https://example.com/products/p0888,218.98,0.525,78201,65,9494,119,33,30
+P0889,Synthetic Summer Gadgets Product 889,Summer Gadgets,physical,https://example.com/products/p0889,417.18,0.0111,42506,40,844,59,89,98
+P0890,Synthetic Summer Gadgets Product 890,Summer Gadgets,physical,https://example.com/products/p0890,330.24,0.3712,133216,-4,12018,3,63,48
+P0891,Synthetic Creator Tools Product 891,Creator Tools,service,https://example.com/products/p0891,129.04,0.3214,1846,60,9069,72,87,29
+P0892,Synthetic Fitness Product 892,Fitness,physical,https://example.com/products/p0892,124.66,0.157,23781,12,9183,87,35,8
+P0893,Synthetic Travel Product 893,Travel,physical,https://example.com/products/p0893,124.89,0.3042,13552,17,9985,154,81,97
+P0894,Synthetic Home Office Product 894,Home Office,mobile_app,https://example.com/products/p0894,56.79,0.0222,28534,-70,2571,29,4,85
+P0895,Synthetic Productivity Product 895,Productivity,software,https://example.com/products/p0895,137.28,0.3465,4250,12,8306,132,14,73
+P0896,Synthetic Pet Care Product 896,Pet Care,membership,https://example.com/products/p0896,341.72,0.3951,146145,-49,6815,96,47,40
+P0897,Synthetic Productivity Product 897,Productivity,service,https://example.com/products/p0897,216.01,0.1768,91224,-42,3686,38,57,97
+P0898,Synthetic Summer Gadgets Product 898,Summer Gadgets,course,https://example.com/products/p0898,97.52,0.4244,112742,18,7013,7,56,73
+P0899,Synthetic Personal Finance Product 899,Personal Finance,digital_download,https://example.com/products/p0899,240.99,0.5257,30792,12,7934,83,36,92
+P0900,Synthetic Gaming Product 900,Gaming,mobile_app,https://example.com/products/p0900,15.22,0.139,99662,76,221,154,26,34
+P0901,Synthetic Fitness Product 901,Fitness,physical,https://example.com/products/p0901,227.04,0.3073,54852,-38,4813,81,80,47
+P0902,Synthetic Fitness Product 902,Fitness,mobile_app,https://example.com/products/p0902,196.25,0.5166,39289,12,6424,110,52,40
+P0903,Synthetic Creator Tools Product 903,Creator Tools,physical,https://example.com/products/p0903,30.76,0.5236,76869,36,330,56,61,81
+P0904,Synthetic Personal Finance Product 904,Personal Finance,service,https://example.com/products/p0904,14.58,0.1704,141608,18,4090,120,51,87
+P0905,Synthetic Career Software Product 905,Career Software,subscription,https://example.com/products/p0905,7.38,0.2883,131106,-65,1883,72,4,59
+P0906,Synthetic Creator Tools Product 906,Creator Tools,physical,https://example.com/products/p0906,149.42,0.1631,2949,51,6561,40,34,9
+P0907,Synthetic Travel Product 907,Travel,course,https://example.com/products/p0907,18.45,0.1559,2357,66,8619,60,15,1
+P0908,Synthetic Productivity Product 908,Productivity,subscription,https://example.com/products/p0908,204.74,0.3323,135416,81,7387,106,21,60
+P0909,Synthetic Fitness Product 909,Fitness,course,https://example.com/products/p0909,261.82,0.1057,105900,25,10385,142,37,94
+P0910,Synthetic Career Software Product 910,Career Software,physical,https://example.com/products/p0910,318.59,0.0567,119176,-40,7579,24,33,15
+P0911,Synthetic Gaming Product 911,Gaming,digital_download,https://example.com/products/p0911,115.93,0.4454,143126,-50,12946,147,23,37
+P0912,Synthetic Home Office Product 912,Home Office,mobile_app,https://example.com/products/p0912,375.05,0.3303,24749,49,11038,150,85,29
+P0913,Synthetic Home Office Product 913,Home Office,service,https://example.com/products/p0913,68.44,0.4255,21274,47,13157,154,35,6
+P0914,Synthetic Travel Product 914,Travel,software,https://example.com/products/p0914,264.11,0.0238,110663,-39,13743,146,1,92
+P0915,Synthetic Personal Finance Product 915,Personal Finance,service,https://example.com/products/p0915,120.13,0.1385,109130,12,2418,126,36,40
+P0916,Synthetic Personal Finance Product 916,Personal Finance,membership,https://example.com/products/p0916,438.6,0.1415,116517,79,2190,73,73,76
+P0917,Synthetic Fitness Product 917,Fitness,software,https://example.com/products/p0917,152.36,0.3561,22818,-57,12340,131,47,61
+P0918,Synthetic Summer Gadgets Product 918,Summer Gadgets,membership,https://example.com/products/p0918,148.32,0.136,76902,-32,11686,35,53,0
+P0919,Synthetic Fitness Product 919,Fitness,membership,https://example.com/products/p0919,364.76,0.4355,20723,-34,8927,63,70,73
+P0920,Synthetic Fitness Product 920,Fitness,software,https://example.com/products/p0920,300.85,0.0694,75102,90,1289,13,66,22
+P0921,Synthetic Fitness Product 921,Fitness,membership,https://example.com/products/p0921,245.81,0.5149,19315,67,3419,156,67,90
+P0922,Synthetic Home Office Product 922,Home Office,course,https://example.com/products/p0922,403.13,0.2569,98577,-64,8175,116,37,51
+P0923,Synthetic Gaming Product 923,Gaming,subscription,https://example.com/products/p0923,399.36,0.1769,134150,60,14195,116,26,2
+P0924,Synthetic Home Office Product 924,Home Office,membership,https://example.com/products/p0924,61.36,0.1563,57137,46,15,156,70,52
+P0925,Synthetic Summer Gadgets Product 925,Summer Gadgets,membership,https://example.com/products/p0925,218.89,0.1422,137637,-21,7549,132,61,44
+P0926,Synthetic Creator Tools Product 926,Creator Tools,mobile_app,https://example.com/products/p0926,256.58,0.2085,67910,-57,10292,47,65,46
+P0927,Synthetic Summer Gadgets Product 927,Summer Gadgets,physical,https://example.com/products/p0927,108.49,0.2841,99977,-65,4474,26,7,57
+P0928,Synthetic Fitness Product 928,Fitness,subscription,https://example.com/products/p0928,113.84,0.5781,93534,-29,14076,77,21,15
+P0929,Synthetic Home Office Product 929,Home Office,digital_download,https://example.com/products/p0929,148.72,0.5948,117665,29,9337,20,56,37
+P0930,Synthetic Creator Tools Product 930,Creator Tools,service,https://example.com/products/p0930,396.23,0.1998,90070,9,2805,150,59,28
+P0931,Synthetic Summer Gadgets Product 931,Summer Gadgets,membership,https://example.com/products/p0931,21.89,0.2281,112339,81,11058,151,29,7
+P0932,Synthetic Beauty Product 932,Beauty,digital_download,https://example.com/products/p0932,348.33,0.5556,49177,-11,219,129,10,90
+P0933,Synthetic Personal Finance Product 933,Personal Finance,software,https://example.com/products/p0933,298.76,0.2672,123297,-2,9003,121,3,0
+P0934,Synthetic Education Product 934,Education,subscription,https://example.com/products/p0934,235.18,0.3175,41941,39,1970,119,40,71
+P0935,Synthetic Travel Product 935,Travel,membership,https://example.com/products/p0935,489.52,0.0308,20162,78,1772,124,27,53
+P0936,Synthetic Productivity Product 936,Productivity,service,https://example.com/products/p0936,13.14,0.5741,137084,-45,12267,110,58,51
+P0937,Synthetic Travel Product 937,Travel,course,https://example.com/products/p0937,269.87,0.1119,27467,11,5177,10,55,13
+P0938,Synthetic Career Software Product 938,Career Software,course,https://example.com/products/p0938,477.73,0.3417,18826,-56,4092,93,90,94
+P0939,Synthetic Gaming Product 939,Gaming,mobile_app,https://example.com/products/p0939,447.12,0.0442,92094,-27,5471,113,67,63
+P0940,Synthetic Education Product 940,Education,subscription,https://example.com/products/p0940,488.23,0.519,1426,77,1207,25,78,41
+P0941,Synthetic Personal Finance Product 941,Personal Finance,service,https://example.com/products/p0941,388.43,0.4301,16886,21,2144,33,44,85
+P0942,Synthetic Beauty Product 942,Beauty,software,https://example.com/products/p0942,307.22,0.2827,50060,31,1403,108,51,19
+P0943,Synthetic Travel Product 943,Travel,physical,https://example.com/products/p0943,287.66,0.4556,14349,21,13128,46,49,11
+P0944,Synthetic Creator Tools Product 944,Creator Tools,digital_download,https://example.com/products/p0944,162.93,0.462,117389,40,4211,137,76,50
+P0945,Synthetic Personal Finance Product 945,Personal Finance,physical,https://example.com/products/p0945,476.63,0.3746,48040,79,12967,91,80,47
+P0946,Synthetic Home Office Product 946,Home Office,physical,https://example.com/products/p0946,54.52,0.0464,140265,25,39,147,68,99
+P0947,Synthetic Summer Gadgets Product 947,Summer Gadgets,digital_download,https://example.com/products/p0947,303.7,0.1979,102529,82,14230,142,76,81
+P0948,Synthetic Beauty Product 948,Beauty,software,https://example.com/products/p0948,48.34,0.5585,2433,19,1494,154,51,57
+P0949,Synthetic Pet Care Product 949,Pet Care,software,https://example.com/products/p0949,129.88,0.4918,96595,18,5655,107,56,88
+P0950,Synthetic Beauty Product 950,Beauty,service,https://example.com/products/p0950,101.03,0.4366,55620,25,6263,20,86,57
+P0951,Synthetic Gaming Product 951,Gaming,service,https://example.com/products/p0951,210.88,0.0404,118870,-55,4993,3,39,98
+P0952,Synthetic Career Software Product 952,Career Software,digital_download,https://example.com/products/p0952,416.71,0.4801,101294,1,9967,35,54,31
+P0953,Synthetic Personal Finance Product 953,Personal Finance,subscription,https://example.com/products/p0953,130.08,0.1881,118056,80,829,41,21,85
+P0954,Synthetic Education Product 954,Education,subscription,https://example.com/products/p0954,374.34,0.4493,110938,23,4382,144,31,62
+P0955,Synthetic Creator Tools Product 955,Creator Tools,mobile_app,https://example.com/products/p0955,328.45,0.0672,120017,-56,11226,66,40,83
+P0956,Synthetic Productivity Product 956,Productivity,mobile_app,https://example.com/products/p0956,476.75,0.3684,76775,29,12744,100,84,7
+P0957,Synthetic Fitness Product 957,Fitness,mobile_app,https://example.com/products/p0957,250.49,0.4572,88461,33,12959,151,38,68
+P0958,Synthetic Gaming Product 958,Gaming,physical,https://example.com/products/p0958,59.66,0.2792,9410,20,8493,65,15,27
+P0959,Synthetic Productivity Product 959,Productivity,digital_download,https://example.com/products/p0959,214.02,0.4095,18675,48,3921,79,81,13
+P0960,Synthetic Travel Product 960,Travel,software,https://example.com/products/p0960,381.29,0.4614,143101,-6,3154,139,74,0
+P0961,Synthetic Creator Tools Product 961,Creator Tools,subscription,https://example.com/products/p0961,351.23,0.5117,80142,41,10407,147,73,93
+P0962,Synthetic Pet Care Product 962,Pet Care,physical,https://example.com/products/p0962,54.13,0.3928,33709,10,8368,134,89,39
+P0963,Synthetic Pet Care Product 963,Pet Care,service,https://example.com/products/p0963,81.71,0.269,35481,-42,8892,88,15,94
+P0964,Synthetic Gaming Product 964,Gaming,subscription,https://example.com/products/p0964,140.99,0.1695,71792,-26,1742,11,71,45
+P0965,Synthetic Career Software Product 965,Career Software,software,https://example.com/products/p0965,212.54,0.2005,47450,-66,14859,124,89,76
+P0966,Synthetic Beauty Product 966,Beauty,subscription,https://example.com/products/p0966,269.67,0.0859,137335,35,5498,42,38,64
+P0967,Synthetic Creator Tools Product 967,Creator Tools,membership,https://example.com/products/p0967,344.04,0.2092,101588,11,11743,20,53,62
+P0968,Synthetic Productivity Product 968,Productivity,subscription,https://example.com/products/p0968,179.27,0.0337,65784,-39,1529,7,12,68
+P0969,Synthetic Travel Product 969,Travel,membership,https://example.com/products/p0969,244.8,0.491,29548,86,10979,157,70,56
+P0970,Synthetic Pet Care Product 970,Pet Care,subscription,https://example.com/products/p0970,459.15,0.3851,91534,-56,12188,115,63,66
+P0971,Synthetic Summer Gadgets Product 971,Summer Gadgets,course,https://example.com/products/p0971,183.73,0.4866,85209,33,12291,124,70,11
+P0972,Synthetic Beauty Product 972,Beauty,mobile_app,https://example.com/products/p0972,406.65,0.5588,110605,-67,7948,23,31,80
+P0973,Synthetic Creator Tools Product 973,Creator Tools,mobile_app,https://example.com/products/p0973,344.43,0.3875,50710,9,32,137,67,65
+P0974,Synthetic Beauty Product 974,Beauty,physical,https://example.com/products/p0974,404.98,0.2809,147445,37,12221,52,77,44
+P0975,Synthetic Home Office Product 975,Home Office,digital_download,https://example.com/products/p0975,93.16,0.0325,81870,45,11511,20,43,34
+P0976,Synthetic Home Office Product 976,Home Office,subscription,https://example.com/products/p0976,118.69,0.3284,99455,-59,10271,4,42,53
+P0977,Synthetic Productivity Product 977,Productivity,service,https://example.com/products/p0977,315.94,0.3423,127711,87,12971,74,22,41
+P0978,Synthetic Productivity Product 978,Productivity,course,https://example.com/products/p0978,185.93,0.5646,32198,-53,6169,112,10,10
+P0979,Synthetic Home Office Product 979,Home Office,membership,https://example.com/products/p0979,479.72,0.4254,86485,40,14108,118,80,96
+P0980,Synthetic Pet Care Product 980,Pet Care,mobile_app,https://example.com/products/p0980,469.44,0.2726,119508,-47,4730,13,15,29
+P0981,Synthetic Travel Product 981,Travel,service,https://example.com/products/p0981,214.27,0.4594,141873,-44,8582,88,9,75
+P0982,Synthetic Creator Tools Product 982,Creator Tools,membership,https://example.com/products/p0982,451.58,0.1336,22843,40,819,109,66,77
+P0983,Synthetic Creator Tools Product 983,Creator Tools,digital_download,https://example.com/products/p0983,315.93,0.3903,143734,-47,5180,89,42,61
+P0984,Synthetic Pet Care Product 984,Pet Care,course,https://example.com/products/p0984,320.38,0.2194,92608,69,11023,119,10,48
+P0985,Synthetic Pet Care Product 985,Pet Care,course,https://example.com/products/p0985,362.89,0.3258,114942,24,8685,50,17,61
+P0986,Synthetic Career Software Product 986,Career Software,software,https://example.com/products/p0986,191.45,0.5487,11237,73,12704,114,5,58
+P0987,Synthetic Home Office Product 987,Home Office,membership,https://example.com/products/p0987,46.2,0.5969,30318,-27,4658,69,11,16
+P0988,Synthetic Summer Gadgets Product 988,Summer Gadgets,physical,https://example.com/products/p0988,241.76,0.2866,139050,-10,12297,92,23,67
+P0989,Synthetic Productivity Product 989,Productivity,course,https://example.com/products/p0989,489.56,0.1136,125424,27,5502,5,85,40
+P0990,Synthetic Fitness Product 990,Fitness,membership,https://example.com/products/p0990,441.66,0.1648,106803,-32,3390,68,43,9
+P0991,Synthetic Personal Finance Product 991,Personal Finance,subscription,https://example.com/products/p0991,23.2,0.3315,78588,-17,13311,79,34,29
+P0992,Synthetic Personal Finance Product 992,Personal Finance,course,https://example.com/products/p0992,23.53,0.2301,330,55,466,54,73,10
+P0993,Synthetic Creator Tools Product 993,Creator Tools,digital_download,https://example.com/products/p0993,155.27,0.0268,138586,-59,11952,21,9,20
+P0994,Synthetic Education Product 994,Education,mobile_app,https://example.com/products/p0994,291.66,0.3255,11992,-10,4763,6,39,3
+P0995,Synthetic Gaming Product 995,Gaming,service,https://example.com/products/p0995,185.73,0.5818,33109,76,8689,32,1,61
+P0996,Synthetic Pet Care Product 996,Pet Care,physical,https://example.com/products/p0996,153.36,0.3489,120519,58,875,123,87,96
+P0997,Synthetic Productivity Product 997,Productivity,membership,https://example.com/products/p0997,371.73,0.4343,75104,23,2405,2,12,69
+P0998,Synthetic Career Software Product 998,Career Software,membership,https://example.com/products/p0998,273.36,0.1214,92818,73,14470,77,87,44
+P0999,Synthetic Beauty Product 999,Beauty,mobile_app,https://example.com/products/p0999,138.77,0.0196,90608,84,14850,30,87,90
+P1000,Synthetic Gaming Product 1000,Gaming,software,https://example.com/products/p1000,479.03,0.5854,136953,46,6699,39,89,2

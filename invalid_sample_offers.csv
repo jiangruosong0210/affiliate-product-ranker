@@ -1,0 +1,11 @@
+offer_id,product_id,platform,payout_type,offer_price,commission_rate,fixed_commission_amount,commission_per_lead,cookie_duration_days,recurring_commission,affiliate_url,offer_status
+BAD-O1,MISSING-PRODUCT,Synthetic Invalid Platform,one_time,100,0.2,20,10,30,False,,active
+BAD-O2,P0001,Synthetic Invalid Platform,one_time,100,0,20,10,30,False,,active
+BAD-O3,P0001,Synthetic Invalid Platform,fixed_amount,100,0.2,,10,30,False,,active
+BAD-O4,P0001,Synthetic Invalid Platform,lead,100,0.2,20,,30,False,,active
+BAD-O5,P0001,Synthetic Invalid Platform,recurring,100,0.2,20,10,30,False,,active
+BAD-O6,P0001,Synthetic Invalid Platform,one_time,100,0.2,20,10,30,maybe,,active
+BAD-O7,P0001,Synthetic Invalid Platform,invalid_type,100,0.2,20,10,30,False,,active
+BAD-O8,P0001,Synthetic Invalid Platform,lead,100,0.2,20,10,30,False,,expired
+BAD-DUP,P0001,Synthetic Invalid Platform,fixed_amount,100,0.2,20,10,30,False,,active
+BAD-DUP,P0002,Synthetic Invalid Platform,fixed_amount,100,0.2,20,10,30,False,,active

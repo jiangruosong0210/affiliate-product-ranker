@@ -1,6 +1,29 @@
 import math
 
 
+PRODUCT_CORE_COLUMNS = [
+    "product_id",
+    "product_name",
+    "category",
+    "product_type",
+    "product_url",
+    "reference_price",
+    "reference_commission_rate",
+]
+OFFER_COLUMNS = [
+    "offer_id",
+    "product_id",
+    "platform",
+    "payout_type",
+    "offer_price",
+    "commission_rate",
+    "fixed_commission_amount",
+    "commission_per_lead",
+    "cookie_duration_days",
+    "recurring_commission",
+    "affiliate_url",
+    "offer_status",
+]
 CORE_COLUMNS = [
     "product_name",
     "platform",
@@ -141,3 +164,20 @@ def parse_number(value):
 
 def format_row_numbers(indexes):
     return ", ".join(str(index + 2) for index in indexes)
+
+
+def parse_boolean(value):
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        if value == 1:
+            return True
+        if value == 0:
+            return False
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in {"true", "yes", "1"}:
+            return True
+        if normalized in {"false", "no", "0"}:
+            return False
+    return None

@@ -1,7 +1,7 @@
-product_name,platform,category,price,commission_rate,product_url,search_volume,search_growth_7d,social_mentions_7d,competitor_count,days_until_peak,seasonal_relevance
-AI Resume Builder,PartnerStack,Career Software,29,0.30,https://example.com/ai-resume-builder,68000,24,7200,42,10,82
-Portable Neck Fan,Amazon Associates,Summer Gadgets,34.99,0.04,https://example.com/portable-neck-fan,82000,38,8600,55,7,95
-Budget Meal Planning App,Impact,Personal Finance,9.99,0.40,https://example.com/meal-planning-app,54000,12,4100,38,21,68
-Online Course Platform,ShareASale,Creator Tools,99,0.20,https://example.com/course-platform,74000,8,6300,72,35,58
-Ergonomic Desk Chair,Amazon Associates,Home Office,229,0.03,https://example.com/desk-chair,46000,-9,2800,83,60,32
-Language Learning App,CJ Affiliate,Education,14.99,0.35,,61000,17,5900,48,18,74
+product_id,product_name,category,product_type,product_url,reference_price,reference_commission_rate,search_volume,search_growth_7d,social_mentions_7d,competitor_count,days_until_peak,seasonal_relevance
+P001,AI Resume Builder,Career Software,software,https://example.com/ai-resume-builder,29,0.30,68000,24,7200,42,10,82
+P002,Portable Neck Fan,Summer Gadgets,physical,https://example.com/portable-neck-fan,34.99,0.04,82000,38,8600,55,7,95
+P003,Budget Meal Planning App,Personal Finance,mobile_app,https://example.com/meal-planning-app,9.99,0.40,54000,12,4100,38,21,68
+P004,Online Course Platform,Creator Tools,subscription,https://example.com/course-platform,99,0.20,74000,8,6300,72,35,58
+P005,Ergonomic Desk Chair,Home Office,physical,https://example.com/desk-chair,229,0.03,46000,-9,2800,83,60,32
+P006,Language Learning App,Education,mobile_app,,14.99,0.35,61000,17,5900,48,18,74
