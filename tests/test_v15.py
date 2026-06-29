@@ -322,6 +322,10 @@ class VideoScaleAndStreamlitTests(unittest.TestCase):
             "Download video exclusions",
             "Download video warnings",
             "Download video recommendations",
+            "Download enriched videos",
+            "Download video text warnings",
+            "Download manual detected comparison",
+            "Download extracted feature summary",
         }
         self.assertEqual(labels, expected)
         self.assertTrue(

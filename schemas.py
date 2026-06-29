@@ -96,3 +96,13 @@ VIDEO_OPTIONAL_COUNT_COLUMNS = [
     "shares",
     "creator_followers",
 ]
+
+VIDEO_TEXT_COLUMNS = [
+    "description",
+    "transcript",
+    "hashtags",
+    "creator_name",
+    "language",
+]
+
+VIDEO_ALL_COLUMNS = VIDEO_COLUMNS + VIDEO_TEXT_COLUMNS

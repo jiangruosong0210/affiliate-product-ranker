@@ -4,6 +4,7 @@ import pandas as pd
 
 from schemas import (
     VIDEO_BOOLEAN_COLUMNS,
+    VIDEO_TEXT_COLUMNS,
     VIDEO_COLUMNS,
     VIDEO_CONTENT_FORMATS,
     VIDEO_HOOK_TYPES,
@@ -39,6 +40,9 @@ def validate_video_records(videos_df, valid_product_ids):
         return pd.DataFrame(), excluded, pd.DataFrame()
 
     cleaned = videos_df.astype(object).copy()
+    for column in VIDEO_TEXT_COLUMNS:
+        if column not in cleaned.columns:
+            cleaned[column] = ""
     errors = {index: [] for index in cleaned.index}
     warnings = {index: [] for index in cleaned.index}
     duplicate_mask = cleaned["video_id"].duplicated(keep=False)
@@ -118,6 +122,8 @@ def validate_video_records(videos_df, valid_product_ids):
         cleaned.at[index, "video_url"] = normalize_optional_text(
             row.get("video_url")
         )
+        for column in VIDEO_TEXT_COLUMNS:
+            cleaned.at[index, column] = normalize_optional_text(row.get(column))
 
         video_url = cleaned.at[index, "video_url"]
         if video_url and not re.match(r"^https?://", video_url, re.IGNORECASE):

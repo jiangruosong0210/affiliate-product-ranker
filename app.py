@@ -16,6 +16,10 @@ from video_insights import (
     build_video_recommendations,
     summarize_groups,
 )
+from video_text_analysis import (
+    apply_label_precedence,
+    enrich_video_text,
+)
 from video_validation import validate_video_records
 
 
@@ -79,6 +83,49 @@ def show_score_bar_chart(dataframe, score_column):
     st.markdown(chart_html, unsafe_allow_html=True)
 
 
+def summarize_filtered_features(dataframe):
+    counts = {}
+    if dataframe.empty or "detected_main_features" not in dataframe:
+        return pd.DataFrame(columns=["feature", "video_count"])
+    for value in dataframe["detected_main_features"]:
+        if pd.isna(value) or not str(value).strip():
+            continue
+        for feature in str(value).split(";"):
+            feature = feature.strip()
+            if feature:
+                counts[feature] = counts.get(feature, 0) + 1
+    rows = [
+        {"feature": feature, "video_count": count}
+        for feature, count in sorted(
+            counts.items(),
+            key=lambda item: (-item[1], item[0]),
+        )
+    ]
+    return pd.DataFrame(rows)
+
+
+def summarize_agreement(comparison_df):
+    rows = []
+    for column in [
+        "content_format_agreement",
+        "hook_type_agreement",
+        "cta_present_agreement",
+        "main_feature_agreement",
+    ]:
+        if column not in comparison_df:
+            continue
+        counts = comparison_df[column].value_counts(dropna=False)
+        for status, count in counts.items():
+            rows.append(
+                {
+                    "field": column.replace("_agreement", ""),
+                    "agreement_status": status,
+                    "video_count": int(count),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
 st.set_page_config(page_title="Affiliate Product Ranker", layout="wide")
 st.title("Affiliate Product Ranker")
 st.write(
@@ -86,8 +133,8 @@ st.write(
     "for the next 7-30 days."
 )
 st.info(
-    "Version 1.5 keeps Product Opportunity Score and Platform Offer Score "
-    "separate and adds evidence-based structured video insights."
+    "Version 1.6 keeps Product Opportunity Score and Platform Offer Score "
+    "separate, adds structured video insights, and enriches optional video text."
 )
 st.warning(
     "This application provides estimated scores for demonstration and "
@@ -152,6 +199,9 @@ scored_offers = pd.DataFrame()
 valid_videos = pd.DataFrame()
 excluded_videos = pd.DataFrame()
 video_warnings = pd.DataFrame()
+video_text_warnings = pd.DataFrame()
+video_label_comparison = pd.DataFrame()
+video_feature_summary = pd.DataFrame()
 video_metrics = pd.DataFrame()
 video_recommendations = pd.DataFrame()
 timings = {
@@ -235,8 +285,18 @@ if products_input is not None:
                 on="product_id",
                 how="left",
             )
-            video_recommendations = build_video_recommendations(
+            (
                 video_metrics,
+                video_text_warnings,
+                video_label_comparison,
+                video_feature_summary,
+            ) = enrich_video_text(video_metrics)
+            recommendation_input = apply_label_precedence(
+                video_metrics,
+                "Manual first, detected fallback",
+            )
+            video_recommendations = build_video_recommendations(
+                recommendation_input,
                 valid_products,
             )
             timings["video_analysis"] = perf_counter() - started
@@ -492,6 +552,21 @@ with tabs[3]:
                 mime="text/csv",
             )
     else:
+        label_mode = st.selectbox(
+            "Label mode",
+            [
+                "Manual first, detected fallback",
+                "Manual labels only",
+                "Detected labels only",
+                "Compare only",
+            ],
+        )
+        recommendation_videos = apply_label_precedence(video_metrics, label_mode)
+        displayed_recommendations = build_video_recommendations(
+            recommendation_videos,
+            valid_products,
+        )
+
         first_filters = st.columns(5)
         product_values = sorted(video_metrics["product_name"].unique())
         category_values = sorted(video_metrics["category"].unique())
@@ -561,6 +636,48 @@ with tabs[3]:
             default=feature_values,
         )
 
+        text_filters = st.columns(4)
+        language_values = sorted(video_metrics["normalized_language"].unique())
+        detected_format_values = sorted(
+            video_metrics["detected_content_format"].unique()
+        )
+        detected_hook_values = sorted(video_metrics["detected_hook_type"].unique())
+        text_status_values = sorted(video_metrics["text_analysis_status"].unique())
+        selected_languages = text_filters[0].multiselect(
+            "Language",
+            language_values,
+            default=language_values,
+        )
+        selected_detected_formats = text_filters[1].multiselect(
+            "Detected format",
+            detected_format_values,
+            default=detected_format_values,
+        )
+        selected_detected_hooks = text_filters[2].multiselect(
+            "Detected hook",
+            detected_hook_values,
+            default=detected_hook_values,
+        )
+        selected_text_statuses = text_filters[3].multiselect(
+            "Text analysis status",
+            text_status_values,
+            default=text_status_values,
+        )
+
+        detected_cta_values = [
+            value
+            for value in [True, False]
+            if value in set(video_metrics["detected_cta_present"].dropna())
+        ]
+        if detected_cta_values:
+            selected_detected_cta = st.multiselect(
+                "Detected CTA present",
+                detected_cta_values,
+                default=detected_cta_values,
+            )
+        else:
+            selected_detected_cta = []
+
         filtered_videos = video_metrics[
             video_metrics["product_name"].isin(selected_video_products)
             & video_metrics["category"].isin(selected_video_categories)
@@ -568,7 +685,20 @@ with tabs[3]:
             & video_metrics["content_format"].isin(selected_formats)
             & video_metrics["hook_type"].isin(selected_hooks)
             & video_metrics["duration_band"].isin(selected_durations)
+            & video_metrics["normalized_language"].isin(selected_languages)
+            & video_metrics["detected_content_format"].isin(
+                selected_detected_formats
+            )
+            & video_metrics["detected_hook_type"].isin(selected_detected_hooks)
+            & video_metrics["text_analysis_status"].isin(selected_text_statuses)
         ]
+        if selected_detected_cta:
+            filtered_videos = filtered_videos[
+                filtered_videos["detected_cta_present"].isna()
+                | filtered_videos["detected_cta_present"].isin(
+                    selected_detected_cta
+                )
+            ]
         if selected_features:
             filtered_videos = filtered_videos[
                 filtered_videos["main_feature"].isin(selected_features)
@@ -616,6 +746,70 @@ with tabs[3]:
             int(filtered_videos["engagement_rate"].notna().sum()),
         )
 
+        st.subheader("Text Coverage")
+        coverage_columns = st.columns(5)
+        coverage_columns[0].metric(
+            "With description",
+            int((filtered_videos["description"].astype(str).str.strip() != "").sum()),
+        )
+        coverage_columns[1].metric(
+            "With transcript",
+            int((filtered_videos["transcript"].astype(str).str.strip() != "").sum()),
+        )
+        coverage_columns[2].metric(
+            "With hashtags",
+            int((filtered_videos["hashtags"].astype(str).str.strip() != "").sum()),
+        )
+        coverage_columns[3].metric(
+            "Analyzed text",
+            int((filtered_videos["text_analysis_status"] == "analyzed").sum()),
+        )
+        coverage_columns[4].metric(
+            "Text warnings",
+            len(video_text_warnings),
+        )
+
+        st.subheader("Automated Content Detection")
+        detection_columns = [
+            "video_id",
+            "product_name",
+            "detected_content_format",
+            "detected_content_format_evidence",
+            "detected_content_format_confidence",
+            "detected_hook_type",
+            "detected_hook_phrase",
+            "detected_hook_confidence",
+            "detected_cta_present",
+            "detected_cta_phrase",
+            "detected_cta_type",
+            "text_analysis_status",
+            "text_analysis_notes",
+        ]
+        st.dataframe(filtered_videos[detection_columns], width="stretch")
+
+        st.subheader("Top Extracted Features")
+        filtered_features = summarize_filtered_features(filtered_videos)
+        st.dataframe(filtered_features, width="stretch")
+        if not filtered_features.empty:
+            st.bar_chart(
+                filtered_features.set_index("feature")[["video_count"]]
+            )
+
+        st.subheader("Manual vs Detected Comparison")
+        st.caption("Agreement is a consistency check, not an accuracy claim.")
+        filtered_comparison = video_label_comparison[
+            video_label_comparison["video_id"].isin(filtered_videos["video_id"])
+        ]
+        agreement_summary = summarize_agreement(filtered_comparison)
+        st.dataframe(agreement_summary, width="stretch")
+        st.dataframe(filtered_comparison, width="stretch")
+
+        st.subheader("Insufficient Text Warnings")
+        if video_text_warnings.empty:
+            st.success("No text-analysis warnings were generated.")
+        else:
+            st.dataframe(video_text_warnings, width="stretch")
+
         st.subheader("Cleaned Video Data")
         st.dataframe(filtered_videos, width="stretch")
         summary_choice = st.selectbox(
@@ -641,7 +835,7 @@ with tabs[3]:
             st.bar_chart(chart_data)
 
         st.subheader("Product-Level Promotion Recommendations")
-        st.dataframe(video_recommendations, width="stretch")
+        st.dataframe(displayed_recommendations, width="stretch")
 
         video_downloads = st.columns(4)
         video_downloads[0].download_button(
@@ -664,19 +858,45 @@ with tabs[3]:
         )
         video_downloads[3].download_button(
             "Download video recommendations",
-            video_recommendations.to_csv(index=False).encode("utf-8"),
+            displayed_recommendations.to_csv(index=False).encode("utf-8"),
             file_name="video_recommendations.csv",
+            mime="text/csv",
+        )
+        text_downloads = st.columns(4)
+        text_downloads[0].download_button(
+            "Download enriched videos",
+            video_metrics.to_csv(index=False).encode("utf-8"),
+            file_name="enriched_videos.csv",
+            mime="text/csv",
+        )
+        text_downloads[1].download_button(
+            "Download video text warnings",
+            video_text_warnings.to_csv(index=False).encode("utf-8"),
+            file_name="video_text_warnings.csv",
+            mime="text/csv",
+        )
+        text_downloads[2].download_button(
+            "Download manual detected comparison",
+            video_label_comparison.to_csv(index=False).encode("utf-8"),
+            file_name="manual_detected_comparison.csv",
+            mime="text/csv",
+        )
+        text_downloads[3].download_button(
+            "Download extracted feature summary",
+            video_feature_summary.to_csv(index=False).encode("utf-8"),
+            file_name="extracted_feature_summary.csv",
             mime="text/csv",
         )
 
 with tabs[4]:
     st.subheader("Data Quality")
-    quality_metrics = st.columns(5)
+    quality_metrics = st.columns(6)
     quality_metrics[0].metric("Excluded products", len(excluded_products))
     quality_metrics[1].metric("Excluded offers", len(excluded_offers))
     quality_metrics[2].metric("Provider failures", len(failed_provider_df))
     quality_metrics[3].metric("Excluded videos", len(excluded_videos))
     quality_metrics[4].metric("Video warnings", len(video_warnings))
+    quality_metrics[5].metric("Text warnings", len(video_text_warnings))
 
     if not excluded_products.empty:
         st.write("Excluded Product Records")
@@ -717,11 +937,21 @@ with tabs[4]:
             file_name="video_warnings.csv",
             mime="text/csv",
         )
+    if not video_text_warnings.empty:
+        st.write("Video Text Warnings")
+        st.dataframe(video_text_warnings, width="stretch")
+        st.download_button(
+            "Download video text warning report",
+            video_text_warnings.to_csv(index=False).encode("utf-8"),
+            file_name="video_text_warnings.csv",
+            mime="text/csv",
+        )
     if (
         excluded_products.empty
         and excluded_offers.empty
         and excluded_videos.empty
         and video_warnings.empty
+        and video_text_warnings.empty
         and failed_provider_df.empty
         and products_input is not None
     ):
@@ -811,13 +1041,24 @@ recommendations require at least five valid videos, three with positive views,
 and two valid observations per candidate. Category fallback requires at least
 ten videos from three products and three observations per candidate.
 
+### Video Text Intelligence
+
+Version 1.6 can enrich uploaded video rows with optional `description`,
+`transcript`, `hashtags`, `creator_name`, and `language` fields. Text analysis
+uses transparent rule-based matching for content format, hook type, CTA
+detection, and product-feature extraction. It does not use LLM APIs,
+supervised ML, sentiment analysis, clustering, scraping, or video downloads.
+
+Detected labels do not silently overwrite manual labels. The safest default is
+manual first with detected fallback, and agreement reports are consistency
+checks rather than accuracy claims.
+
 ### Limitations
 
 All caps and weights are provisional. Mock-provider and generated files are
-synthetic. Version 1.5 uses structured video CSV data only. It performs no URL
-requests, scraping, downloading, transcript analysis, frame extraction,
-computer vision, audio analysis, machine learning, LLM generation, or automated
-posting.
+synthetic. Version 1.6 uses uploaded structured CSV text only. It performs no
+URL requests, scraping, downloading, frame extraction, computer vision, audio
+analysis, external LLM calls, video/script generation, or automated posting.
 
 Future versions may integrate real affiliate APIs, persistent storage,
 historical outcome data, and separately approved analytical capabilities.

@@ -2,27 +2,30 @@
 
 ## Project Overview
 
-Affiliate Product Ranker Version 1.5 supports three independent decision layers:
+Affiliate Product Ranker Version 1.6 supports three independent decision layers:
 
 1. Which products have the strongest short-term market opportunity?
 2. For the same product, which platform-specific affiliate offer is most
    attractive?
-3. Which structured promotional-video patterns have the strongest observed
-   attention and engagement evidence?
+3. Which promotional-video patterns and text signals have the strongest
+   observed attention and engagement evidence?
 
 The Product Opportunity Score from Versions 1.2 and 1.3A remains unchanged.
 Version 1.4 added a separate Platform Offer Score. Version 1.5 adds Video
-Insights without creating a video score. These layers are not combined into a
-final profit prediction.
+Insights without creating a video score. Version 1.6 adds rule-based video text
+intelligence for optional titles, descriptions, transcripts, hashtags, creator
+names, and language metadata. These layers are not combined into a final profit
+prediction.
 
 This is a rule-based demonstration and decision-support tool. It does not
 guarantee affiliate revenue or profit.
 
-Version 1.5 does not fetch or process video files. It uses structured CSV data
-and no real APIs, scraping, databases, machine learning, LLM APIs, computer
-vision, audio analysis, or automated posting.
+Version 1.6 does not fetch or process video files. It uses structured CSV data
+and no real APIs, scraping, databases, supervised machine learning, LLM APIs,
+computer vision, audio analysis, clustering, sentiment analysis, or automated
+posting.
 
-## Two-File Model
+## Input Files
 
 ### Products
 
@@ -124,11 +127,29 @@ cta_present
 main_feature
 ```
 
+Version 1.6 adds optional text-enrichment fields:
+
+```text
+description
+transcript
+hashtags
+creator_name
+language
+```
+
+Existing Version 1.5 video CSV files remain valid without these columns. When
+`language` is blank, the analysis value is `unknown`; the app does not silently
+assume English.
+
 Required video fields are `video_id`, `product_id`, `platform`,
 `publish_date`, `duration_seconds`, `views`, `content_format`, and `hook_type`.
 
 Optional interaction metrics remain unknown when blank. They are never replaced
 with zero. `video_url` may be blank and is never fetched automatically.
+
+`hashtags` is kept as one raw CSV text field for ease of upload. Internally, the
+app derives a normalized semicolon-separated list such as
+`resume; career; ai`.
 
 Controlled platforms:
 
@@ -358,6 +379,95 @@ Rules:
 No Video Promotion Score, conversion prediction, revenue prediction, or
 profitability score is created.
 
+## Video Text Intelligence
+
+Version 1.6 preserves original uploaded text fields and adds derived analysis
+fields:
+
+```text
+combined_text
+cleaned_text
+analysis_text
+hashtag_list
+text_word_count
+text_analysis_status
+text_analysis_notes
+```
+
+Text preparation is transparent:
+
+- lowercase is used for analysis only
+- whitespace is trimmed and collapsed
+- URLs are removed from analysis text
+- useful hook punctuation such as `?`, `%`, `$`, and `!` is preserved
+- extremely long analysis text is capped while the original transcript remains
+  available
+- short text, unsupported language, malformed hashtags, duplicate text, and
+  truncation produce warnings rather than exclusions
+
+Rule-based detectors create explainable fields for:
+
+- `detected_content_format`
+- `detected_hook_type`
+- `detected_cta_present`
+- `detected_main_features`
+
+Each detected label includes evidence phrases, evidence source, confidence
+labels such as `high`, `medium`, or `low`, and notes for ambiguity or conflict.
+These confidence labels are explainable rule-strength labels, not probability
+scores.
+
+Feature extraction combines:
+
+- category-specific dictionaries
+- normalized unigrams, bigrams, and trigrams
+- stopword removal
+- generic marketing-word filtering
+- simple synonym normalization
+- deterministic TF-IDF-style discovery for feature suggestions only
+
+TF-IDF discovery does not determine content format, hook type, CTA status, or
+recommendation eligibility.
+
+## Manual And Detected Labels
+
+Version 1.6 compares:
+
+```text
+content_format vs detected_content_format
+hook_type vs detected_hook_type
+cta_present vs detected_cta_present
+main_feature vs detected_main_features
+```
+
+Comparison statuses are:
+
+```text
+exact_match
+partial_match
+mismatch
+manual_missing
+detected_missing
+not_comparable
+```
+
+The dashboard calls these metrics agreement, not accuracy, because manual
+labels may not be perfect ground truth.
+
+Label modes:
+
+```text
+Manual first, detected fallback
+Manual labels only
+Detected labels only
+Compare only
+```
+
+The default is `Manual first, detected fallback`. Existing manual labels remain
+unchanged. Detected labels fill only missing or unknown manual values and never
+silently overwrite the original uploaded fields. If no text fields are
+provided, Version 1.5 behavior remains unchanged.
+
 ## Video Recommendations
 
 Product-level evidence requires:
@@ -395,8 +505,9 @@ Recommendations are deterministic rules based only on uploaded data.
 1. **Overview**: counts, provider status, top product, recommended offer, timing.
 2. **Product Ranking**: existing ranking, filters, Top N, chart, and download.
 3. **Platform Offer Comparison**: offer filters and side-by-side product offers.
-4. **Video Insights**: filters, metrics, group summaries, recommendations, and
-   video downloads.
+4. **Video Insights**: filters, metrics, text coverage, automated detection,
+   extracted features, manual-vs-detected agreement, group summaries,
+   recommendations, and video downloads.
 5. **Data Quality**: exclusions, warnings, reasons, and report downloads.
 6. **Scalability**: row counts and processing-stage timing.
 7. **Methodology**: formulas, evidence rules, limitations, and future work.
@@ -439,6 +550,10 @@ large_sample_videos.csv: exactly 5,000 valid videos
 invalid_sample_videos.csv: separate exclusions and warning-only examples
 ```
 
+The sample and large video files include optional Version 1.6 text fields. The
+validation logic still accepts older files that contain only the Version 1.5
+video columns.
+
 All generated data is synthetic test data and does not represent real affiliate
 markets.
 
@@ -458,8 +573,10 @@ streamlit run app.py
 python -m unittest discover -s tests
 ```
 
-Tests cover Versions 1.2 through 1.5, including the complete clean
-1,000-product, 2,500-offer, and 5,000-video run.
+Tests cover Versions 1.2 through 1.6, including import safety, product-only
+regression, product-plus-offer regression, full product/offer/video regression,
+text detection, manual-vs-detected agreement, label fallback modes, and the
+complete clean 1,000-product, 2,500-offer, and 5,000-video run.
 
 ## Repository Structure
 
@@ -474,6 +591,7 @@ affiliate-product-ranker/
 ├── scoring.py
 ├── signal_processing.py
 ├── video_insights.py
+├── video_text_analysis.py
 ├── video_validation.py
 ├── validation.py
 ├── market_data/
@@ -502,6 +620,7 @@ Secrets: none
 ```
 
 Future versions may add real affiliate APIs, a database, or historical
-machine-learning models. Version 1.5 does not upload MP4 files, scrape platforms,
-download videos, inspect frames, process audio, generate scripts, or publish
-social-media content.
+machine-learning models. Version 1.6 does not upload MP4 files, scrape
+platforms, download videos, inspect frames, process audio, call external LLMs,
+cluster text, run sentiment analysis, generate scripts, generate videos, or
+publish social-media content.

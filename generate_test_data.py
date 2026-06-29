@@ -6,6 +6,7 @@ from schemas import (
     OFFER_COLUMNS,
     PRODUCT_CORE_COLUMNS,
     SIGNAL_COLUMNS,
+    VIDEO_ALL_COLUMNS,
     VIDEO_COLUMNS,
     VIDEO_CONTENT_FORMATS,
     VIDEO_HOOK_TYPES,
@@ -65,6 +66,24 @@ VIDEO_FEATURES = [
     "automation",
     "portability",
     "customer support",
+]
+VIDEO_DESCRIPTIONS = [
+    "Honest review with pros and cons plus a link in bio.",
+    "Step by step tutorial showing the setup and main benefits.",
+    "Quick demo and real example with a current price reminder.",
+    "Top 5 tips and best tools for this category.",
+]
+VIDEO_TRANSCRIPTS = [
+    "Today I'm showing how it works. Use code TEST for a small discount.",
+    "Struggling with setup? Here is how to fix it in a simple walkthrough.",
+    "I got better results after using the template and export options.",
+    "This comparison explains the alternative and when it is worth it.",
+]
+VIDEO_HASHTAGS = [
+    "#demo #review #affiliate",
+    "tutorial, setup, tips",
+    "#career #automation #template",
+    "comparison | tools | discount",
 ]
 
 
@@ -237,6 +256,11 @@ def generate_clean_video_data(product_ids, seed=RANDOM_SEED):
                     "comparison_present": randomizer.choice([True, False, ""]),
                     "cta_present": randomizer.choice([True, False, ""]),
                     "main_feature": randomizer.choice(VIDEO_FEATURES),
+                    "description": randomizer.choice(VIDEO_DESCRIPTIONS),
+                    "transcript": randomizer.choice(VIDEO_TRANSCRIPTS),
+                    "hashtags": randomizer.choice(VIDEO_HASHTAGS),
+                    "creator_name": f"Creator {product_index % 25 + 1}",
+                    "language": randomizer.choice(["en", "en", "unknown"]),
                 }
             )
 
@@ -263,6 +287,11 @@ def generate_invalid_video_data():
         "comparison_present": False,
         "cta_present": True,
         "main_feature": "testing",
+        "description": "Bad fixture row with a demo and link in bio.",
+        "transcript": "This is a short transcript for validation testing.",
+        "hashtags": "#testing #demo",
+        "creator_name": "Fixture Creator",
+        "language": "en",
     }
     rows = [
         {**base, "video_id": "DUP-V"},
@@ -285,6 +314,13 @@ def generate_invalid_video_data():
             "video_id": "WARN-LIKES",
             "views": 10,
             "likes": 11,
+        },
+        {
+            **base,
+            "video_id": "WARN-TEXT",
+            "transcript": "hola mundo",
+            "hashtags": "#valid #%$",
+            "language": "es",
         },
     ]
     return rows
@@ -329,9 +365,13 @@ def invalid_offer(
     }
 
 
-def write_csv(path, rows, columns):
+def write_csv(path, rows, columns, lineterminator="\r\n"):
     with path.open("w", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(file, fieldnames=columns)
+        writer = csv.DictWriter(
+            file,
+            fieldnames=columns,
+            lineterminator=lineterminator,
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -356,12 +396,23 @@ def main():
         invalid_offers,
         OFFER_COLUMNS,
     )
-    write_csv(PROJECT_DIR / "sample_videos.csv", sample_videos, VIDEO_COLUMNS)
-    write_csv(PROJECT_DIR / "large_sample_videos.csv", clean_videos, VIDEO_COLUMNS)
+    write_csv(
+        PROJECT_DIR / "sample_videos.csv",
+        sample_videos,
+        VIDEO_ALL_COLUMNS,
+        lineterminator="\n",
+    )
+    write_csv(
+        PROJECT_DIR / "large_sample_videos.csv",
+        clean_videos,
+        VIDEO_ALL_COLUMNS,
+        lineterminator="\n",
+    )
     write_csv(
         PROJECT_DIR / "invalid_sample_videos.csv",
         invalid_videos,
-        VIDEO_COLUMNS,
+        VIDEO_ALL_COLUMNS,
+        lineterminator="\n",
     )
 
 
