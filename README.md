@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Affiliate Product Ranker Version 1.6 supports three independent decision layers:
+Affiliate Product Ranker Version 1.7 supports three independent decision layers:
 
 1. Which products have the strongest short-term market opportunity?
 2. For the same product, which platform-specific affiliate offer is most
@@ -14,16 +14,16 @@ The Product Opportunity Score from Versions 1.2 and 1.3A remains unchanged.
 Version 1.4 added a separate Platform Offer Score. Version 1.5 adds Video
 Insights without creating a video score. Version 1.6 adds rule-based video text
 intelligence for optional titles, descriptions, transcripts, hashtags, creator
-names, and language metadata. These layers are not combined into a final profit
-prediction.
+names, and language metadata. Version 1.7 adds local one-file MP4 upload
+inspection for metadata, sampled frames, and lightweight visual heuristics.
+These layers are not combined into a final profit prediction.
 
 This is a rule-based demonstration and decision-support tool. It does not
 guarantee affiliate revenue or profit.
 
-Version 1.6 does not fetch or process video files. It uses structured CSV data
-and no real APIs, scraping, databases, supervised machine learning, LLM APIs,
-computer vision, audio analysis, clustering, sentiment analysis, or automated
-posting.
+Version 1.7 does not connect to platform APIs, scrape websites, download remote
+videos, run external LLMs, perform speech-to-text, recognize products, identify
+people, use OCR, generate videos, predict revenue, or publish content.
 
 ## Input Files
 
@@ -379,6 +379,78 @@ Rules:
 No Video Promotion Score, conversion prediction, revenue prediction, or
 profitability score is created.
 
+## Uploaded MP4 Processing
+
+Version 1.7 can inspect one directly uploaded MP4 at a time inside the Video
+Insights tab. Uploaded videos are processed locally in temporary storage and are
+not saved permanently.
+
+Limits:
+
+```text
+file type: MP4 only
+maximum file size: 25 MB
+minimum duration: 1 second
+maximum duration: 60 seconds
+maximum sampled frames: 12
+target processing time: under 30 seconds when possible
+```
+
+Extracted metadata:
+
+```text
+original_filename
+safe_filename
+file_size_bytes
+file_hash
+duration_seconds
+width
+height
+aspect_ratio
+video_orientation
+resolution_label
+frame_rate
+estimated_frame_count
+video_codec
+audio_track_present
+creation_timestamp
+processing_status
+processing_notes
+short_form_eligible
+```
+
+Frame sampling prioritizes opening frames near 0.5, 1.5, and 2.5 seconds,
+middle frames near 25%, 50%, and 75%, and closing frames near the final 3 and
+final 1 seconds. If fewer than 12 unique timestamps are available, deterministic
+evenly spaced fallback timestamps are added.
+
+Approximate visual heuristics:
+
+```text
+average_brightness
+average_contrast
+black_frame_count
+duplicate_frame_count
+estimated_scene_change_count
+approximate_shot_frequency
+opening_frame_activity
+```
+
+These visual outputs are simple sampled-frame heuristics. They are not semantic
+video understanding and do not detect products, objects, faces, identities, or
+text overlays.
+
+Audio handling is intentionally limited to detecting whether an audio track is
+present. Version 1.7 does not extract WAV files, calculate silence ratio,
+estimate speech presence, or run speech-to-text.
+
+Users may paste transcript text or upload a `.txt` transcript. That transcript
+is processed through the existing Version 1.6 text-intelligence pipeline.
+
+Product association is manual and auditable. If valid product data exists, the
+user may select one product from a dropdown. If no product is selected or no
+product data exists, the uploaded video is marked `unassigned`.
+
 ## Video Text Intelligence
 
 Version 1.6 preserves original uploaded text fields and adds derived analysis
@@ -505,9 +577,9 @@ Recommendations are deterministic rules based only on uploaded data.
 1. **Overview**: counts, provider status, top product, recommended offer, timing.
 2. **Product Ranking**: existing ranking, filters, Top N, chart, and download.
 3. **Platform Offer Comparison**: offer filters and side-by-side product offers.
-4. **Video Insights**: filters, metrics, text coverage, automated detection,
-   extracted features, manual-vs-detected agreement, group summaries,
-   recommendations, and video downloads.
+4. **Video Insights**: uploaded MP4 inspection, filters, metrics, text
+   coverage, automated detection, extracted features, manual-vs-detected
+   agreement, group summaries, recommendations, and video downloads.
 5. **Data Quality**: exclusions, warnings, reasons, and report downloads.
 6. **Scalability**: row counts and processing-stage timing.
 7. **Methodology**: formulas, evidence rules, limitations, and future work.
@@ -573,10 +645,11 @@ streamlit run app.py
 python -m unittest discover -s tests
 ```
 
-Tests cover Versions 1.2 through 1.6, including import safety, product-only
+Tests cover Versions 1.2 through 1.7, including import safety, product-only
 regression, product-plus-offer regression, full product/offer/video regression,
-text detection, manual-vs-detected agreement, label fallback modes, and the
-complete clean 1,000-product, 2,500-offer, and 5,000-video run.
+text detection, manual-vs-detected agreement, label fallback modes, MP4 upload
+processing, synthetic video metadata/frame sampling, and the complete clean
+1,000-product, 2,500-offer, and 5,000-video run.
 
 ## Repository Structure
 
@@ -592,6 +665,7 @@ affiliate-product-ranker/
 ├── signal_processing.py
 ├── video_insights.py
 ├── video_text_analysis.py
+├── video_upload_processing.py
 ├── video_validation.py
 ├── validation.py
 ├── market_data/
@@ -620,7 +694,7 @@ Secrets: none
 ```
 
 Future versions may add real affiliate APIs, a database, or historical
-machine-learning models. Version 1.6 does not upload MP4 files, scrape
-platforms, download videos, inspect frames, process audio, call external LLMs,
-cluster text, run sentiment analysis, generate scripts, generate videos, or
-publish social-media content.
+machine-learning models. Version 1.7 does not process MP4 batches, scrape
+platforms, download remote videos, run speech-to-text, call external LLMs,
+recognize products, identify people, use OCR, generate scripts, generate
+videos, predict conversion or revenue, or publish social-media content.

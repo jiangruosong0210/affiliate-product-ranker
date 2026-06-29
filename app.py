@@ -20,6 +20,7 @@ from video_text_analysis import (
     apply_label_precedence,
     enrich_video_text,
 )
+from video_upload_processing import process_uploaded_video
 from video_validation import validate_video_records
 
 
@@ -133,8 +134,8 @@ st.write(
     "for the next 7-30 days."
 )
 st.info(
-    "Version 1.6 keeps Product Opportunity Score and Platform Offer Score "
-    "separate, adds structured video insights, and enriches optional video text."
+    "Version 1.7 keeps Product Opportunity Score and Platform Offer Score "
+    "separate, enriches optional video text, and adds local MP4 upload inspection."
 )
 st.warning(
     "This application provides estimated scores for demonstration and "
@@ -538,6 +539,177 @@ with tabs[3]:
         "Video insights summarize structured performance evidence. They do not "
         "estimate revenue, conversion, or profitability."
     )
+    st.subheader("Uploaded Video Processing")
+    st.caption(
+        "Version 1.7 inspects one uploaded MP4 at a time using local, "
+        "lightweight metadata and frame heuristics."
+    )
+    upload_video_columns = st.columns(2)
+    with upload_video_columns[0]:
+        uploaded_mp4 = st.file_uploader(
+            "Upload one MP4 video",
+            type=["mp4"],
+            key="uploaded_mp4_video",
+        )
+        transcript_file = st.file_uploader(
+            "Upload transcript.txt (optional)",
+            type=["txt"],
+            key="uploaded_video_transcript",
+        )
+    with upload_video_columns[1]:
+        associated_product = None
+        if not valid_products.empty:
+            product_options = ["Unassigned"] + [
+                f"{row['product_id']} - {row['product_name']}"
+                for _, row in valid_products.iterrows()
+            ]
+            selected_product_label = st.selectbox(
+                "Associated product",
+                product_options,
+            )
+            if selected_product_label != "Unassigned":
+                selected_product_id = selected_product_label.split(" - ", 1)[0]
+                product_row = valid_products[
+                    valid_products["product_id"] == selected_product_id
+                ].iloc[0]
+                associated_product = {
+                    "product_id": product_row["product_id"],
+                    "product_name": product_row["product_name"],
+                    "category": product_row["category"],
+                }
+        else:
+            st.info("Upload valid product data to associate the video with a product.")
+
+        uploaded_video_title = st.text_input("Video title (optional)")
+        uploaded_video_description = st.text_area(
+            "Video description (optional)",
+            height=90,
+        )
+        uploaded_video_hashtags = st.text_input("Video hashtags (optional)")
+        uploaded_video_language = st.text_input("Video language (optional)")
+    transcript_text = st.text_area(
+        "Paste transcript text (optional)",
+        height=120,
+    )
+    process_uploaded_button = st.button(
+        "Process uploaded MP4",
+        disabled=uploaded_mp4 is None,
+    )
+
+    if uploaded_mp4 is not None:
+        st.video(uploaded_mp4.getvalue())
+
+    if process_uploaded_button and uploaded_mp4 is not None:
+        uploaded_transcript = transcript_text
+        if transcript_file is not None:
+            try:
+                transcript_from_file = transcript_file.getvalue().decode("utf-8")
+                uploaded_transcript = "\n".join(
+                    part for part in [uploaded_transcript, transcript_from_file]
+                    if part.strip()
+                )
+            except UnicodeDecodeError:
+                st.warning("Transcript file could not be decoded as UTF-8.")
+
+        with st.spinner("Processing uploaded MP4..."):
+            upload_result = process_uploaded_video(
+                uploaded_mp4,
+                associated_product=associated_product,
+                title=uploaded_video_title,
+                description=uploaded_video_description,
+                transcript=uploaded_transcript,
+                hashtags=uploaded_video_hashtags,
+                language=uploaded_video_language,
+            )
+            uploaded_text_analysis, upload_text_warnings, upload_comparison, upload_features = (
+                enrich_video_text(upload_result["text_record"])
+            )
+            effective_upload_text = apply_label_precedence(
+                uploaded_text_analysis,
+                "Manual first, detected fallback",
+            )
+
+        metadata_df = pd.DataFrame([upload_result["metadata"]])
+        visual_df = pd.DataFrame([upload_result["visual_features"]])
+        association_df = pd.DataFrame([upload_result["association"]])
+        report_df = upload_result["report"]
+
+        status = upload_result["metadata"]["processing_status"]
+        if status == "success":
+            st.success("Uploaded video processed successfully.")
+        elif status == "partial":
+            st.warning("Uploaded video was partially processed.")
+        elif status == "rejected":
+            st.error("Uploaded video was rejected.")
+        else:
+            st.error("Uploaded video processing failed.")
+
+        if upload_result["errors"]:
+            st.error("; ".join(upload_result["errors"]))
+        if upload_result["warnings"]:
+            st.warning("; ".join(upload_result["warnings"]))
+
+        st.write("Metadata Summary")
+        st.dataframe(metadata_df, width="stretch")
+        st.write("Product Association")
+        st.dataframe(association_df, width="stretch")
+        st.write("Approximate Visual Heuristics")
+        st.caption(
+            "These are lightweight heuristics from sampled frames, not semantic "
+            "video understanding."
+        )
+        st.dataframe(visual_df, width="stretch")
+
+        if upload_result["contact_sheet_bytes"]:
+            st.write("Sampled Frame Contact Sheet")
+            st.image(upload_result["contact_sheet_bytes"])
+
+        st.write("Transcript-Based Version 1.6 Analysis")
+        st.dataframe(effective_upload_text, width="stretch")
+        if not upload_comparison.empty:
+            st.write("Uploaded Video Manual vs Detected Comparison")
+            st.dataframe(upload_comparison, width="stretch")
+        if not upload_text_warnings.empty:
+            st.write("Uploaded Video Text Warnings")
+            st.dataframe(upload_text_warnings, width="stretch")
+        if not upload_features.empty:
+            st.write("Uploaded Video Extracted Features")
+            st.dataframe(upload_features, width="stretch")
+
+        uploaded_downloads = st.columns(5)
+        uploaded_downloads[0].download_button(
+            "Download video metadata",
+            metadata_df.to_csv(index=False).encode("utf-8"),
+            file_name="video_metadata.csv",
+            mime="text/csv",
+        )
+        uploaded_downloads[1].download_button(
+            "Download sampled frames ZIP",
+            upload_result["sampled_frames_zip_bytes"],
+            file_name="sampled_frames.zip",
+            mime="application/zip",
+            disabled=not bool(upload_result["sampled_frames_zip_bytes"]),
+        )
+        uploaded_downloads[2].download_button(
+            "Download contact sheet",
+            upload_result["contact_sheet_bytes"],
+            file_name="contact_sheet.png",
+            mime="image/png",
+            disabled=not bool(upload_result["contact_sheet_bytes"]),
+        )
+        uploaded_downloads[3].download_button(
+            "Download video processing report",
+            report_df.to_csv(index=False).encode("utf-8"),
+            file_name="video_processing_report.csv",
+            mime="text/csv",
+        )
+        uploaded_downloads[4].download_button(
+            "Download uploaded video text analysis",
+            effective_upload_text.to_csv(index=False).encode("utf-8"),
+            file_name="uploaded_video_text_analysis.csv",
+            mime="text/csv",
+        )
+
     if videos_input is None:
         st.write(
             "Upload an optional videos CSV to analyze promotional video patterns."

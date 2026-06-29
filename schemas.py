@@ -106,3 +106,45 @@ VIDEO_TEXT_COLUMNS = [
 ]
 
 VIDEO_ALL_COLUMNS = VIDEO_COLUMNS + VIDEO_TEXT_COLUMNS
+
+UPLOADED_VIDEO_METADATA_COLUMNS = [
+    "original_filename",
+    "safe_filename",
+    "file_size_bytes",
+    "file_hash",
+    "duration_seconds",
+    "width",
+    "height",
+    "aspect_ratio",
+    "video_orientation",
+    "resolution_label",
+    "frame_rate",
+    "estimated_frame_count",
+    "video_codec",
+    "audio_track_present",
+    "creation_timestamp",
+    "processing_status",
+    "processing_notes",
+    "short_form_eligible",
+]
+
+UPLOADED_VIDEO_VISUAL_COLUMNS = [
+    "sampled_frame_count",
+    "sampled_timestamps",
+    "average_brightness",
+    "average_contrast",
+    "black_frame_count",
+    "duplicate_frame_count",
+    "estimated_scene_change_count",
+    "approximate_shot_frequency",
+    "opening_frame_activity",
+    "visual_analysis_status",
+    "visual_analysis_notes",
+]
+
+UPLOADED_VIDEO_ASSOCIATION_COLUMNS = [
+    "associated_product_id",
+    "associated_product_name",
+    "association_method",
+    "association_status",
+]

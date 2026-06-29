@@ -12,7 +12,7 @@ class CleanImportTests(unittest.TestCase):
         command = (
             "import schemas; import validation; import data_quality; "
             "import video_validation; import video_text_analysis; "
-            "import video_insights; "
+            "import video_upload_processing; import video_insights; "
             "import market_data.service; import offer_scoring; import app"
         )
         result = subprocess.run(
