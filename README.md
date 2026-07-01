@@ -2,13 +2,15 @@
 
 ## Project Overview
 
-Affiliate Product Ranker Version 1.7 supports three independent decision layers:
+Affiliate Product Ranker Version 1.8 supports four independent decision layers:
 
 1. Which products have the strongest short-term market opportunity?
 2. For the same product, which platform-specific affiliate offer is most
    attractive?
 3. Which promotional-video patterns and text signals have the strongest
    observed attention and engagement evidence?
+4. How can those existing signals be turned into a safe, editable short-form
+   video planning package?
 
 The Product Opportunity Score from Versions 1.2 and 1.3A remains unchanged.
 Version 1.4 added a separate Platform Offer Score. Version 1.5 adds Video
@@ -16,14 +18,18 @@ Insights without creating a video score. Version 1.6 adds rule-based video text
 intelligence for optional titles, descriptions, transcripts, hashtags, creator
 names, and language metadata. Version 1.7 adds local one-file MP4 upload
 inspection for metadata, sampled frames, and lightweight visual heuristics.
-These layers are not combined into a final profit prediction.
+Version 1.8 adds a Creative Studio that creates rule-based video briefs,
+timestamped scripts, editable storyboards, provider-neutral generation prompts,
+and downloadable planning packages. These layers are not combined into a final
+profit prediction.
 
 This is a rule-based demonstration and decision-support tool. It does not
 guarantee affiliate revenue or profit.
 
-Version 1.7 does not connect to platform APIs, scrape websites, download remote
+Version 1.8 does not connect to platform APIs, scrape websites, download remote
 videos, run external LLMs, perform speech-to-text, recognize products, identify
-people, use OCR, generate videos, predict revenue, or publish content.
+people, use OCR, generate video, generate audio, generate images, predict
+revenue, or publish content.
 
 ## Input Files
 
@@ -572,6 +578,112 @@ Every recommendation reports:
 
 Recommendations are deterministic rules based only on uploaded data.
 
+## Creative Studio
+
+Version 1.8 adds a Creative Studio tab that converts existing product, offer,
+and video-insight context into an editable planning package for short-form
+affiliate videos.
+
+It generates:
+
+- structured video brief
+- timestamped script
+- editable storyboard
+- concise generation prompt
+- detailed generation prompt
+- optional negative prompt
+- provider-neutral creative package JSON
+- complete ZIP package
+
+Required planning inputs:
+
+```text
+selected product
+target platform
+campaign objective
+duration
+aspect ratio
+```
+
+Optional inputs include recommended offer context, video recommendation context,
+target audience, tone, CTA, features, product notes, brand constraints, and
+affiliate disclosure text.
+
+Platform presets are available for:
+
+```text
+TikTok
+YouTube Shorts
+Instagram Reels
+Facebook Reels
+Other
+```
+
+Each preset supplies editable defaults for aspect ratio, duration, pacing, hook
+timing, CTA timing, and scene count.
+
+Campaign objectives:
+
+```text
+awareness
+engagement
+product education
+product comparison
+offer promotion
+click-through
+conversion-oriented promotion
+```
+
+The conversion-oriented option changes the structure and CTA emphasis only. It
+does not predict conversion performance.
+
+Creative Studio chooses context in this order:
+
+1. Product-level video recommendation.
+2. Category-level video recommendation.
+3. Deterministic default template based on the product and objective.
+
+User edits and user overrides always take priority. The tab stores a baseline
+package and an edited draft in Streamlit session state. Regenerating warns the
+user when the current draft has edits, and Reset Creative Studio clears only
+Creative Studio state.
+
+Safety rules:
+
+- inactive offers are not promoted
+- unknown offers are allowed only with a warning
+- discounts, availability, savings, or price changes are not invented
+- commission and cookie-duration details are internal and not used in
+  consumer-facing script text by default
+- generated claims must come from uploaded product, offer, video, or user
+  input context
+- unsupported claims such as guaranteed results, best-product claims,
+  instant-results claims, health/safety claims, or specific savings are flagged
+
+Creative Studio exports:
+
+```text
+video_brief.json
+video_brief.csv
+script.txt
+storyboard.csv
+storyboard.json
+generation_prompt.txt
+creative_package.json
+complete_creative_package.zip
+```
+
+`video_generation_provider.py` contains a placeholder provider interface only:
+
+```python
+class VideoGenerationProvider:
+    def generate(self, creative_package):
+        raise NotImplementedError
+```
+
+This makes Version 1.9 easier to extend with a separately approved provider,
+without adding video generation to Version 1.8.
+
 ## Dashboard Tabs
 
 1. **Overview**: counts, provider status, top product, recommended offer, timing.
@@ -580,9 +692,11 @@ Recommendations are deterministic rules based only on uploaded data.
 4. **Video Insights**: uploaded MP4 inspection, filters, metrics, text
    coverage, automated detection, extracted features, manual-vs-detected
    agreement, group summaries, recommendations, and video downloads.
-5. **Data Quality**: exclusions, warnings, reasons, and report downloads.
-6. **Scalability**: row counts and processing-stage timing.
-7. **Methodology**: formulas, evidence rules, limitations, and future work.
+5. **Creative Studio**: editable video brief, script, storyboard, prompts, and
+   creative-package downloads.
+6. **Data Quality**: exclusions, warnings, reasons, and report downloads.
+7. **Scalability**: row counts and processing-stage timing.
+8. **Methodology**: formulas, evidence rules, limitations, and future work.
 
 ## Synthetic Test Data
 
@@ -645,17 +759,19 @@ streamlit run app.py
 python -m unittest discover -s tests
 ```
 
-Tests cover Versions 1.2 through 1.7, including import safety, product-only
+Tests cover Versions 1.2 through 1.8, including import safety, product-only
 regression, product-plus-offer regression, full product/offer/video regression,
 text detection, manual-vs-detected agreement, label fallback modes, MP4 upload
-processing, synthetic video metadata/frame sampling, and the complete clean
-1,000-product, 2,500-offer, and 5,000-video run.
+processing, synthetic video metadata/frame sampling, Creative Studio planning
+and exports, and the complete clean 1,000-product, 2,500-offer, and
+5,000-video run.
 
 ## Repository Structure
 
 ```text
 affiliate-product-ranker/
 ├── app.py
+├── creative_planning.py
 ├── data_quality.py
 ├── generate_test_data.py
 ├── keyword_generation.py
@@ -664,6 +780,7 @@ affiliate-product-ranker/
 ├── scoring.py
 ├── signal_processing.py
 ├── video_insights.py
+├── video_generation_provider.py
 ├── video_text_analysis.py
 ├── video_upload_processing.py
 ├── video_validation.py
@@ -693,8 +810,9 @@ Python: 3.12
 Secrets: none
 ```
 
-Future versions may add real affiliate APIs, a database, or historical
-machine-learning models. Version 1.7 does not process MP4 batches, scrape
-platforms, download remote videos, run speech-to-text, call external LLMs,
-recognize products, identify people, use OCR, generate scripts, generate
-videos, predict conversion or revenue, or publish social-media content.
+Future versions may add real affiliate APIs, a database, historical
+machine-learning models, or a separately approved creative-generation provider.
+Version 1.8 does not process MP4 batches, scrape platforms, download remote
+videos, run speech-to-text, call external LLMs, recognize products, identify
+people, use OCR, generate video, generate audio, generate images, predict
+conversion or revenue, or publish social-media content.

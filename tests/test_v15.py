@@ -277,7 +277,7 @@ class VideoScaleAndStreamlitTests(unittest.TestCase):
             "products.csv", products, "text/csv"
         ).run(timeout=30)
         self.assertEqual(len(product_only.exception), 0)
-        self.assertEqual(len(product_only.tabs), 7)
+        self.assertEqual(len(product_only.tabs), 8)
 
         with_offers = self.make_uploadable_app()
         with_offers.get("file_uploader")[0].upload(
@@ -308,7 +308,7 @@ class VideoScaleAndStreamlitTests(unittest.TestCase):
         )
         app.run(timeout=30)
         self.assertEqual(len(app.exception), 0)
-        self.assertEqual(len(app.tabs), 7)
+        self.assertEqual(len(app.tabs), 8)
         labels = {
             button.proto.label for button in app.get("download_button")
         }

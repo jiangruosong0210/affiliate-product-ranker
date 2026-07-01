@@ -1,10 +1,25 @@
 import html
+from copy import deepcopy
 from pathlib import Path
 from time import perf_counter
 
 import pandas as pd
 import streamlit as st
 
+from creative_planning import (
+    ALLOWED_DURATIONS,
+    CAMPAIGN_OBJECTIVES,
+    CONTENT_TEMPLATES,
+    DEFAULT_DISCLOSURE,
+    PLATFORM_PRESETS,
+    brief_csv_bytes,
+    dataframe_csv_bytes,
+    json_bytes,
+    package_zip_bytes,
+    text_bytes,
+    validate_creative_package,
+    build_creative_package,
+)
 from data_quality import validate_offer_records, validate_product_records
 from market_data.manual_provider import ManualProvider
 from market_data.mock_provider import MockProvider
@@ -127,6 +142,50 @@ def summarize_agreement(comparison_df):
     return pd.DataFrame(rows)
 
 
+def reset_creative_state():
+    for key in [
+        "creative_baseline_package",
+        "creative_baseline_script",
+        "creative_baseline_storyboard",
+        "creative_edited_script",
+        "creative_dirty",
+        "creative_last_settings",
+    ]:
+        st.session_state.pop(key, None)
+
+
+def selected_recommended_offer(scored_offers_df, product_id):
+    if scored_offers_df.empty:
+        return None
+    eligible = scored_offers_df[
+        (scored_offers_df["product_id"] == product_id)
+        & (scored_offers_df["recommended_offer"])
+    ]
+    if eligible.empty:
+        return None
+    return eligible.iloc[0].to_dict()
+
+
+def selected_video_recommendation(video_recommendations_df, product_id):
+    if video_recommendations_df.empty:
+        return None
+    matches = video_recommendations_df[
+        video_recommendations_df["product_id"] == product_id
+    ]
+    if matches.empty:
+        return None
+    return matches.iloc[0].to_dict()
+
+
+def edited_creative_package(storyboard_df, script_text):
+    package = deepcopy(st.session_state.creative_baseline_package)
+    package["script_text"] = script_text
+    package["storyboard"] = storyboard_df.to_dict("records")
+    package["provider_neutral_payload"]["scenes"] = package["storyboard"]
+    package["validation_warnings"] = validate_creative_package(package)
+    return package
+
+
 st.set_page_config(page_title="Affiliate Product Ranker", layout="wide")
 st.title("Affiliate Product Ranker")
 st.write(
@@ -134,8 +193,9 @@ st.write(
     "for the next 7-30 days."
 )
 st.info(
-    "Version 1.7 keeps Product Opportunity Score and Platform Offer Score "
-    "separate, enriches optional video text, and adds local MP4 upload inspection."
+    "Version 1.8 keeps the existing ranking and video-insight logic, then adds "
+    "a rule-based Creative Studio for planning provider-neutral short-form "
+    "video briefs, scripts, storyboards, and prompts."
 )
 st.warning(
     "This application provides estimated scores for demonstration and "
@@ -310,6 +370,7 @@ tabs = st.tabs(
         "Product Ranking",
         "Platform Offer Comparison",
         "Video Insights",
+        "Creative Studio",
         "Data Quality",
         "Scalability",
         "Methodology",
@@ -1061,6 +1122,335 @@ with tabs[3]:
         )
 
 with tabs[4]:
+    st.subheader("Creative Studio")
+    st.caption(
+        "Create a provider-neutral short-form video plan from uploaded product, "
+        "offer, and video-insight data. This does not generate video, audio, "
+        "images, revenue predictions, or automatic posts."
+    )
+    st.info(
+        "Creative outputs are deterministic planning drafts. Mock data and "
+        "synthetic recommendations must not be presented as real market evidence."
+    )
+
+    if ranked_products.empty:
+        st.write("Upload valid product data to create a video brief.")
+    else:
+        product_labels = [
+            f"{row['product_id']} - {row['product_name']}"
+            for _, row in ranked_products.iterrows()
+        ]
+        selected_creative_product = st.selectbox(
+            "Selected product",
+            product_labels,
+            key="creative_selected_product",
+        )
+        selected_creative_product_id = selected_creative_product.split(" - ", 1)[0]
+        creative_product = ranked_products[
+            ranked_products["product_id"] == selected_creative_product_id
+        ].iloc[0].to_dict()
+        creative_offer = selected_recommended_offer(
+            scored_offers,
+            selected_creative_product_id,
+        )
+        creative_video_recommendation = selected_video_recommendation(
+            video_recommendations,
+            selected_creative_product_id,
+        )
+
+        summary_columns = st.columns(3)
+        summary_columns[0].metric(
+            "Product score",
+            f"{creative_product['profit_potential_score']:.2f}",
+        )
+        summary_columns[1].metric(
+            "Recommended offer",
+            creative_offer["platform"] if creative_offer else "None",
+        )
+        evidence_label = (
+            creative_video_recommendation.get("evidence_level")
+            if creative_video_recommendation
+            else "deterministic default"
+        )
+        summary_columns[2].metric("Video evidence", evidence_label)
+
+        if creative_offer and creative_offer.get("offer_status") == "unknown":
+            st.warning("The selected offer is marked unknown; verify it before use.")
+        if creative_offer and creative_offer.get("offer_status") == "inactive":
+            st.warning("Inactive offers are not promoted in Creative Studio drafts.")
+
+        platform_options = list(PLATFORM_PRESETS)
+        objective_options = list(CAMPAIGN_OBJECTIVES)
+        input_columns = st.columns(2)
+        with input_columns[0]:
+            target_platform = st.selectbox(
+                "Target platform",
+                platform_options,
+                key="creative_target_platform",
+            )
+            preset = PLATFORM_PRESETS[target_platform]
+            campaign_objective = st.selectbox(
+                "Campaign objective",
+                objective_options,
+                key="creative_campaign_objective",
+            )
+            if campaign_objective == "conversion-oriented promotion":
+                st.warning(
+                    "This changes structure and CTA emphasis only. It does not "
+                    "predict conversion performance."
+                )
+            duration_seconds = st.selectbox(
+                "Duration",
+                ALLOWED_DURATIONS,
+                index=ALLOWED_DURATIONS.index(preset["duration_seconds"]),
+                key="creative_duration_seconds",
+            )
+            aspect_ratio = st.text_input(
+                "Aspect ratio",
+                value=preset["aspect_ratio"],
+                key="creative_aspect_ratio",
+            )
+            pacing = st.text_input(
+                "Pacing",
+                value=preset["pacing"],
+                key="creative_pacing",
+            )
+        with input_columns[1]:
+            target_audience = st.text_input(
+                "Target audience",
+                value="interested buyers",
+                key="creative_target_audience",
+            )
+            tone = st.text_input(
+                "Tone",
+                value="clear and helpful",
+                key="creative_tone",
+            )
+            cta = st.text_input(
+                "CTA",
+                value=CAMPAIGN_OBJECTIVES[campaign_objective]["cta"],
+                key="creative_cta",
+            )
+            template_override = st.selectbox(
+                "Creative template",
+                ["Auto", *CONTENT_TEMPLATES],
+                key="creative_template_override",
+            )
+            hook_type_override = st.selectbox(
+                "Hook type",
+                [
+                    "Auto",
+                    "result first",
+                    "problem solution",
+                    "question",
+                    "surprising fact",
+                    "discount offer",
+                    "general introduction",
+                ],
+                key="creative_hook_type_override",
+            )
+
+        default_feature = ""
+        if creative_video_recommendation:
+            feature_value = creative_video_recommendation.get("feature_to_emphasize")
+            if feature_value and feature_value != "insufficient observations":
+                default_feature = feature_value
+        details_columns = st.columns(2)
+        with details_columns[0]:
+            key_product_features = st.text_area(
+                "Key product features",
+                value=default_feature,
+                height=90,
+                key="creative_key_product_features",
+            )
+            product_notes = st.text_area(
+                "Product notes",
+                height=90,
+                key="creative_product_notes",
+            )
+        with details_columns[1]:
+            brand_constraints = st.text_area(
+                "Brand constraints",
+                height=90,
+                key="creative_brand_constraints",
+            )
+            include_disclosure = st.checkbox(
+                "Include affiliate disclosure",
+                value=True,
+                key="creative_include_disclosure",
+            )
+            disclosure_text = st.text_input(
+                "Disclosure text",
+                value=DEFAULT_DISCLOSURE,
+                key="creative_disclosure_text",
+            )
+
+        settings = {
+            "target_platform": target_platform,
+            "campaign_objective": campaign_objective,
+            "duration_seconds": duration_seconds,
+            "aspect_ratio": aspect_ratio,
+            "pacing": pacing,
+            "target_audience": target_audience,
+            "tone": tone,
+            "cta": cta,
+            "template_override": template_override,
+            "hook_type_override": hook_type_override,
+            "key_product_features": key_product_features,
+            "product_notes": product_notes,
+            "brand_constraints": brand_constraints,
+            "include_disclosure": include_disclosure,
+            "disclosure_text": disclosure_text,
+        }
+
+        if st.session_state.get("creative_dirty"):
+            st.warning(
+                "You have edited the current creative draft. Generating again "
+                "will replace the editable draft with a new baseline."
+            )
+
+        action_columns = st.columns(2)
+        generate_clicked = action_columns[0].button("Generate creative package")
+        reset_clicked = action_columns[1].button("Reset Creative Studio")
+        if reset_clicked:
+            reset_creative_state()
+            st.rerun()
+
+        if generate_clicked:
+            package = build_creative_package(
+                creative_product,
+                offer=creative_offer,
+                video_recommendation=creative_video_recommendation,
+                settings=settings,
+            )
+            st.session_state.creative_baseline_package = package
+            st.session_state.creative_baseline_script = package["script_text"]
+            st.session_state.creative_baseline_storyboard = deepcopy(
+                package["storyboard"]
+            )
+            st.session_state.creative_edited_script = package["script_text"]
+            st.session_state.creative_dirty = False
+            st.session_state.creative_last_settings = settings
+
+        if "creative_baseline_package" in st.session_state:
+            package = st.session_state.creative_baseline_package
+            st.subheader("Video Brief")
+            st.json(package["brief"])
+
+            st.subheader("Editable Script")
+            edited_script = st.text_area(
+                "Script draft",
+                value=st.session_state.get(
+                    "creative_edited_script",
+                    package["script_text"],
+                ),
+                height=280,
+                key="creative_script_editor",
+            )
+            st.session_state.creative_edited_script = edited_script
+
+            st.subheader("Editable Storyboard")
+            storyboard_df = pd.DataFrame(package["storyboard"])
+            edited_storyboard_df = st.data_editor(
+                storyboard_df,
+                width="stretch",
+                num_rows="fixed",
+                key="creative_storyboard_editor",
+            )
+
+            st.subheader("Generation Prompts")
+            st.text_area(
+                "Concise generation prompt",
+                value=package["prompts"]["concise_generation_prompt"],
+                height=90,
+            )
+            st.text_area(
+                "Detailed generation prompt",
+                value=package["prompts"]["detailed_generation_prompt"],
+                height=160,
+            )
+            st.text_area(
+                "Negative prompt",
+                value=package["prompts"]["negative_prompt"],
+                height=90,
+            )
+
+            edited_storyboard_records = edited_storyboard_df.to_dict("records")
+            st.session_state.creative_dirty = (
+                edited_script != st.session_state.creative_baseline_script
+                or edited_storyboard_records
+                != st.session_state.creative_baseline_storyboard
+            )
+            edited_package = edited_creative_package(
+                edited_storyboard_df,
+                edited_script,
+            )
+            if edited_package["validation_warnings"]:
+                st.warning("; ".join(edited_package["validation_warnings"]))
+            else:
+                st.success("Creative package validation passed.")
+
+            st.subheader("Exports")
+            prompt_text = (
+                edited_package["prompts"]["concise_generation_prompt"]
+                + "\n\n"
+                + edited_package["prompts"]["detailed_generation_prompt"]
+                + "\n\nNegative prompt:\n"
+                + edited_package["prompts"]["negative_prompt"]
+            )
+            download_columns = st.columns(4)
+            download_columns[0].download_button(
+                "Download video_brief.json",
+                json_bytes(edited_package["brief"]),
+                file_name="video_brief.json",
+                mime="application/json",
+            )
+            download_columns[1].download_button(
+                "Download video_brief.csv",
+                brief_csv_bytes(edited_package["brief"]),
+                file_name="video_brief.csv",
+                mime="text/csv",
+            )
+            download_columns[2].download_button(
+                "Download script.txt",
+                text_bytes(edited_package["script_text"]),
+                file_name="script.txt",
+                mime="text/plain",
+            )
+            download_columns[3].download_button(
+                "Download storyboard.csv",
+                dataframe_csv_bytes(edited_package["storyboard"]),
+                file_name="storyboard.csv",
+                mime="text/csv",
+            )
+
+            second_download_columns = st.columns(4)
+            second_download_columns[0].download_button(
+                "Download storyboard.json",
+                json_bytes(edited_package["storyboard"]),
+                file_name="storyboard.json",
+                mime="application/json",
+            )
+            second_download_columns[1].download_button(
+                "Download generation_prompt.txt",
+                text_bytes(prompt_text),
+                file_name="generation_prompt.txt",
+                mime="text/plain",
+            )
+            second_download_columns[2].download_button(
+                "Download creative_package.json",
+                json_bytes(edited_package),
+                file_name="creative_package.json",
+                mime="application/json",
+            )
+            second_download_columns[3].download_button(
+                "Download complete_creative_package.zip",
+                package_zip_bytes(edited_package),
+                file_name="complete_creative_package.zip",
+                mime="application/zip",
+            )
+
+with tabs[5]:
     st.subheader("Data Quality")
     quality_metrics = st.columns(6)
     quality_metrics[0].metric("Excluded products", len(excluded_products))
@@ -1129,7 +1519,7 @@ with tabs[4]:
     ):
         st.success("No records were excluded.")
 
-with tabs[5]:
+with tabs[6]:
     st.subheader("Scalability")
     product_rows = len(products_input) if products_input is not None else 0
     offer_rows = len(offers_input) if offers_input is not None else 0
@@ -1165,7 +1555,7 @@ with tabs[5]:
     if products_input is not None:
         st.success("Processing completed successfully.")
 
-with tabs[6]:
+with tabs[7]:
     st.subheader("Methodology")
     st.markdown(
         f"""
@@ -1174,6 +1564,8 @@ with tabs[6]:
 - **Product Opportunity Score** estimates short-term market opportunity.
 - **Platform Offer Score** compares affiliate economics for the same product.
 - **Video Insights** compare observed attention and engagement patterns.
+- **Creative Studio** turns existing context into editable video planning
+  artifacts.
 
 Video Insights do not create a score, conversion estimate, revenue estimate, or
 profit prediction.
@@ -1225,12 +1617,31 @@ Detected labels do not silently overwrite manual labels. The safest default is
 manual first with detected fallback, and agreement reports are consistency
 checks rather than accuracy claims.
 
+### Creative Studio
+
+Version 1.8 creates provider-neutral planning artifacts: a video brief,
+timestamped script, editable storyboard, generation prompts, creative-package
+JSON, and a ZIP export. It uses product-level video recommendations first,
+category-level recommendations second, and deterministic objective-based
+templates when evidence is insufficient.
+
+User overrides win. Inactive offers are excluded from promotion planning.
+Unknown offers require a warning. Commission and cookie-duration terms are
+internal affiliate economics and are not written into consumer-facing script
+text by default. Unsupported claims such as guaranteed results, best-product
+claims, invented discounts, health/safety claims, and specific savings are
+flagged for review.
+
+The placeholder `VideoGenerationProvider` interface is present for future
+Version 1.9 integration, but no provider implementation is included.
+
 ### Limitations
 
 All caps and weights are provisional. Mock-provider and generated files are
-synthetic. Version 1.6 uses uploaded structured CSV text only. It performs no
-URL requests, scraping, downloading, frame extraction, computer vision, audio
-analysis, external LLM calls, video/script generation, or automated posting.
+synthetic. Version 1.8 performs no URL requests, scraping, remote video
+downloading, semantic computer vision, audio analysis, external LLM calls,
+video generation, image generation, audio generation, provider jobs, conversion
+prediction, revenue prediction, or automated posting.
 
 Future versions may integrate real affiliate APIs, persistent storage,
 historical outcome data, and separately approved analytical capabilities.

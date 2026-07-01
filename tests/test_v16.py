@@ -239,7 +239,7 @@ class VideoTextStreamlitTests(unittest.TestCase):
             )
         return app
 
-    def test_full_workflow_has_seven_tabs_and_v16_downloads(self):
+    def test_full_workflow_has_eight_tabs_and_v16_downloads(self):
         app = self.make_uploadable_app()
         app.get("file_uploader")[0].upload(
             "products.csv",
@@ -258,7 +258,7 @@ class VideoTextStreamlitTests(unittest.TestCase):
         )
         app.run(timeout=30)
         self.assertEqual(len(app.exception), 0)
-        self.assertEqual(len(app.tabs), 7)
+        self.assertEqual(len(app.tabs), 8)
         labels = {button.proto.label for button in app.get("download_button")}
         for label in {
             "Download enriched videos",

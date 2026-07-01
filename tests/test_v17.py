@@ -234,9 +234,14 @@ class VideoUploadStreamlitTests(unittest.TestCase):
         app.get("text_area")[1].input(
             "Here is a demo. Use code SAVE and export pdf."
         )
-        app.get("button")[-1].click().run(timeout=60)
+        for button in app.get("button"):
+            if button.proto.label == "Process uploaded MP4":
+                button.click().run(timeout=60)
+                break
+        else:
+            self.fail("Process uploaded MP4 button was not found")
         self.assertEqual(len(app.exception), 0)
-        self.assertEqual(len(app.tabs), 7)
+        self.assertEqual(len(app.tabs), 8)
         labels = {button.proto.label for button in app.get("download_button")}
         for label in {
             "Download video metadata",
