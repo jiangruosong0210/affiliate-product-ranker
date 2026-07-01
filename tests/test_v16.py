@@ -258,7 +258,7 @@ class VideoTextStreamlitTests(unittest.TestCase):
         )
         app.run(timeout=30)
         self.assertEqual(len(app.exception), 0)
-        self.assertEqual(len(app.tabs), 8)
+        self.assertEqual(len(app.tabs), 9)
         labels = {button.proto.label for button in app.get("download_button")}
         for label in {
             "Download enriched videos",

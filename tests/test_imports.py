@@ -14,6 +14,7 @@ class CleanImportTests(unittest.TestCase):
             "import video_validation; import video_text_analysis; "
             "import video_upload_processing; import video_insights; "
             "import creative_planning; import video_generation_provider; "
+            "import video_generation_service; "
             "import market_data.service; import offer_scoring; import app"
         )
         result = subprocess.run(

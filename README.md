@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Affiliate Product Ranker Version 1.8 supports four independent decision layers:
+Affiliate Product Ranker Version 1.9 supports five independent decision layers:
 
 1. Which products have the strongest short-term market opportunity?
 2. For the same product, which platform-specific affiliate offer is most
@@ -11,6 +11,8 @@ Affiliate Product Ranker Version 1.8 supports four independent decision layers:
    observed attention and engagement evidence?
 4. How can those existing signals be turned into a safe, editable short-form
    video planning package?
+5. How can a provider-neutral video-generation workflow be tested safely before
+   connecting real paid or external providers?
 
 The Product Opportunity Score from Versions 1.2 and 1.3A remains unchanged.
 Version 1.4 added a separate Platform Offer Score. Version 1.5 adds Video
@@ -20,16 +22,18 @@ names, and language metadata. Version 1.7 adds local one-file MP4 upload
 inspection for metadata, sampled frames, and lightweight visual heuristics.
 Version 1.8 adds a Creative Studio that creates rule-based video briefs,
 timestamped scripts, editable storyboards, provider-neutral generation prompts,
-and downloadable planning packages. These layers are not combined into a final
-profit prediction.
+and downloadable planning packages. Version 1.9A adds a mock-first Video
+Generator workflow with request, job, result, error, and capability models plus
+a deterministic placeholder MP4 provider. These layers are not combined into a
+final profit prediction.
 
 This is a rule-based demonstration and decision-support tool. It does not
 guarantee affiliate revenue or profit.
 
-Version 1.8 does not connect to platform APIs, scrape websites, download remote
+Version 1.9A does not connect to platform APIs, scrape websites, download remote
 videos, run external LLMs, perform speech-to-text, recognize products, identify
-people, use OCR, generate video, generate audio, generate images, predict
-revenue, or publish content.
+people, use OCR, generate real AI video, generate audio, generate images,
+predict revenue, or publish content.
 
 ## Input Files
 
@@ -673,16 +677,59 @@ creative_package.json
 complete_creative_package.zip
 ```
 
-`video_generation_provider.py` contains a placeholder provider interface only:
+## Video Generator
 
-```python
-class VideoGenerationProvider:
-    def generate(self, creative_package):
-        raise NotImplementedError
+Version 1.9A adds a mock-first Video Generator tab. It loads the current
+Creative Studio package from Streamlit session state, builds a provider-neutral
+text-to-video request, and submits that request to a deterministic local mock
+provider.
+
+The mock provider creates a small placeholder MP4 in temporary storage only.
+The placeholder is clearly labeled as simulated workflow output. It must never
+be presented as AI-generated video, real provider output, real market evidence,
+or a published creative asset.
+
+Version 1.9A includes provider-neutral models for:
+
+```text
+VideoProviderCapabilities
+VideoGenerationRequest
+VideoGenerationJob
+VideoGenerationResult
+VideoGenerationError
 ```
 
-This makes Version 1.9 easier to extend with a separately approved provider,
-without adding video generation to Version 1.8.
+Supported mock job states:
+
+```text
+submitted
+queued
+processing
+completed
+failed
+timed-out
+cancelled
+```
+
+The Streamlit workflow uses manual status refresh. Duplicate submissions are
+prevented while the same request is active. Users must explicitly confirm that
+they understand the current provider is simulated before submitting the mock
+job.
+
+Real provider safeguards planned for the next approval gate:
+
+- real providers disabled unless credentials are configured
+- explicit confirmation before any external or paid generation request
+- no automatic paid retries
+- no automatic paid fallback
+- no permanent video storage
+- no image-to-video, multi-scene paid generation, caption burn-in, or social
+  posting in Version 1.9A
+
+`video_generation_provider.py` contains the provider-neutral interface and mock
+provider. `video_generation_service.py` handles request construction,
+session-friendly job actions, safe filenames, temporary output folders, and MP4
+validation.
 
 ## Dashboard Tabs
 
@@ -694,9 +741,11 @@ without adding video generation to Version 1.8.
    agreement, group summaries, recommendations, and video downloads.
 5. **Creative Studio**: editable video brief, script, storyboard, prompts, and
    creative-package downloads.
-6. **Data Quality**: exclusions, warnings, reasons, and report downloads.
-7. **Scalability**: row counts and processing-stage timing.
-8. **Methodology**: formulas, evidence rules, limitations, and future work.
+6. **Video Generator**: mock provider, provider-neutral request, manual job
+   refresh, placeholder MP4 preview, and MP4 download.
+7. **Data Quality**: exclusions, warnings, reasons, and report downloads.
+8. **Scalability**: row counts and processing-stage timing.
+9. **Methodology**: formulas, evidence rules, limitations, and future work.
 
 ## Synthetic Test Data
 
@@ -759,12 +808,12 @@ streamlit run app.py
 python -m unittest discover -s tests
 ```
 
-Tests cover Versions 1.2 through 1.8, including import safety, product-only
+Tests cover Versions 1.2 through 1.9A, including import safety, product-only
 regression, product-plus-offer regression, full product/offer/video regression,
 text detection, manual-vs-detected agreement, label fallback modes, MP4 upload
 processing, synthetic video metadata/frame sampling, Creative Studio planning
-and exports, and the complete clean 1,000-product, 2,500-offer, and
-5,000-video run.
+and exports, mock video-generation request/job/result behavior, MP4 validation,
+and the complete clean 1,000-product, 2,500-offer, and 5,000-video run.
 
 ## Repository Structure
 
@@ -781,6 +830,7 @@ affiliate-product-ranker/
 ├── signal_processing.py
 ├── video_insights.py
 ├── video_generation_provider.py
+├── video_generation_service.py
 ├── video_text_analysis.py
 ├── video_upload_processing.py
 ├── video_validation.py
@@ -811,8 +861,10 @@ Secrets: none
 ```
 
 Future versions may add real affiliate APIs, a database, historical
-machine-learning models, or a separately approved creative-generation provider.
-Version 1.8 does not process MP4 batches, scrape platforms, download remote
-videos, run speech-to-text, call external LLMs, recognize products, identify
-people, use OCR, generate video, generate audio, generate images, predict
-conversion or revenue, or publish social-media content.
+machine-learning models, optional NVIDIA Nemotron prompt refinement, OmniRoute
+or direct-provider proof-of-concept results, or a separately approved real
+creative-generation provider. Version 1.9A does not process MP4 batches, scrape
+platforms, download remote videos, run speech-to-text, call external LLMs,
+recognize products, identify people, use OCR, generate real AI video, generate
+audio, generate images, predict conversion or revenue, or publish social-media
+content.

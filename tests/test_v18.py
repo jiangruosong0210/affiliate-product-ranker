@@ -227,9 +227,9 @@ class CreativePlanningTests(unittest.TestCase):
             },
         )
 
-    def test_provider_interface_is_placeholder_only(self):
+    def test_provider_interface_is_abstract_for_real_providers(self):
         with self.assertRaises(NotImplementedError):
-            VideoGenerationProvider().generate({"brief": {}})
+            VideoGenerationProvider().get_capabilities()
 
 
 class CreativeStudioStreamlitTests(unittest.TestCase):
@@ -267,7 +267,7 @@ class CreativeStudioStreamlitTests(unittest.TestCase):
             self.fail("Generate creative package button was not found")
 
         self.assertEqual(len(app.exception), 0)
-        self.assertEqual(len(app.tabs), 8)
+        self.assertEqual(len(app.tabs), 9)
         labels = {button.proto.label for button in app.get("download_button")}
         for label in {
             "Download video_brief.json",

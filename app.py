@@ -26,6 +26,19 @@ from market_data.mock_provider import MockProvider
 from market_data.service import process_market_data
 from offer_scoring import OFFER_SCORING_CONFIG, score_offers
 from scoring import SCORING_CONFIG, score_products
+from video_generation_provider import (
+    ACTIVE_VIDEO_STATUSES,
+    VIDEO_STATUS_COMPLETED,
+    dataclass_to_dict,
+)
+from video_generation_service import (
+    build_video_generation_request,
+    cancel_video_generation,
+    get_video_provider_registry,
+    refresh_video_generation,
+    safe_filename,
+    submit_video_generation,
+)
 from video_insights import (
     add_video_metrics,
     build_video_recommendations,
@@ -154,6 +167,17 @@ def reset_creative_state():
         st.session_state.pop(key, None)
 
 
+def reset_video_generation_state():
+    for key in [
+        "video_generation_request",
+        "video_generation_signature",
+        "video_generation_job",
+        "video_generation_result",
+        "video_generation_error",
+    ]:
+        st.session_state.pop(key, None)
+
+
 def selected_recommended_offer(scored_offers_df, product_id):
     if scored_offers_df.empty:
         return None
@@ -193,9 +217,9 @@ st.write(
     "for the next 7-30 days."
 )
 st.info(
-    "Version 1.8 keeps the existing ranking and video-insight logic, then adds "
-    "a rule-based Creative Studio for planning provider-neutral short-form "
-    "video briefs, scripts, storyboards, and prompts."
+    "Version 1.9 keeps the existing ranking, offer, video-insight, and "
+    "Creative Studio logic, then adds a mock-first Video Generator workflow "
+    "for testing provider-neutral generation jobs without external API calls."
 )
 st.warning(
     "This application provides estimated scores for demonstration and "
@@ -371,6 +395,7 @@ tabs = st.tabs(
         "Platform Offer Comparison",
         "Video Insights",
         "Creative Studio",
+        "Video Generator",
         "Data Quality",
         "Scalability",
         "Methodology",
@@ -1331,6 +1356,7 @@ with tabs[4]:
             st.session_state.creative_edited_script = package["script_text"]
             st.session_state.creative_dirty = False
             st.session_state.creative_last_settings = settings
+            reset_video_generation_state()
 
         if "creative_baseline_package" in st.session_state:
             package = st.session_state.creative_baseline_package
@@ -1451,6 +1477,166 @@ with tabs[4]:
             )
 
 with tabs[5]:
+    st.subheader("Video Generator")
+    st.caption(
+        "Version 1.9A simulates the video-generation workflow with a local "
+        "mock provider. The placeholder MP4 is not AI-generated and is not "
+        "real market or creative output."
+    )
+    st.warning(
+        "Mock output is simulated for workflow testing only. It must never be "
+        "presented as an AI-generated video or as real provider output."
+    )
+
+    if "creative_baseline_package" not in st.session_state:
+        st.write("Generate a Creative Studio package before using Video Generator.")
+    else:
+        package = st.session_state.creative_baseline_package
+        request = build_video_generation_request(package)
+        providers = get_video_provider_registry()
+        provider_name = st.selectbox(
+            "Video provider",
+            list(providers),
+            key="video_generation_provider",
+        )
+        provider = providers[provider_name]
+        capabilities = provider.get_capabilities()
+
+        summary_columns = st.columns(4)
+        summary_columns[0].metric("Provider", capabilities.provider_name)
+        summary_columns[1].metric("Model", provider.model_name)
+        summary_columns[2].metric("Mode", "Text-to-video")
+        summary_columns[3].metric("Cost", capabilities.cost_label)
+
+        st.write("Provider Capabilities")
+        st.json(dataclass_to_dict(capabilities))
+
+        brief = package.get("brief", {})
+        prompt = request.prompt
+        prompt_columns = st.columns(2)
+        prompt_columns[0].write("Creative Package")
+        prompt_columns[0].json(
+            {
+                "product_name": brief.get("product_name", ""),
+                "target_platform": brief.get("target_platform", ""),
+                "duration_seconds": request.duration_seconds,
+                "aspect_ratio": request.aspect_ratio,
+            }
+        )
+        prompt_columns[1].write("Generation Prompt")
+        prompt_columns[1].text_area(
+            "Prompt sent to provider",
+            value=prompt,
+            height=220,
+            disabled=True,
+        )
+
+        if package.get("validation_warnings"):
+            st.warning("; ".join(package["validation_warnings"]))
+
+        st.info(
+            "Future real providers will require explicit confirmation before "
+            "submitting any paid or external generation request. Version 1.9A "
+            "uses only the local mock provider."
+        )
+        confirmed = st.checkbox(
+            "I understand this is a simulated mock workflow.",
+            key="video_generation_confirmed",
+        )
+
+        active_job = st.session_state.get("video_generation_job")
+        duplicate_active = (
+            active_job is not None
+            and active_job.status in ACTIVE_VIDEO_STATUSES
+            and st.session_state.get("video_generation_signature") == request.request_id
+        )
+        submit_disabled = not confirmed or duplicate_active
+
+        action_columns = st.columns(3)
+        submit_clicked = action_columns[0].button(
+            "Submit mock generation job",
+            disabled=submit_disabled,
+        )
+        refresh_clicked = action_columns[1].button(
+            "Refresh job status",
+            disabled=active_job is None,
+        )
+        cancel_clicked = action_columns[2].button(
+            "Cancel job",
+            disabled=active_job is None
+            or active_job.status not in ACTIVE_VIDEO_STATUSES,
+        )
+
+        if duplicate_active:
+            st.warning(
+                "A job with the same request is already active. Refresh or "
+                "cancel it before submitting again."
+            )
+
+        if submit_clicked:
+            job, result, error = submit_video_generation(provider, request)
+            st.session_state.video_generation_request = request
+            st.session_state.video_generation_signature = request.request_id
+            st.session_state.video_generation_job = job
+            st.session_state.video_generation_result = result
+            st.session_state.video_generation_error = error
+            active_job = job
+
+        if refresh_clicked and active_job is not None:
+            job, result, error = refresh_video_generation(provider, active_job)
+            st.session_state.video_generation_job = job
+            st.session_state.video_generation_result = result
+            st.session_state.video_generation_error = error
+            active_job = job
+
+        if cancel_clicked and active_job is not None:
+            job = cancel_video_generation(provider, active_job)
+            st.session_state.video_generation_job = job
+            st.session_state.video_generation_error = None
+            active_job = job
+
+        current_job = st.session_state.get("video_generation_job")
+        current_error = st.session_state.get("video_generation_error")
+        current_result = st.session_state.get("video_generation_result")
+
+        if current_job is None:
+            st.write("No video generation job has been submitted yet.")
+        else:
+            st.subheader("Job Status")
+            status_columns = st.columns(4)
+            status_columns[0].metric("Status", current_job.status)
+            status_columns[1].metric(
+                "Progress",
+                f"{(current_job.progress or 0) * 100:.0f}%",
+            )
+            status_columns[2].metric("Provider", current_job.provider)
+            status_columns[3].metric("Model", current_job.model)
+            st.write(current_job.message)
+            st.json(dataclass_to_dict(current_job))
+
+        if current_error is not None:
+            st.error(current_error.message)
+            st.json(dataclass_to_dict(current_error))
+
+        if current_result is not None and current_job.status == VIDEO_STATUS_COMPLETED:
+            st.subheader("Mock MP4 Preview")
+            st.info(
+                "This preview is a locally generated placeholder MP4 for "
+                "workflow testing. It is not AI-generated."
+            )
+            video_path = Path(current_result.local_video_path)
+            video_bytes = video_path.read_bytes()
+            st.video(video_bytes)
+            product_name = brief.get("product_name", "mock-video")
+            download_name = f"{safe_filename(product_name)}-mock-placeholder.mp4"
+            st.download_button(
+                "Download mock placeholder MP4",
+                video_bytes,
+                file_name=download_name,
+                mime="video/mp4",
+            )
+
+with tabs[6]:
     st.subheader("Data Quality")
     quality_metrics = st.columns(6)
     quality_metrics[0].metric("Excluded products", len(excluded_products))
@@ -1519,7 +1705,7 @@ with tabs[5]:
     ):
         st.success("No records were excluded.")
 
-with tabs[6]:
+with tabs[7]:
     st.subheader("Scalability")
     product_rows = len(products_input) if products_input is not None else 0
     offer_rows = len(offers_input) if offers_input is not None else 0
@@ -1555,17 +1741,19 @@ with tabs[6]:
     if products_input is not None:
         st.success("Processing completed successfully.")
 
-with tabs[7]:
+with tabs[8]:
     st.subheader("Methodology")
     st.markdown(
         f"""
-### Three Separate Decision Layers
+### Five Separate Decision Layers
 
 - **Product Opportunity Score** estimates short-term market opportunity.
 - **Platform Offer Score** compares affiliate economics for the same product.
 - **Video Insights** compare observed attention and engagement patterns.
 - **Creative Studio** turns existing context into editable video planning
   artifacts.
+- **Video Generator** tests a provider-neutral job workflow with a mock
+  placeholder MP4.
 
 Video Insights do not create a score, conversion estimate, revenue estimate, or
 profit prediction.
@@ -1632,16 +1820,23 @@ text by default. Unsupported claims such as guaranteed results, best-product
 claims, invented discounts, health/safety claims, and specific savings are
 flagged for review.
 
-The placeholder `VideoGenerationProvider` interface is present for future
-Version 1.9 integration, but no provider implementation is included.
+### Video Generator
+
+Version 1.9A adds provider-neutral request, job, result, error, and capability
+models plus a deterministic mock provider. The mock provider uses manual status
+refresh, prevents duplicate active submissions, supports cancellation, and
+creates a temporary placeholder MP4 for preview and download.
+
+The placeholder MP4 is simulated workflow output. It is not AI-generated, not
+real provider output, and not evidence that a product will perform well.
 
 ### Limitations
 
 All caps and weights are provisional. Mock-provider and generated files are
-synthetic. Version 1.8 performs no URL requests, scraping, remote video
+synthetic. Version 1.9A performs no URL requests, scraping, remote video
 downloading, semantic computer vision, audio analysis, external LLM calls,
-video generation, image generation, audio generation, provider jobs, conversion
-prediction, revenue prediction, or automated posting.
+real AI video generation, image generation, audio generation, paid provider
+jobs, conversion prediction, revenue prediction, or automated posting.
 
 Future versions may integrate real affiliate APIs, persistent storage,
 historical outcome data, and separately approved analytical capabilities.
