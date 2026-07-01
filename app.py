@@ -25,6 +25,11 @@ from market_data.manual_provider import ManualProvider
 from market_data.mock_provider import MockProvider
 from market_data.service import process_market_data
 from offer_scoring import OFFER_SCORING_CONFIG, score_offers
+from prompt_refinement import (
+    load_openrouter_settings,
+    package_signature,
+    refine_prompt_with_openrouter,
+)
 from scoring import SCORING_CONFIG, score_products
 from video_generation_provider import (
     ACTIVE_VIDEO_STATUSES,
@@ -57,6 +62,16 @@ PRODUCT_TEMPLATE_PATH = PROJECT_DIR / "sample_products.csv"
 OFFER_TEMPLATE_PATH = PROJECT_DIR / "sample_offers.csv"
 VIDEO_TEMPLATE_PATH = PROJECT_DIR / "sample_videos.csv"
 
+PROMPT_REFINEMENT_KEYS = [
+    "prompt_refinement_original_prompt",
+    "prompt_refinement_refined_prompt",
+    "prompt_refinement_result",
+    "prompt_refinement_warnings",
+    "prompt_refinement_active_choice",
+    "prompt_refinement_in_progress",
+    "prompt_refinement_package_signature",
+]
+
 
 @st.cache_resource
 def get_provider_registry():
@@ -66,6 +81,11 @@ def get_provider_registry():
     }
 
 
+@st.cache_resource
+def get_cached_video_provider_registry():
+    return get_video_provider_registry()
+
+
 def read_uploaded_csv(uploaded_file):
     if uploaded_file is None:
         return None, ""
@@ -73,6 +93,32 @@ def read_uploaded_csv(uploaded_file):
         return pd.read_csv(uploaded_file), ""
     except Exception as exc:
         return None, f"Could not read {uploaded_file.name}: {exc}"
+
+
+def reset_prompt_refinement_state():
+    for key in PROMPT_REFINEMENT_KEYS:
+        st.session_state.pop(key, None)
+
+
+def ensure_prompt_refinement_state(package, original_prompt):
+    signature = package_signature(package)
+    if st.session_state.get("prompt_refinement_package_signature") != signature:
+        reset_prompt_refinement_state()
+        st.session_state.prompt_refinement_package_signature = signature
+        st.session_state.prompt_refinement_original_prompt = original_prompt
+        st.session_state.prompt_refinement_active_choice = "original"
+        st.session_state.prompt_refinement_in_progress = False
+    st.session_state.setdefault("prompt_refinement_original_prompt", original_prompt)
+    st.session_state.setdefault("prompt_refinement_active_choice", "original")
+    st.session_state.setdefault("prompt_refinement_in_progress", False)
+
+
+def selected_generation_prompt(original_prompt):
+    if st.session_state.get("prompt_refinement_active_choice") == "refined":
+        refined_prompt = st.session_state.get("prompt_refinement_refined_prompt", "")
+        if refined_prompt:
+            return refined_prompt
+    return original_prompt
 
 
 def show_top_three(top_three_df):
@@ -1492,8 +1538,179 @@ with tabs[5]:
         st.write("Generate a Creative Studio package before using Video Generator.")
     else:
         package = st.session_state.creative_baseline_package
-        request = build_video_generation_request(package)
-        providers = get_video_provider_registry()
+        original_request = build_video_generation_request(package)
+        original_prompt = original_request.prompt
+        ensure_prompt_refinement_state(package, original_prompt)
+
+        st.write("Prompt Refinement")
+        st.caption(
+            "Optional OpenRouter-assisted text refinement can improve wording "
+            "before the mock job. AI-assisted drafts must be reviewed before use."
+        )
+        settings = load_openrouter_settings(secrets=st.secrets)
+        refinement_enabled = st.toggle(
+            "Use AI-assisted prompt refinement",
+            key="prompt_refinement_enabled",
+        )
+        status_columns = st.columns(3)
+        status_columns[0].metric(
+            "OpenRouter",
+            "configured" if settings.api_key else "not configured",
+        )
+        status_columns[1].metric("Default model", settings.default_model)
+        status_columns[2].metric("Timeout", f"{settings.timeout_seconds}s")
+        st.info(
+            "Free OpenRouter models may be rate-limited, temporarily unavailable, "
+            "or removed. This app keeps the original deterministic prompt when "
+            "refinement is unavailable or invalid."
+        )
+
+        if refinement_enabled:
+            selected_model = st.selectbox(
+                "Refinement model",
+                settings.model_options,
+                index=(
+                    settings.model_options.index(settings.default_model)
+                    if settings.default_model in settings.model_options
+                    else 0
+                ),
+                key="prompt_refinement_selected_model",
+            )
+            st.warning(
+                "AI-assisted draft — verify before use. Text is sent to "
+                "OpenRouter only after you click Refine prompt. This version "
+                "does not send images, sampled frames, MP4 files, or private "
+                "uploads for refinement."
+            )
+            refine_columns = st.columns(2)
+            refine_clicked = refine_columns[0].button(
+                "Refine prompt",
+                disabled=(
+                    not settings.api_key
+                    or st.session_state.get("prompt_refinement_in_progress", False)
+                ),
+            )
+            reset_clicked = refine_columns[1].button("Reset refinement")
+            if reset_clicked:
+                reset_prompt_refinement_state()
+                ensure_prompt_refinement_state(package, original_prompt)
+                st.success("Prompt refinement state was reset.")
+
+            if not settings.api_key:
+                st.warning(
+                    "OpenRouter is not configured. Add OPENROUTER_API_KEY in "
+                    "environment variables or Streamlit secrets to use refinement."
+                )
+
+            if refine_clicked:
+                st.session_state.prompt_refinement_in_progress = True
+                refinement_status = st.empty()
+                refinement_started_at = perf_counter()
+                refinement_status.info("Refinement request started.")
+                with st.spinner("Waiting for OpenRouter refinement..."):
+                    result = refine_prompt_with_openrouter(
+                        package,
+                        original_prompt,
+                        selected_model,
+                        settings,
+                    )
+                elapsed_seconds = round(perf_counter() - refinement_started_at, 2)
+                result.provider_metadata.setdefault(
+                    "elapsed_seconds",
+                    elapsed_seconds,
+                )
+                st.session_state.prompt_refinement_result = result
+                st.session_state.prompt_refinement_warnings = result.warnings
+                if result.accepted:
+                    st.session_state.prompt_refinement_refined_prompt = result.refined_prompt
+                    st.session_state.prompt_refinement_active_choice = "refined"
+                    refinement_status.success(
+                        f"Refinement completed in {elapsed_seconds:.2f} seconds."
+                    )
+                    st.success("A refined prompt is ready for review.")
+                else:
+                    st.session_state.prompt_refinement_active_choice = "original"
+                    refinement_status.warning(
+                        f"Refinement stopped after {elapsed_seconds:.2f} seconds."
+                    )
+                    st.warning(
+                        result.error_message
+                        or "No refined prompt was accepted. The original prompt is still active."
+                    )
+                st.session_state.prompt_refinement_in_progress = False
+
+        prompt_panel_columns = st.columns(2)
+        prompt_panel_columns[0].write("Original deterministic prompt")
+        prompt_panel_columns[0].text_area(
+            "Original prompt",
+            value=original_prompt,
+            height=240,
+            disabled=True,
+            label_visibility="collapsed",
+        )
+        prompt_panel_columns[1].write("Refined prompt")
+        refined_prompt = st.session_state.get("prompt_refinement_refined_prompt", "")
+        prompt_panel_columns[1].text_area(
+            "Refined prompt",
+            value=refined_prompt or "No accepted refined prompt yet.",
+            height=240,
+            disabled=True,
+            label_visibility="collapsed",
+        )
+
+        result = st.session_state.get("prompt_refinement_result")
+        if result is not None:
+            if result.refinement_summary:
+                st.write("Refinement summary")
+                st.write("; ".join(result.refinement_summary))
+            if result.unsupported_claims_removed:
+                st.write("Unsupported claims removed")
+                st.write("; ".join(result.unsupported_claims_removed))
+            if result.warnings:
+                st.warning("; ".join(result.warnings))
+            if result.provider_metadata:
+                safe_metadata = {
+                    key: value
+                    for key, value in result.provider_metadata.items()
+                    if key
+                    in {
+                        "http_status",
+                        "finish_reason",
+                        "latency_seconds",
+                        "elapsed_seconds",
+                        "response_length",
+                        "model",
+                        "used_structured_output",
+                    }
+                }
+                if safe_metadata:
+                    st.write("Refinement diagnostics")
+                    st.json(safe_metadata)
+
+        prompt_options = ["original"]
+        if refined_prompt:
+            prompt_options.append("refined")
+        active_choice = st.radio(
+            "Prompt sent to mock provider",
+            prompt_options,
+            index=prompt_options.index(
+                st.session_state.get("prompt_refinement_active_choice", "original")
+                if st.session_state.get("prompt_refinement_active_choice", "original")
+                in prompt_options
+                else "original"
+            ),
+            horizontal=True,
+        )
+        st.session_state.prompt_refinement_active_choice = active_choice
+        active_prompt = selected_generation_prompt(original_prompt)
+        st.success(
+            "Active prompt: refined AI-assisted draft"
+            if active_choice == "refined"
+            else "Active prompt: original deterministic prompt"
+        )
+
+        request = build_video_generation_request(package, prompt_override=active_prompt if active_choice == "refined" else None)
+        providers = get_cached_video_provider_registry()
         provider_name = st.selectbox(
             "Video provider",
             list(providers),
@@ -1526,7 +1743,7 @@ with tabs[5]:
         prompt_columns[1].write("Generation Prompt")
         prompt_columns[1].text_area(
             "Prompt sent to provider",
-            value=prompt,
+            value=request.prompt,
             height=220,
             disabled=True,
         )

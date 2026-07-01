@@ -24,16 +24,18 @@ Version 1.8 adds a Creative Studio that creates rule-based video briefs,
 timestamped scripts, editable storyboards, provider-neutral generation prompts,
 and downloadable planning packages. Version 1.9A adds a mock-first Video
 Generator workflow with request, job, result, error, and capability models plus
-a deterministic placeholder MP4 provider. These layers are not combined into a
-final profit prediction.
+a deterministic placeholder MP4 provider. Version 1.9A+ adds optional
+OpenRouter-assisted text prompt refinement before the same mock provider
+workflow. These layers are not combined into a final profit prediction.
 
 This is a rule-based demonstration and decision-support tool. It does not
 guarantee affiliate revenue or profit.
 
-Version 1.9A does not connect to platform APIs, scrape websites, download remote
-videos, run external LLMs, perform speech-to-text, recognize products, identify
-people, use OCR, generate real AI video, generate audio, generate images,
-predict revenue, or publish content.
+Version 1.9A+ does not connect to platform APIs, scrape websites, download
+remote videos, perform speech-to-text, recognize products, identify people, use
+OCR, generate real AI video, generate audio, generate images, predict revenue,
+or publish content. The optional OpenRouter step is text-only prompt refinement
+and never submits a real video-generation request.
 
 ## Input Files
 
@@ -679,10 +681,55 @@ complete_creative_package.zip
 
 ## Video Generator
 
-Version 1.9A adds a mock-first Video Generator tab. It loads the current
-Creative Studio package from Streamlit session state, builds a provider-neutral
-text-to-video request, and submits that request to a deterministic local mock
-provider.
+Version 1.9A adds a mock-first Video Generator tab. Version 1.9A+ adds an
+optional prompt-refinement step before the same mock workflow. The tab loads
+the current Creative Studio package from Streamlit session state, shows the
+original deterministic prompt, optionally creates an AI-assisted draft through
+OpenRouter, asks the user to choose the original or refined prompt, then submits
+that chosen text to the deterministic local mock provider.
+
+Prompt refinement is optional. The app remains fully usable when no OpenRouter
+key is configured, when the free model is unavailable or rate-limited, or when a
+response fails validation. In those cases, the original deterministic prompt is
+kept and the mock provider is not blocked.
+
+Supported OpenRouter refinement models are stored in one configuration object
+inside `prompt_refinement.py`:
+
+```text
+openai/gpt-oss-20b:free
+nvidia/nemotron-3-super-120b-a12b:free
+```
+
+Optional configuration keys:
+
+```text
+OPENROUTER_API_KEY
+OPENROUTER_BASE_URL
+OPENROUTER_REFINEMENT_MODEL
+OPENROUTER_TIMEOUT_SECONDS
+OPENROUTER_MAX_PROMPT_LENGTH
+```
+
+The API key must stay in environment variables or Streamlit secrets. It is not
+written to source code, exports, creative packages, ZIP files, screenshots, or
+test fixtures. Version 1.9A+ sends only text prompt context after the user
+enables refinement and clicks the refinement button. It does not send uploaded
+images, sampled frames, MP4 files, or confidential company data.
+
+The refinement response must be valid JSON with:
+
+```text
+refined_prompt
+refinement_summary
+unsupported_claims_removed
+warnings
+```
+
+The app validates the response before accepting it. It rejects malformed JSON,
+missing fields, empty prompts, overly long prompts, product identity changes,
+removed CTA or disclosure metadata when present, unsupported claim language,
+and invented discount or offer details.
 
 The mock provider creates a small placeholder MP4 in temporary storage only.
 The placeholder is clearly labeled as simulated workflow output. It must never
@@ -724,11 +771,13 @@ Real provider safeguards planned for the next approval gate:
 - no automatic paid fallback
 - no permanent video storage
 - no image-to-video, multi-scene paid generation, caption burn-in, or social
-  posting in Version 1.9A
+  posting in Version 1.9A+
 
 `video_generation_provider.py` contains the provider-neutral interface and mock
 provider. `video_generation_service.py` handles request construction,
 session-friendly job actions, safe filenames, temporary output folders, and MP4
+validation. `prompt_refinement.py` contains the optional OpenRouter text
+refinement configuration, request construction, provider call, and response
 validation.
 
 ## Dashboard Tabs

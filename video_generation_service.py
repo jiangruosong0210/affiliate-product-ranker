@@ -39,11 +39,12 @@ def build_video_generation_request(
     creative_package,
     provider_name="Mock Video Provider",
     model_name="mock-placeholder-video-v1",
+    prompt_override=None,
 ):
     payload = creative_package.get("provider_neutral_payload", {})
     prompts = creative_package.get("prompts", {})
     brief = creative_package.get("brief", {})
-    prompt = (
+    prompt = prompt_override or (
         payload.get("detailed_prompt")
         or prompts.get("detailed_generation_prompt")
         or prompts.get("concise_generation_prompt")
@@ -72,6 +73,7 @@ def build_video_generation_request(
             "product_name": brief.get("product_name", ""),
             "target_platform": brief.get("target_platform", ""),
             "creative_package_version": creative_package.get("version", ""),
+            "prompt_source": "refined" if prompt_override else "original",
             "simulated": provider_name == "Mock Video Provider",
         },
     }
